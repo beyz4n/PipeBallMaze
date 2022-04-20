@@ -33,6 +33,7 @@ public class Main extends Application {
                 words.add(splitLine[j]);
             }
         }
+        // aaa
 /*
 
         Object[][] objects = new Object[4][4];
