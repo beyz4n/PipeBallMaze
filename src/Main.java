@@ -33,7 +33,7 @@ public class Main extends Application {
                 words.add(splitLine[j]);
             }
         }
-
+/*
         Object[][] objects = new Object[4][4];
         for (int k = 0; k < words.size(); k+=3){
             //these are too wrong, will be corrected later!
