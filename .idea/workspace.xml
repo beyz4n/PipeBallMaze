@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="commented out sth 2">
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="commented out sth 3">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,6 +11,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="284gY8DQXTia6iZayjbHDLInpZa" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -55,7 +58,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650481541929</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="commented out sth 3">
+      <created>1650481893039</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1650481893039</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -84,6 +94,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commented out sth" />
     <MESSAGE value="commented out sth 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="commented out sth 2" />
+    <MESSAGE value="commented out sth 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="commented out sth 3" />
   </component>
 </project>
