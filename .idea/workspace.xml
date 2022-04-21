@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="object arrayini hallettim">
-      <change afterPath="$PROJECT_DIR$/Levels/level1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Levels/level2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Levels/level3.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Levels/level4.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Levels/level5.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Levels/level6.txt" afterDir="false" />
+    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="level için ekleme yaptım, çalışmadığı için commentli halde.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650543365805</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="level için ekleme yaptım, çalışmadığı için commentli halde.">
+      <created>1650544633790</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1650544633790</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -133,7 +133,8 @@
     <MESSAGE value="yazıya a ekledim" />
     <MESSAGE value="yazıya b ekledim" />
     <MESSAGE value="object arrayini hallettim" />
-    <option name="LAST_COMMIT_MESSAGE" value="object arrayini hallettim" />
+    <MESSAGE value="level için ekleme yaptım, çalışmadığı için commentli halde." />
+    <option name="LAST_COMMIT_MESSAGE" value="level için ekleme yaptım, çalışmadığı için commentli halde." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
