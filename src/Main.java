@@ -1,6 +1,4 @@
-import Tiles.EmptyMovable;
-import Tiles.EmptyUnmovable;
-import Tiles.StartPipe;
+import Tiles.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -13,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main extends Application {
-    public static void main (String[] args){
+    public static void main(String[] args) {
         launch(args);
     }
 
@@ -23,39 +21,49 @@ public class Main extends Application {
         File file = new File("input.txt");
         Scanner input = new Scanner(file);
         ArrayList<String> lines = new ArrayList<>();
-        while(input.hasNext()){
+        while (input.hasNext()) {
             lines.add(input.next());
         }
         ArrayList<String> words = new ArrayList<>();
-        for (int i = 0; i < lines.size(); i++){
+        for (int i = 0; i < lines.size(); i++) {
             String[] splitLine = lines.get(i).split(",");
-            for (int j = 0; j < splitLine.length; j++){
+            for (int j = 0; j < splitLine.length; j++) {
                 words.add(splitLine[j]);
             }
         }
-        // aaa
-        // bbb
-/*
 
         Object[][] objects = new Object[4][4];
-        for (int k = 0; k < words.size(); k+=3){
-            //these are too wrong, will be corrected later!
-            if(words.get(k + 1).equals("Starter"))
-            objects[k % 4][k/4] = new StartPipe(words.get(k +2));
-            if(words.get(k + 1).equals("Empty")) {
-                if (words.get(k + 2).equals("Free"))
-                    objects[k % 4][k / 4] = new EmptyUnmovable();
-                if (words.get(k + 2).equals("None"))
-                    objects[k % 4][k / 4] = new EmptyMovable();
-            }
-            if(words.get(k + 1).equals("Pipe"))
-                objects[k % 4][k/4] = new StartPipe(words.get(k +2));
-            if(words.get(k + 1).equals("PipeStatic"))
-                objects[k % 4][k/4] = new StartPipe(words.get(k +2));
-            if(words.get(k + 1).equals("End"))
-                objects[k % 4][k/4] = new StartPipe(words.get(k +2));
-        }
+        for (int k = 0; k < words.size(); k += 3) {
 
+            int queue = Integer.parseInt(words.get(k)) - 1;
+
+            if(words.get(k + 1).equals("Starter")) {
+                objects[queue / 4][queue % 4] = new StartPipe(words.get(k + 2));
+            }
+
+            if(words.get(k + 1).equals("Empty")) {
+                if (words.get(k + 2).equals("Free")){
+                    objects[queue / 4][queue % 4] = new EmptyUnmovable();
+                }
+
+                if (words.get(k + 2).equals("none")) {
+                    objects[queue / 4][queue % 4] = new EmptyMovable();
+                }
+            }
+
+            if(words.get(k + 1).equals("Pipe")) {
+                objects[queue / 4][queue % 4] = new LinearPipe(words.get(k + 2));
+            }
+
+            if(words.get(k + 1).equals("PipeStatic")) {
+                objects[queue / 4][queue % 4] = new NormalPipeStatic(words.get(k + 2));
+            }
+
+            if(words.get(k + 1).equals("End")) {
+                objects[queue / 4][queue % 4] = new EndPipe(words.get(k + 2));
+            }
+        }
+        Object[][] objects2 = new Object[4][4];
 
         /*
         Tiles.PipeStatic pipe1 = new Tiles.PipeStatic();
@@ -64,14 +72,14 @@ public class Main extends Application {
         CurvedPipe emp1 = new CurvedPipe("11");
         ImageView imageView = new ImageView(emp1.getImage());
          */
-        Pane pane = new StackPane();
-        //pane.getChildren().add(imageView);
-        Scene scene = new Scene(pane, 500,500);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("abc");
-        primaryStage.show();
-        //as
-        //added a new comment to test
+            Pane pane = new StackPane();
+            //pane.getChildren().add(imageView);
+            Scene scene = new Scene(pane, 500, 500);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("abc");
+            primaryStage.show();
+            //as
+            //added a new comment to test
 
+        }
     }
-}
