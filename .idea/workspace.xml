@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="object arrayini hallettim">
+    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="commented out sth pane'leri ekleyip tile'ları yerleştirdim ama tile'lar daha hareket edemiyor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +86,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650543365805</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="commented out sth pane'leri ekleyip tile'ları yerleştirdim ama tile'lar daha hareket edemiyor">
+      <created>1650551188059</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1650551188059</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -120,7 +126,8 @@
     <MESSAGE value="yazıya a ekledim" />
     <MESSAGE value="yazıya b ekledim" />
     <MESSAGE value="object arrayini hallettim" />
-    <option name="LAST_COMMIT_MESSAGE" value="object arrayini hallettim" />
+    <MESSAGE value="commented out sth pane'leri ekleyip tile'ları yerleştirdim ama tile'lar daha hareket edemiyor" />
+    <option name="LAST_COMMIT_MESSAGE" value="commented out sth pane'leri ekleyip tile'ları yerleştirdim ama tile'lar daha hareket edemiyor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
