@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="commented out sth 3 aa ekledim">
+    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="object arrayini hallettim">
+      <change afterPath="$PROJECT_DIR$/Levels/level1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Levels/level2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Levels/level3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Levels/level4.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Levels/level5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Levels/level6.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,9 +28,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\intellij_main\PipeBallMaze\Levels" />
+      <recent name="C:\Users\user\Desktop\intellij_main\PipeBallMaze" />
+      <recent name="C:\Users\user\Desktop\intellij_main\PipeBallMaze\src\Levels" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -62,14 +79,28 @@
       <option name="project" value="LOCAL" />
       <updated>1650481893039</updated>
     </task>
-    <task id="LOCAL-00003" summary="commented out sth 3 aa ekledim">
-      <created>1650488936147</created>
+    <task id="LOCAL-00003" summary="yazıya a ekledim">
+      <created>1650488387835</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1650488936147</updated>
+      <updated>1650488387835</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="yazıya b ekledim">
+      <created>1650488978418</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1650488978418</updated>
+    </task>
+    <task id="LOCAL-00005" summary="object arrayini hallettim">
+      <created>1650543365805</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1650543365805</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -99,7 +130,30 @@
     <MESSAGE value="commented out sth" />
     <MESSAGE value="commented out sth 2" />
     <MESSAGE value="commented out sth 3" />
-    <MESSAGE value="commented out sth 3 aa ekledim" />
-    <option name="LAST_COMMIT_MESSAGE" value="commented out sth 3 aa ekledim" />
+    <MESSAGE value="yazıya a ekledim" />
+    <MESSAGE value="yazıya b ekledim" />
+    <MESSAGE value="object arrayini hallettim" />
+    <option name="LAST_COMMIT_MESSAGE" value="object arrayini hallettim" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
