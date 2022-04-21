@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="commented out sth pane'leri ekleyip tile'ları yerleştirdim ama tile'lar daha hareket edemiyor">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="pull öncesi commit">
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +21,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\user\Desktop\intellij_main\PipeBallMaze\Levels" />
@@ -86,14 +93,21 @@
       <option name="project" value="LOCAL" />
       <updated>1650543365805</updated>
     </task>
-    <task id="LOCAL-00006" summary="commented out sth pane'leri ekleyip tile'ları yerleştirdim ama tile'lar daha hareket edemiyor">
-      <created>1650551188059</created>
+    <task id="LOCAL-00006" summary="level için ekleme yaptım, çalışmadığı için commentli halde.">
+      <created>1650544633790</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1650551188059</updated>
+      <updated>1650544633790</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="pull öncesi commit">
+      <created>1650551383951</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1650551383951</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -126,16 +140,27 @@
     <MESSAGE value="yazıya a ekledim" />
     <MESSAGE value="yazıya b ekledim" />
     <MESSAGE value="object arrayini hallettim" />
-    <MESSAGE value="commented out sth pane'leri ekleyip tile'ları yerleştirdim ama tile'lar daha hareket edemiyor" />
-    <option name="LAST_COMMIT_MESSAGE" value="commented out sth pane'leri ekleyip tile'ları yerleştirdim ama tile'lar daha hareket edemiyor" />
+    <MESSAGE value="level için ekleme yaptım, çalışmadığı için commentli halde." />
+    <MESSAGE value="pull öncesi commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="pull öncesi commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>58</line>
-          <option name="timeStamp" value="9" />
+          <line>44</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>197</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
