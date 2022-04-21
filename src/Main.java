@@ -62,11 +62,21 @@ public class Main extends Application {
                 }
 
                 if (words.get(k + 1).equals("Pipe")) {
-                    tiles[queue / 4][queue % 4] = new LinearPipe(words.get(k + 2));
+                    if (words.get(k+2).equals("Vertical") || words.get(k+2).equals("Horizontal")) {
+                        tiles[queue / 4][queue % 4] = new LinearPipe(words.get(k + 2));
+                    }
+                    else if(words.get(k+2).equals("00") ||words.get(k+2).equals("01") ||words.get(k+2).equals("10") ||words.get(k+2).equals("11")){
+                        tiles[queue / 4][queue % 4] = new CurvedPipeMovable(words.get(k + 2));
+                    }
                 }
 
                 if (words.get(k + 1).equals("PipeStatic")) {
-                    tiles[queue / 4][queue % 4] = new NormalPipeStatic(words.get(k + 2));
+                    if (words.get(k+2).equals("Vertical") || words.get(k+2).equals("Horizontal")) {
+                        tiles[queue / 4][queue % 4] = new NormalPipeStatic(words.get(k + 2));
+                    }
+                    else if(words.get(k+2).equals("00") ||words.get(k+2).equals("01") ||words.get(k+2).equals("10") ||words.get(k+2).equals("11")){
+                        tiles[queue / 4][queue % 4] = new CurvedPipeStatic(words.get(k + 2));
+                    }
                 }
 
                 if (words.get(k + 1).equals("End")) {
