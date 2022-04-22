@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="pull öncesi commit">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="Tile swap olayını hallettik ama yeri değişmemesi gerekenler de hareket ediyor">
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650551383951</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Tile swap olayını hallettik ama yeri değişmemesi gerekenler de hareket ediyor">
+      <created>1650629924878</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1650629924878</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,7 +142,8 @@
     <MESSAGE value="object arrayini hallettim" />
     <MESSAGE value="level için ekleme yaptım, çalışmadığı için commentli halde." />
     <MESSAGE value="pull öncesi commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="pull öncesi commit" />
+    <MESSAGE value="Tile swap olayını hallettik ama yeri değişmemesi gerekenler de hareket ediyor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tile swap olayını hallettik ama yeri değişmemesi gerekenler de hareket ediyor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

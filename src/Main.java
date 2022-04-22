@@ -243,7 +243,7 @@ public class Main extends Application {
         imageView2.setX(temp.getX());
         imageView2.setY(temp.getY());
     }
-    }
+}
 
 class EdgePane extends StackPane {
     public EdgePane(String title) {
