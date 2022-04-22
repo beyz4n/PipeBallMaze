@@ -237,11 +237,11 @@ public class Main extends Application {
                             && !(tiles[index1x][index1y] instanceof EmptyFree)){
                         if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
                                 imageView2.getY() == imageView1.getY()) {
-                            swapTiles(imageView1, imageView2);
+                            swapImages(imageView1, imageView2);
                         }
                         if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                 imageView2.getX() == imageView1.getX() ) {
-                            swapTiles(imageView1, imageView2);
+                            swapImages(imageView1, imageView2);
                         }
                     }
                 }
@@ -250,11 +250,11 @@ public class Main extends Application {
                             && !(tiles[index1x][index1y] instanceof EmptyFree)) {
                         if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
                                 imageView2.getY() == imageView1.getY()) {
-                            swapTiles(imageView1, imageView2);
+                            swapImages(imageView1, imageView2);
                         }
                         if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                 imageView2.getX() == imageView1.getX()) {
-                            swapTiles(imageView1, imageView2);
+                            swapImages(imageView1, imageView2);
                         }
                     }
                 }
@@ -267,7 +267,7 @@ public class Main extends Application {
         }
     }
 
-    public void swapTiles(ImageView imageView1, ImageView imageView2){
+    public void swapImages(ImageView imageView1, ImageView imageView2){
 
         ImageView temp = new ImageView(imageView1.getImage());
         temp.setX(imageView1.getX());
