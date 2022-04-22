@@ -2,14 +2,12 @@ package Tiles;
 
 import javafx.scene.image.Image;
 
-public class EmptyUnmovable extends Tile implements Fixed {
+public class EmptyFree extends Tile implements Movable {
     @Override
-    public boolean isFixed() {
+    public boolean isMovable() {
         return true;
     }
-    public EmptyUnmovable(){
+    public EmptyFree(){
         setImage(new Image("empty.png"));
-}
-
-
+    }
 }
