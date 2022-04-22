@@ -52,11 +52,11 @@ public class Main extends Application {
 
                 if (words.get(k + 1).equals("Empty")) {
                     if (words.get(k + 2).equals("Free")) {
-                        tiles[queue / 4][queue % 4] = new Empty();
+                        tiles[queue / 4][queue % 4] = new EmptyFree();
                     }
 
                     if (words.get(k + 2).equals("none")) {
-                        tiles[queue / 4][queue % 4] = new EmptyFree();
+                        tiles[queue / 4][queue % 4] = new Empty();
                     }
                 }
 
@@ -232,17 +232,32 @@ public class Main extends Application {
                         }
                     }
                 }
-                if ((tiles[index1x][index1y] instanceof Movable) && tiles[index2x][index2y] instanceof Movable){
-                    if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
-                            imageView2.getY() == imageView1.getY()) {
-                        swapTiles(imageView1, imageView2);
-                    }
-                    if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
-                            imageView2.getX() == imageView1.getX() ) {
-                        swapTiles(imageView1, imageView2);
+                if (tiles[index1x][index1y] instanceof EmptyFree){
+                    if ((tiles[index1x][index1y] instanceof Movable) && (tiles[index2x][index2y] instanceof Movable)
+                            && !(tiles[index1x][index1y] instanceof EmptyFree)){
+                        if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
+                                imageView2.getY() == imageView1.getY()) {
+                            swapTiles(imageView1, imageView2);
+                        }
+                        if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
+                                imageView2.getX() == imageView1.getX() ) {
+                            swapTiles(imageView1, imageView2);
+                        }
                     }
                 }
-
+                else {
+                    if ((tiles[index1x][index1y] instanceof Movable) && (tiles[index2x][index2y] instanceof Movable)
+                            && !(tiles[index1x][index1y] instanceof EmptyFree)) {
+                        if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
+                                imageView2.getY() == imageView1.getY()) {
+                            swapTiles(imageView1, imageView2);
+                        }
+                        if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
+                                imageView2.getX() == imageView1.getX()) {
+                            swapTiles(imageView1, imageView2);
+                        }
+                    }
+                }
                 Tile temp = tiles[index1x][index1y];
                 tiles[index1x][index1y] = tiles[index2x][index2y];
                 tiles[index2x][index2y] = temp;
