@@ -52,11 +52,11 @@ public class Main extends Application {
 
                 if (words.get(k + 1).equals("Empty")) {
                     if (words.get(k + 2).equals("Free")) {
-                        tiles[queue / 4][queue % 4] = new EmptyUnmovable();
+                        tiles[queue / 4][queue % 4] = new Empty();
                     }
 
                     if (words.get(k + 2).equals("none")) {
-                        tiles[queue / 4][queue % 4] = new EmptyMovable();
+                        tiles[queue / 4][queue % 4] = new EmptyFree();
                     }
                 }
 
@@ -215,7 +215,7 @@ public class Main extends Application {
 
             imageViews[i].setOnMouseReleased(e -> {
                 ImageView imageView1 = (ImageView) e.getTarget(); // ilk konumunu aldık
-                ImageView imageView2 = (ImageView) e.getPickResult().getIntersectedNode();
+                ImageView imageView2 = (ImageView) e.getPickResult().getIntersectedNode(); // son konum
                 int index1x = 0;
                 int index1y = 0;
                 int index2x = 0;
