@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="tile images were replaced." />
+    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="ufak düzeltme" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -134,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650666205495</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="ufak düzeltme">
+      <created>1650666449555</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1650666449555</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,7 +191,8 @@
     <MESSAGE value="solved empty and empty free issues" />
     <MESSAGE value="swapTiles became swapImages" />
     <MESSAGE value="tile images were replaced." />
-    <option name="LAST_COMMIT_MESSAGE" value="tile images were replaced." />
+    <MESSAGE value="ufak düzeltme" />
+    <option name="LAST_COMMIT_MESSAGE" value="ufak düzeltme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
