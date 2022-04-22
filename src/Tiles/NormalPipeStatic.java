@@ -5,8 +5,8 @@ import javafx.scene.image.Image;
 public class NormalPipeStatic extends PipeStatic implements Fixed {
     public NormalPipeStatic (String status){
         if(status.equals("Vertical"))
-            setImage(new Image("PipeStatic_Vertical.png"));
+            setImage(new Image("VerticalPipeStatic.jpg"));
         else if(status.equals("Horizontal"))
-            setImage(new Image("PipeStatic_Horizontal.png"));
+            setImage(new Image("HorizontalPipeStatic.jpg"));
     }
 }

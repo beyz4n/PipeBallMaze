@@ -7,19 +7,19 @@ public class CurvedPipeStatic extends Tile implements Fixed {
     public CurvedPipeStatic(String status) {
         switch (status) {
             case "00":
-                setImage(new Image("CurvedPipe_00.png"));
+                setImage(new Image("Curve3Static.jpg"));
                 setStatus(status);
                 break;
             case "01":
-                setImage(new Image("CurvedPipe_01.png"));
+                setImage(new Image("Curve4Static.jpg"));
                 setStatus(status);
                 break;
             case "10":
-                setImage(new Image("CurvedPipe_10.png"));
+                setImage(new Image("Curve2Static.jpg"));
                 setStatus(status);
                 break;
             case "11":
-                setImage(new Image("CurvedPipe_11.png"));
+                setImage(new Image("Curve1Static.jpg"));
                 setStatus(status);
                 break;
         }

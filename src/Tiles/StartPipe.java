@@ -6,11 +6,11 @@ public class StartPipe extends PipeStatic implements Fixed {
 
     public StartPipe(String status){
         if(status.equals("Vertical")) {
-            setImage(new Image("Starter_Vertical.png"));
+            setImage(new Image("StarterVertical.jpg"));
             setStatus(status);
         }
         else if(status.equals("Horizontal")) {
-            setImage(new Image("Starter_Horizontal.png"));
+            setImage(new Image("StarterHorizontal.jpg"));
             setStatus(status);
         }
     }

@@ -6,11 +6,11 @@ public class EndPipe extends PipeStatic implements Fixed {
 
     public EndPipe(String status){
         if(status.equals("Vertical")) {
-            setImage(new Image("End_Vertical.png"));
+            setImage(new Image("EndVertical.jpg"));
             setStatus(status);
         }
         else if (status.equals("Horizontal")) {
-            setImage(new Image("End_Horizontal.png"));
+            setImage(new Image("EndHorizontal.jpg"));
             setStatus(status);
         }
     }

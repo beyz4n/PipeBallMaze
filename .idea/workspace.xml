@@ -1,11 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="aa">
-      <change afterPath="$PROJECT_DIR$/src/emptyfree.png" afterDir="false" />
+    <list default="true" id="68049215-49b9-4f8d-b072-e665109cbc86" name="Changes" comment="swapTiles became swapImages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CurvedPipe_00.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CurvedPipe_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CurvedPipe_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CurvedPipe_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/End_Horizontal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/End_Vertical.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PipeStatic_00.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PipeStatic_01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PipeStatic_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PipeStatic_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PipeStatic_Horizontal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PipeStatic_Vertical.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pipe_Horizontal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pipe_Vertical.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Starter_Horizontal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Starter_Vertical.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tiles/CurvedPipeMovable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/CurvedPipeMovable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tiles/CurvedPipeStatic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/CurvedPipeStatic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tiles/Empty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/Empty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tiles/EmptyFree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/EmptyFree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tiles/EndPipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/EndPipe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tiles/LinearPipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/LinearPipe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tiles/NormalPipeStatic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/NormalPipeStatic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tiles/StartPipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/StartPipe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/empty.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emptyfree.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +141,21 @@
       <option name="project" value="LOCAL" />
       <updated>1650654458193</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="solved empty and empty free issues">
+      <created>1650656246511</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1650656246511</updated>
+    </task>
+    <task id="LOCAL-00011" summary="swapTiles became swapImages">
+      <created>1650656415892</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1650656415892</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -165,7 +202,9 @@
     <MESSAGE value="pull öncesi commit" />
     <MESSAGE value="Tile hareketleri tamamlandı artık çapraz kaymıyorlar" />
     <MESSAGE value="aa" />
-    <option name="LAST_COMMIT_MESSAGE" value="aa" />
+    <MESSAGE value="solved empty and empty free issues" />
+    <MESSAGE value="swapTiles became swapImages" />
+    <option name="LAST_COMMIT_MESSAGE" value="swapTiles became swapImages" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

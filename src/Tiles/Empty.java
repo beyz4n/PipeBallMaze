@@ -8,7 +8,7 @@ public class Empty extends Tile implements Movable {
         return true;
     }
     public Empty(){
-        setImage(new Image("empty.png"));
+        setImage(new Image("Empty.jpg"));
 }
 
 
