@@ -1,6 +1,7 @@
 import Tiles.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -77,6 +78,7 @@ public class Main extends Application {
                     else if(words.get(k+2).equals("00") ||words.get(k+2).equals("01") ||words.get(k+2).equals("10") ||words.get(k+2).equals("11")){
                         tiles[queue / 4][queue % 4] = new CurvedPipeStatic(words.get(k + 2));
                     }
+                    
                 }
 
                 if (words.get(k + 1).equals("End")) {
@@ -197,6 +199,12 @@ public class Main extends Application {
                 imageView5, imageView6, imageView7, imageView8, imageView9, imageView10,
                 imageView11, imageView12, imageView13, imageView14, imageView15, imageView16);
 
+        ImageView[] imageViews =  {imageView1, imageView2, imageView3,imageView4,
+                imageView5, imageView6, imageView7, imageView8, imageView9, imageView10,
+                imageView11, imageView12, imageView13, imageView14, imageView15, imageView16};
+
+
+        drag(imageViews);
 
         Scene scene = new Scene(borderPane, 930,850);
         primaryStage.setTitle("PipeBallMaze");
@@ -213,6 +221,28 @@ public class Main extends Application {
             */
 
         }
+    private void drag(ImageView[] imageViews) {
+        for (int i = 0; i < imageViews.length; i++){
+
+            imageViews[i].setOnMouseReleased(e -> {
+                ImageView imageView = (ImageView) e.getTarget(); // ilk konumunu aldık
+                ImageView iv = (ImageView) e.getPickResult().getIntersectedNode();
+
+                swapTiles(iv, imageView);
+            });
+        }
+    }
+
+    public void swapTiles(ImageView imageView1, ImageView imageView2){
+
+        ImageView temp = new ImageView(imageView1.getImage());
+        temp.setX(imageView1.getX());
+        temp.setY(imageView1.getY());
+        imageView1.setX(imageView2.getX());
+        imageView1.setY(imageView2.getY());
+        imageView2.setX(temp.getX());
+        imageView2.setY(temp.getY());
+    }
     }
 
 class EdgePane extends StackPane {
