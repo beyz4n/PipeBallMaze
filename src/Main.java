@@ -211,6 +211,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+
          /*   Object ob = new Object();
             Pane pane = new StackPane();
             //pane.getChildren().add(imageView);
@@ -221,14 +222,24 @@ public class Main extends Application {
             */
 
         }
+
     private void drag(ImageView[] imageViews) {
         for (int i = 0; i < imageViews.length; i++){
 
             imageViews[i].setOnMouseReleased(e -> {
-                ImageView imageView = (ImageView) e.getTarget(); // ilk konumunu aldık
-                ImageView iv = (ImageView) e.getPickResult().getIntersectedNode();
+                ImageView imageView1 = (ImageView) e.getTarget(); // ilk konumunu aldık
+                ImageView imageView2 = (ImageView) e.getPickResult().getIntersectedNode();
 
-                swapTiles(iv, imageView);
+                //if(imageViews[i].getClass() instanceof Movable) {
+                    if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
+                    imageView2.getY() == imageView1.getY()) {
+                        swapTiles(imageView1, imageView2);
+                    }
+                    if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
+                            imageView2.getX() == imageView1.getX() ) {
+                        swapTiles(imageView1, imageView2);
+                    }
+              //  }
             });
         }
     }
