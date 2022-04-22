@@ -1,10 +1,8 @@
 import Tiles.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -203,43 +201,53 @@ public class Main extends Application {
                 imageView5, imageView6, imageView7, imageView8, imageView9, imageView10,
                 imageView11, imageView12, imageView13, imageView14, imageView15, imageView16};
 
-
-        drag(imageViews);
+        drag(imageViews, tiles);
 
         Scene scene = new Scene(borderPane, 930,850);
         primaryStage.setTitle("PipeBallMaze");
         primaryStage.setScene(scene);
         primaryStage.show();
 
-
-         /*   Object ob = new Object();
-            Pane pane = new StackPane();
-            //pane.getChildren().add(imageView);
-
-        /*
-            Scene scene = new Scene(pane, 500, 500);
-            primaryStage.setScene(scene);
-            */
-
         }
 
-    private void drag(ImageView[] imageViews) {
+    private void drag(ImageView[] imageViews, Tile[][] tiles) {
         for (int i = 0; i < imageViews.length; i++){
 
             imageViews[i].setOnMouseReleased(e -> {
                 ImageView imageView1 = (ImageView) e.getTarget(); // ilk konumunu aldık
                 ImageView imageView2 = (ImageView) e.getPickResult().getIntersectedNode();
-
-                //if(imageViews[i].getClass() instanceof Movable) {
+                int index1x = 0;
+                int index1y = 0;
+                int index2x = 0;
+                int index2y = 0;
+                for (int k = 0; k < 4; k++){
+                    for (int j = 0; j < 4; j++){
+                        if(tiles[k][j].getImage().equals(imageView1.getImage())){
+                            index1x = k;
+                            index1y = j;
+                        }
+                        if(tiles[k][j].getImage().equals(imageView2.getImage())){
+                            index2x = k;
+                            index2y = j;
+                        }
+                    }
+                }
+                if ((tiles[index1x][index1y] instanceof Movable) && tiles[index2x][index2y] instanceof Movable){
                     if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
-                    imageView2.getY() == imageView1.getY()) {
+                            imageView2.getY() == imageView1.getY()) {
                         swapTiles(imageView1, imageView2);
                     }
                     if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                             imageView2.getX() == imageView1.getX() ) {
                         swapTiles(imageView1, imageView2);
                     }
-              //  }
+                }
+
+                Tile temp = tiles[index1x][index1y];
+                tiles[index1x][index1y] = tiles[index2x][index2y];
+                tiles[index2x][index2y] = temp;
+
+
             });
         }
     }
