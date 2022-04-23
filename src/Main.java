@@ -61,7 +61,8 @@ public class Main extends Application {
             primaryStage.show();
         });
 
-    /*
+        //Beyza
+        /*
         File folder = new File("src\\Levels");
         ArrayList<File> levels = new ArrayList<>();
         for (int l = 0; l < folder.list().length; l++) {
@@ -69,12 +70,21 @@ public class Main extends Application {
             File file = new File("src\\Levels\\level" + levelNo + ".txt");
             levels.add(file);
         }
-*/
+         */
+        //Sena
+        File folder = new File("src/Levels");
+        ArrayList<File> levels = new ArrayList<>();
+        for (int l = 0; l < folder.list().length; l++) {
+            String levelNo = l + 1 + "";
+            File file = new File("src/Levels/level" + levelNo + ".txt");
+            levels.add(file);
+        }
+
         //for (int m = 0; m < levels.size(); m++) { }
-        File file = new File("input.txt");
+        //File file = new File("input.txt");
             Scanner input = null;
             try {
-                input = new Scanner(file);
+                input = new Scanner(levels.get(2));
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
