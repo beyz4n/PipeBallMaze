@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main extends Application {
-    static int numberOfMoves = 0;
+    private static int numberOfMoves = 0;
     public static int getNumberOfMoves() {
         return numberOfMoves;
     }
@@ -307,6 +307,7 @@ public class Main extends Application {
                         }
                     }
                 }
+                // maybe we should move these into the if's ? not sure tho, will ask
                 Tile temp = tiles[index1x][index1y];
                 tiles[index1x][index1y] = tiles[index2x][index2y];
                 tiles[index2x][index2y] = temp;
