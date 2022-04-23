@@ -149,8 +149,8 @@ public class Main extends Application {
 
          */
 
-        Button checkButton = new Button("Check !");
-        borderPane.setBottom(new EdgePane(checkButton));
+            Button checkButton = new Button("Check !");
+            borderPane.setBottom(new EdgePane(checkButton));
 
             borderPane.setLeft(new EdgePane(new Label("Left"))); // sonradan sileriz
             borderPane.setCenter(pane);
@@ -314,12 +314,7 @@ public class Main extends Application {
                             if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                     imageView2.getX() == imageView1.getX()) {
                                 swapImages(imageView1, imageView2);
-                                Label label = new Label("Number of Moves " + getNumberOfMoves());
-                                label.setStyle("-fx-text-fill: white");
-                                EdgePane edgePane = new EdgePane(label);
-                                edgePane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
-                                        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-                                getBorderPane().setTop(edgePane);
+                                displayNumberOfMoves();
                                 Tile temp = tiles[index1x][index1y];
                                 tiles[index1x][index1y] = tiles[index2x][index2y];
                                 tiles[index2x][index2y] = temp;
