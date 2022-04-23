@@ -61,8 +61,7 @@ public class Main extends Application {
             primaryStage.show();
         });
 
-        //Beyza
-        /*
+    /*
         File folder = new File("src\\Levels");
         ArrayList<File> levels = new ArrayList<>();
         for (int l = 0; l < folder.list().length; l++) {
@@ -70,21 +69,12 @@ public class Main extends Application {
             File file = new File("src\\Levels\\level" + levelNo + ".txt");
             levels.add(file);
         }
-         */
-        //Sena
-        File folder = new File("src/Levels");
-        ArrayList<File> levels = new ArrayList<>();
-        for (int l = 0; l < folder.list().length; l++) {
-            String levelNo = l + 1 + "";
-            File file = new File("src/Levels/level" + levelNo + ".txt");
-            levels.add(file);
-        }
-
+*/
         //for (int m = 0; m < levels.size(); m++) { }
-        //File file = new File("input.txt");
+        File file = new File("input.txt");
             Scanner input = null;
             try {
-                input = new Scanner(levels.get(2));
+                input = new Scanner(file);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -170,92 +160,92 @@ public class Main extends Application {
             imageView1.setFitWidth(175);
 
             ImageView imageView2 = new ImageView(tiles[0][1].getImage());
-            imageView2.setX(180);
+            imageView2.setX(178);
             imageView2.setY(0);
             imageView2.setFitHeight(175);
             imageView2.setFitWidth(175);
 
             ImageView imageView3 = new ImageView(tiles[0][2].getImage());
-            imageView3.setX(360);
+            imageView3.setX(356);
             imageView3.setY(0);
             imageView3.setFitHeight(175);
             imageView3.setFitWidth(175);
 
             ImageView imageView4 = new ImageView(tiles[0][3].getImage());
-            imageView4.setX(540);
+            imageView4.setX(534);
             imageView4.setY(0);
             imageView4.setFitHeight(175);
             imageView4.setFitWidth(175);
 
             ImageView imageView5 = new ImageView(tiles[1][0].getImage());
             imageView5.setX(0);
-            imageView5.setY(180);
+            imageView5.setY(178);
             imageView5.setFitHeight(175);
             imageView5.setFitWidth(175);
 
             ImageView imageView6 = new ImageView(tiles[1][1].getImage());
-            imageView6.setX(180);
-            imageView6.setY(180);
+            imageView6.setX(178);
+            imageView6.setY(178);
             imageView6.setFitHeight(175);
             imageView6.setFitWidth(175);
 
             ImageView imageView7 = new ImageView(tiles[1][2].getImage());
-            imageView7.setX(360);
-            imageView7.setY(180);
+            imageView7.setX(356);
+            imageView7.setY(178);
             imageView7.setFitHeight(175);
             imageView7.setFitWidth(175);
 
             ImageView imageView8 = new ImageView(tiles[1][3].getImage());
-            imageView8.setX(540);
-            imageView8.setY(180);
+            imageView8.setX(534);
+            imageView8.setY(178);
             imageView8.setFitHeight(175);
             imageView8.setFitWidth(175);
 
             ImageView imageView9 = new ImageView(tiles[2][0].getImage());
             imageView9.setX(0);
-            imageView9.setY(360);
+            imageView9.setY(356);
             imageView9.setFitHeight(175);
             imageView9.setFitWidth(175);
 
             ImageView imageView10 = new ImageView(tiles[2][1].getImage());
-            imageView10.setX(180);
-            imageView10.setY(360);
+            imageView10.setX(178);
+            imageView10.setY(356);
             imageView10.setFitHeight(175);
             imageView10.setFitWidth(175);
 
             ImageView imageView11 = new ImageView(tiles[2][2].getImage());
-            imageView11.setX(360);
-            imageView11.setY(360);
+            imageView11.setX(356);
+            imageView11.setY(356);
             imageView11.setFitHeight(175);
             imageView11.setFitWidth(175);
 
             ImageView imageView12 = new ImageView(tiles[2][3].getImage());
-            imageView12.setX(540);
-            imageView12.setY(360);
+            imageView12.setX(534);
+            imageView12.setY(356);
             imageView12.setFitHeight(175);
             imageView12.setFitWidth(175);
 
             ImageView imageView13 = new ImageView(tiles[3][0].getImage());
             imageView13.setX(0);
-            imageView13.setY(540);
+            imageView13.setY(534);
             imageView13.setFitHeight(175);
             imageView13.setFitWidth(175);
 
             ImageView imageView14 = new ImageView(tiles[3][1].getImage());
-            imageView14.setX(180);
-            imageView14.setY(540);
+            imageView14.setX(178);
+            imageView14.setY(534);
             imageView14.setFitHeight(175);
             imageView14.setFitWidth(175);
 
             ImageView imageView15 = new ImageView(tiles[3][2].getImage());
-            imageView15.setX(360);
-            imageView15.setY(540);
+            imageView15.setX(356);
+            imageView15.setY(534);
             imageView15.setFitHeight(175);
             imageView15.setFitWidth(175);
 
             ImageView imageView16 = new ImageView(tiles[3][3].getImage());
-            imageView16.setX(540);
-            imageView16.setY(540);
+            imageView16.setX(534);
+            imageView16.setY(534);
             imageView16.setFitHeight(175);
             imageView16.setFitWidth(175);
 
@@ -275,9 +265,11 @@ public class Main extends Application {
             StackPane stackPane = new StackPane();
             stackPane.setBackground(new Background(backgroundImage));
             stackPane.getChildren().add(label);
+            pane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
             borderPane.setTop(stackPane);
 
-            Scene scene = new Scene(borderPane, 930, 850);
+            Scene scene = new Scene(borderPane, 950, 780);
             primaryStage.setTitle("PipeBallMaze");
             primaryStage.setScene(scene);
             //primaryStage.show();
@@ -401,7 +393,7 @@ class EdgePane extends StackPane {
     public EdgePane(String title) {
         getChildren().add(new Label(title));
         setStyle("-fx-border-color: darkblue");
-        setPadding(new Insets(22.5, 57.5, 24.5, 22.5));
+        setPadding(new Insets(25.5, 57.5, 30.5, 36.5));
 
         //For EdgePane's Background
         setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
