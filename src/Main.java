@@ -15,7 +15,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main extends Application {
-    private static int numberOfMoves = 0;
+    private static int numberOfMoves;
+
+    public BorderPane getBorderPane() {
+        return borderPane;
+    }
+
+    public void setBorderPane(BorderPane borderPane) {
+        this.borderPane = borderPane;
+    }
+
+    private BorderPane borderPane;
     public static int getNumberOfMoves() {
         return numberOfMoves;
     }
@@ -134,7 +144,7 @@ public class Main extends Application {
 
             borderPane.setLeft(new EdgePane("Left"));
             borderPane.setCenter(pane);
-
+            setBorderPane(borderPane);
 
             ImageView imageView1 = new ImageView(tiles[0][0].getImage());
             imageView1.setX(0);
@@ -253,6 +263,7 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             //primaryStage.show();
 
+
 }
 
     private void drag(ImageView[] imageViews, Tile[][] tiles) {
@@ -282,13 +293,21 @@ public class Main extends Application {
                             && !(tiles[index1x][index1y] instanceof EmptyFree)){
                         if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
                                 imageView2.getY() == imageView1.getY()) {
-                            setNumberOfMoves(getNumberOfMoves() + 1);
                             swapImages(imageView1, imageView2);
+                            Label label = new Label("Number of Moves " + getNumberOfMoves());
+                            StackPane stackPane = new StackPane();
+                            stackPane.getChildren().add(label);
+                            getBorderPane().setTop(stackPane);
+
                         }
                         if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                 imageView2.getX() == imageView1.getX() ) {
-                            setNumberOfMoves(getNumberOfMoves() + 1);
                             swapImages(imageView1, imageView2);
+                            Label label = new Label("Number of Moves " + getNumberOfMoves());
+                            StackPane stackPane = new StackPane();
+                            stackPane.getChildren().add(label);
+                            getBorderPane().setTop(stackPane);
+
                         }
                     }
                 }
@@ -297,13 +316,21 @@ public class Main extends Application {
                             && !(tiles[index1x][index1y] instanceof EmptyFree)) {
                         if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
                                 imageView2.getY() == imageView1.getY()) {
-                            setNumberOfMoves(getNumberOfMoves() + 1);
                             swapImages(imageView1, imageView2);
+                            Label label = new Label("Number of Moves " + getNumberOfMoves());
+                            StackPane stackPane = new StackPane();
+                            stackPane.getChildren().add(label);
+                            getBorderPane().setTop(stackPane);
+
                         }
                         if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                 imageView2.getX() == imageView1.getX()) {
-                            setNumberOfMoves(getNumberOfMoves() + 1);
                             swapImages(imageView1, imageView2);
+                            Label label = new Label("Number of Moves " + getNumberOfMoves());
+                            StackPane stackPane = new StackPane();
+                            stackPane.getChildren().add(label);
+                            getBorderPane().setTop(stackPane);
+
                         }
                     }
                 }
@@ -326,6 +353,8 @@ public class Main extends Application {
         imageView1.setY(imageView2.getY());
         imageView2.setX(temp.getX());
         imageView2.setY(temp.getY());
+
+        setNumberOfMoves(getNumberOfMoves() + 1);
     }
 }
 
