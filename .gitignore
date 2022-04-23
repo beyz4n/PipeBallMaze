@@ -3,8 +3,11 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 !**/.idea/workspace.xml
+!**/.idea/workspace.xml~58ca7b6 (aa)
+!**/.idea/uiDesigner.xml
 !**/eclipse-workspace/PipeBallMaze/.idea/uiDesigner.xml
 !**/eclipse-workspace/PipeBallMaze/.idea/workspace.xml
+!**/eclipse-workspace/PipeBallMaze/.idea/workspace.xml~58ca7b6 (aa)
 
 ### Eclipse ###
 .apt_generated

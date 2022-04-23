@@ -265,7 +265,7 @@ public class Main extends Application {
             StackPane stackPane = new StackPane();
             stackPane.setBackground(new Background(backgroundImage));
             stackPane.getChildren().add(label);
-            pane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+            pane.setBackground(new Background(new BackgroundImage(new Image("Background2.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
             borderPane.setTop(stackPane);
 
