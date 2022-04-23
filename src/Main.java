@@ -15,6 +15,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main extends Application {
+    static int numberOfMoves = 0;
+    public static int getNumberOfMoves() {
+        return numberOfMoves;
+    }
+
+    public static void setNumberOfMoves(int numberOfMoves) {
+        Main.numberOfMoves = numberOfMoves;
+    }
+
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -119,7 +129,7 @@ public class Main extends Application {
             /*
             StackPane spane = new StackPane();
             spane.getChildren().add(new Button("Check!"));
-           borderPane.setBottom(spane);
+            borderPane.setBottom(spane);
              */
 
             borderPane.setLeft(new EdgePane("Left"));
@@ -232,12 +242,11 @@ public class Main extends Application {
                     imageView11, imageView12, imageView13, imageView14, imageView15, imageView16};
 
             drag(imageViews, tiles);
-            /* Number Of Moves
-            Label label = new Label("Number of Moves ");
+            //Number Of Moves
+            Label label = new Label("Number of Moves " + getNumberOfMoves());
             StackPane stackPane = new StackPane();
             stackPane.getChildren().add(label);
             borderPane.setTop(stackPane);
-            */
 
             Scene scene = new Scene(borderPane, 930, 850);
             primaryStage.setTitle("PipeBallMaze");
@@ -273,10 +282,12 @@ public class Main extends Application {
                             && !(tiles[index1x][index1y] instanceof EmptyFree)){
                         if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
                                 imageView2.getY() == imageView1.getY()) {
+                            setNumberOfMoves(getNumberOfMoves() + 1);
                             swapImages(imageView1, imageView2);
                         }
                         if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                 imageView2.getX() == imageView1.getX() ) {
+                            setNumberOfMoves(getNumberOfMoves() + 1);
                             swapImages(imageView1, imageView2);
                         }
                     }
@@ -286,10 +297,12 @@ public class Main extends Application {
                             && !(tiles[index1x][index1y] instanceof EmptyFree)) {
                         if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
                                 imageView2.getY() == imageView1.getY()) {
+                            setNumberOfMoves(getNumberOfMoves() + 1);
                             swapImages(imageView1, imageView2);
                         }
                         if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                 imageView2.getX() == imageView1.getX()) {
+                            setNumberOfMoves(getNumberOfMoves() + 1);
                             swapImages(imageView1, imageView2);
                         }
                     }
