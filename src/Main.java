@@ -266,13 +266,7 @@ public class Main extends Application {
 
             drag(imageViews, tiles);
             //Number Of Moves
-            Label label = new Label("Number of Moves " + getNumberOfMoves());
-            label.setStyle("-fx-text-fill: white");
-           EdgePane edgePane = new EdgePane(label);
-            edgePane.setBackground(new Background(backgroundImage));
-            pane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-            borderPane.setTop(edgePane);
+            displayNumberOfMoves();
 
             Scene scene = new Scene(borderPane, 950, 780);
             primaryStage.setTitle("PipeBallMaze");
@@ -311,12 +305,7 @@ public class Main extends Application {
                             if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
                                     imageView2.getY() == imageView1.getY()) {
                                 swapImages(imageView1, imageView2);
-                                Label label = new Label("Number of Moves " + getNumberOfMoves());
-                                label.setStyle("-fx-text-fill: white");
-                                EdgePane edgePane = new EdgePane(label);
-                                edgePane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
-                                        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-                                getBorderPane().setTop(edgePane);
+                                displayNumberOfMoves();
                                 Tile temp = tiles[index1x][index1y];
                                 tiles[index1x][index1y] = tiles[index2x][index2y];
                                 tiles[index2x][index2y] = temp;
@@ -343,12 +332,7 @@ public class Main extends Application {
                             if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
                                     imageView2.getY() == imageView1.getY()) {
                                 swapImages(imageView1, imageView2);
-                                Label label = new Label("Number of Moves " + getNumberOfMoves());
-                                label.setStyle("-fx-text-fill: white");
-                                EdgePane edgePane = new EdgePane(label);
-                                edgePane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
-                                        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-                                getBorderPane().setTop(edgePane);
+                                displayNumberOfMoves();
                                 Tile temp = tiles[index1x][index1y];
                                 tiles[index1x][index1y] = tiles[index2x][index2y];
                                 tiles[index2x][index2y] = temp;
@@ -357,12 +341,7 @@ public class Main extends Application {
                             if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                     imageView2.getX() == imageView1.getX()) {
                                 swapImages(imageView1, imageView2);
-                                Label label = new Label("Number of Moves " + getNumberOfMoves());
-                                label.setStyle("-fx-text-fill: white");
-                                EdgePane edgePane = new EdgePane(label);
-                                edgePane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
-                                        BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-                                getBorderPane().setTop(edgePane);
+                                displayNumberOfMoves();
                                 Tile temp = tiles[index1x][index1y];
                                 tiles[index1x][index1y] = tiles[index2x][index2y];
                                 tiles[index2x][index2y] = temp;
@@ -387,6 +366,14 @@ public class Main extends Application {
         imageView2.setY(temp.getY());
 
         setNumberOfMoves(getNumberOfMoves() + 1);
+    }
+    public void displayNumberOfMoves(){
+        Label label = new Label("Number of Moves " + getNumberOfMoves());
+        label.setStyle("-fx-text-fill: white");
+        EdgePane edgePane = new EdgePane(label);
+        edgePane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+        getBorderPane().setTop(edgePane);
     }
 }
 
