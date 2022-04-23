@@ -7,19 +7,19 @@ public class CurvedPipeMovable extends Tile implements Movable {
     public CurvedPipeMovable(String status) {
         switch (status) {
             case "00":
-                setImage(new Image("Curve3.jpg"));
+                setImage(new Image("Curve3.png"));
                 setStatus(status);
                 break;
             case "01":
-            setImage(new Image("Curve4.jpg"));
+            setImage(new Image("Curve4.png"));
                 setStatus(status);
             break;
             case "10":
-                setImage(new Image("Curve2.jpg"));
+                setImage(new Image("Curve2.png"));
                 setStatus(status);
                 break;
             case "11":
-                setImage(new Image("Curve1.jpg"));
+                setImage(new Image("Curve1.png"));
                 setStatus(status);
                 break;
         }
