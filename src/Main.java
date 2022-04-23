@@ -137,12 +137,13 @@ public class Main extends Application {
             borderPane.setTop(new EdgePane("Top"));
             borderPane.setRight(new EdgePane("Right"));
             borderPane.setBottom(new EdgePane("Bottom"));
-            //Check button
-            /*
+
             StackPane spane = new StackPane();
             spane.getChildren().add(new Button("Check!"));
+            spane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
             borderPane.setBottom(spane);
-             */
+
 
             borderPane.setLeft(new EdgePane("Left"));
             borderPane.setCenter(pane);
