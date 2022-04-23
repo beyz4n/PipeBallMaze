@@ -1,5 +1,5 @@
 import Tiles.*;
-import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -7,42 +7,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class GameBoard{ //extends Application {
     private BorderPane borderPane;
     private Tile[][] tiles;
     private ImageView[] imageViews;
-
-    public BorderPane getBorderPane() {
-        return borderPane;
-    }
-
-    public void setBorderPane(BorderPane borderPane) {
-        this.borderPane = borderPane;
-    }
-
-    //public static void main(String[] args) {launch(args);}
-
-    public Tile[][] getTiles() {
-        return tiles;
-    }
-
-    public void setTiles(Tile[][] tiles) {
-        this.tiles = tiles;
-    }
-
-    public ImageView[] getImageViews() {
-        return imageViews;
-    }
-
-    public void setImageViews(ImageView[] imageViews) {
-        this.imageViews = imageViews;
-    }
 
     public GameBoard(){
         BackgroundImage backgroundImage = new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
@@ -63,10 +37,17 @@ public class GameBoard{ //extends Application {
             startStage.hide();
             primaryStage.show();
         });
-        File file = new File("input.txt");
-        Scanner input = null;
+        File folder = new File("src/Levels");
+        ArrayList<File> levels = new ArrayList<>();
+        for (int l = 0; l < folder.list().length; l++) {
+            String levelNo = l + 1 + "";
+            File file = new File("src/Levels/level" + levelNo + ".txt");
+            levels.add(file);
+        }
+
+        Scanner input;
         try {
-            input = new Scanner(file);
+            input = new Scanner(levels.get(3));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -76,11 +57,9 @@ public class GameBoard{ //extends Application {
             lines.add(input.next());
         }
         ArrayList<String> words = new ArrayList<>();
-        for (int i = 0; i < lines.size(); i++) {
-            String[] splitLine = lines.get(i).split(",");
-            for (int j = 0; j < splitLine.length; j++) {
-                words.add(splitLine[j]);
-            }
+        for (String line : lines) {
+            String[] splitLine = line.split(",");
+            Collections.addAll(words, splitLine);
         }
 
         Tile[][] tiles = new Tile[4][4];
@@ -129,13 +108,13 @@ public class GameBoard{ //extends Application {
         Pane pane = new Pane();
         pane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        borderPane.setRight(new EdgePane(new Label("Right"))); // sonradan sileriz
+        borderPane.setRight(new EdgePane(new Label("Right"))); // delete later
 
 
         Button checkButton = new Button("Check !");
         borderPane.setBottom(new EdgePane(checkButton));
 
-        borderPane.setLeft(new EdgePane(new Label("Left"))); // sonradan sileriz
+        borderPane.setLeft(new EdgePane(new Label("Left"))); // delete later
 
         borderPane.setCenter(pane);
         setBorderPane(borderPane);
@@ -254,5 +233,52 @@ public class GameBoard{ //extends Application {
         primaryStage.setScene(scene);
         //primaryStage.show();
 
+    }
+    public BorderPane getBorderPane() {
+        return borderPane;
+    }
+
+    public void setBorderPane(BorderPane borderPane) {
+        this.borderPane = borderPane;
+    }
+
+    //public static void main(String[] args) {launch(args);}
+
+    public Tile[][] getTiles() {
+        return tiles;
+    }
+
+    public void setTiles(Tile[][] tiles) {
+        this.tiles = tiles;
+    }
+
+    public ImageView[] getImageViews() {
+        return imageViews;
+    }
+
+    public void setImageViews(ImageView[] imageViews) {
+        this.imageViews = imageViews;
+    }
+
+}
+class EdgePane extends StackPane {
+    public EdgePane(Button button){
+
+        getChildren().add(button);
+        //setStyle("-fx-border-color: white");
+        setPadding(new Insets(25.5, 57.5, 50.5, 45.5));
+
+        //For EdgePane's Background
+        setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+    }
+    public EdgePane(Label label) {
+        getChildren().add(label);
+        //setStyle("-fx-border-color: white");
+        setPadding(new Insets(10, 57.5, 75, 105.5));
+
+        //For EdgePane's Background
+        setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
     }
 }

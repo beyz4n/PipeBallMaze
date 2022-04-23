@@ -1,82 +1,52 @@
 import Tiles.*;
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main extends Application {
     private static int numberOfMoves;
-
-    public BorderPane getBorderPane() {
-        return borderPane;
-    }
-
-    public void setBorderPane(BorderPane borderPane) {
-        this.borderPane = borderPane;
-    }
-
-    private BorderPane borderPane;
-    public static int getNumberOfMoves() {
-        return numberOfMoves;
-    }
-
-    public static void setNumberOfMoves(int numberOfMoves) {
-        Main.numberOfMoves = numberOfMoves;
-    }
-
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws FileNotFoundException {
+    public void start(Stage primaryStage) {
 
             GameBoard gameBoard = new GameBoard();
             drag(gameBoard.getImageViews(), gameBoard.getTiles(),gameBoard);
             displayNumberOfMoves(gameBoard);
 
-
-
-
-
 }
 
     private void drag(ImageView[] imageViews, Tile[][] tiles, GameBoard gameBoard) {
-        for (int i = 0; i < imageViews.length; i++){
+        for (ImageView imageView : imageViews) {
 
-            imageViews[i].setOnMouseReleased(e -> {
-                ImageView imageView1 = (ImageView) e.getTarget(); // ilk konumunu aldık
-                ImageView imageView2 = (ImageView) e.getPickResult().getIntersectedNode(); // son konum
+            imageView.setOnMouseReleased(e -> {
+                ImageView imageView1 = (ImageView) e.getTarget(); // gets the first node
+                ImageView imageView2 = (ImageView) e.getPickResult().getIntersectedNode(); // gets the last node
                 int index1x = 0;
                 int index1y = 0;
                 int index2x = 0;
                 int index2y = 0;
-                for (int k = 0; k < 4; k++){
-                    for (int j = 0; j < 4; j++){
-                        if(tiles[k][j].getImage().equals(imageView1.getImage())){
+                for (int k = 0; k < 4; k++) {
+                    for (int j = 0; j < 4; j++) {
+                        if (tiles[k][j].getImage().equals(imageView1.getImage())) {
                             index1x = k;
                             index1y = j;
                         }
-                        if(tiles[k][j].getImage().equals(imageView2.getImage())){
+                        if (tiles[k][j].getImage().equals(imageView2.getImage())) {
                             index2x = k;
                             index2y = j;
                         }
                     }
                 }
-                if(!((index1x == index2x) && (index1y == index2y))) {
+                if (!((index1x == index2x) && (index1y == index2y))) {
                     if (tiles[index1x][index1y] instanceof EmptyFree) {
                         if ((tiles[index1x][index1y] instanceof Movable) && (tiles[index2x][index2y] instanceof Movable)
                                 && !(tiles[index1x][index1y] instanceof EmptyFree)) {
@@ -84,14 +54,14 @@ public class Main extends Application {
                                     imageView2.getY() == imageView1.getY()) {
                                 swapImages(imageView1, imageView2);
                                 displayNumberOfMoves(gameBoard);
-                                swapTiles(tiles,index1x,index1y,index2x,index2y,gameBoard);
+                                swapTiles(index1x, index1y, index2x, index2y, gameBoard);
 
                             }
                             if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                     imageView2.getX() == imageView1.getX()) {
                                 swapImages(imageView1, imageView2);
                                 displayNumberOfMoves(gameBoard);
-                                swapTiles(tiles,index1x,index1y,index2x,index2y,gameBoard);
+                                swapTiles(index1x, index1y, index2x, index2y, gameBoard);
 
                             }
                         }
@@ -102,14 +72,14 @@ public class Main extends Application {
                                     imageView2.getY() == imageView1.getY()) {
                                 swapImages(imageView1, imageView2);
                                 displayNumberOfMoves(gameBoard);
-                                swapTiles(tiles,index1x,index1y,index2x,index2y,gameBoard);
+                                swapTiles(index1x, index1y, index2x, index2y, gameBoard);
 
                             }
                             if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                     imageView2.getX() == imageView1.getX()) {
                                 swapImages(imageView1, imageView2);
                                 displayNumberOfMoves(gameBoard);
-                                swapTiles(tiles,index1x,index1y,index2x,index2y,gameBoard);
+                                swapTiles(index1x, index1y, index2x, index2y, gameBoard);
                             }
                         }
                     }
@@ -143,32 +113,21 @@ public class Main extends Application {
 
     }
 
-    public void swapTiles(Tile[][] tiles, int index1x, int index1y, int index2x, int index2y, GameBoard gameBoard){
+    public void swapTiles(/*Tile[][] tiles,*/ int index1x, int index1y, int index2x, int index2y, GameBoard gameBoard){
         Tile temp = gameBoard.getTiles()[index1x][index1y];
         gameBoard.getTiles()[index1x][index1y] = gameBoard.getTiles()[index2x][index2y];
         gameBoard.getTiles()[index2x][index2y] = temp;
     }
-}
 
-class EdgePane extends StackPane {
-    public EdgePane(Button button){
+    public void checkForSolution(){
 
-        getChildren().add(button);
-        //setStyle("-fx-border-color: white");
-        setPadding(new Insets(25.5, 57.5, 50.5, 45.5));
-
-        //For EdgePane's Background
-        setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
     }
-    public EdgePane(Label label) {
-        getChildren().add(label);
-        //setStyle("-fx-border-color: white");
-        setPadding(new Insets(10, 57.5, 75, 105.5));
-
-        //For EdgePane's Background
-        setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+    public static int getNumberOfMoves() {
+        return numberOfMoves;
     }
-}
 
+    public static void setNumberOfMoves(int numberOfMoves) {
+        Main.numberOfMoves = numberOfMoves;
+    }
+
+}
