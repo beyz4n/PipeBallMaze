@@ -44,14 +44,14 @@ public class Main extends Application {
         BackgroundImage backgroundImage = new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
-        /*
+
         Button startButton = new Button("Start");
         StackPane startPane = new StackPane();
         startPane.getChildren().add(startButton);
         startPane.setBackground(new Background(backgroundImage));
         Scene startScene = new Scene(startPane,850,780);
         Stage startStage = new Stage();
-        /*
+
         startStage.setScene(startScene);
         startStage.setTitle("PipeBallMaze");
         startStage.show();
@@ -60,13 +60,13 @@ public class Main extends Application {
             startStage.hide();
             primaryStage.show();
         });
-*/
 
-        File folder = new File("Levels");
+
+        File folder = new File("src\\Levels");
         ArrayList<File> levels = new ArrayList<>();
         for (int l = 0; l < folder.list().length; l++) {
             String levelNo = l + 1 + "";
-            File file = new File("Levels\\level" + levelNo + ".txt");
+            File file = new File("src\\Levels\\level" + levelNo + ".txt");
             levels.add(file);
         }
 
