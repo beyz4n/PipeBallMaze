@@ -288,49 +288,50 @@ public class Main extends Application {
                         }
                     }
                 }
-                if (tiles[index1x][index1y] instanceof EmptyFree){
-                    if ((tiles[index1x][index1y] instanceof Movable) && (tiles[index2x][index2y] instanceof Movable)
-                            && !(tiles[index1x][index1y] instanceof EmptyFree)){
-                        if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
-                                imageView2.getY() == imageView1.getY()) {
-                            swapImages(imageView1, imageView2);
-                            Label label = new Label("Number of Moves " + getNumberOfMoves());
-                            StackPane stackPane = new StackPane();
-                            stackPane.getChildren().add(label);
-                            getBorderPane().setTop(stackPane);
+                if(!((index1x == index2x) && (index1y == index2y))) {
+                    if (tiles[index1x][index1y] instanceof EmptyFree) {
+                        if ((tiles[index1x][index1y] instanceof Movable) && (tiles[index2x][index2y] instanceof Movable)
+                                && !(tiles[index1x][index1y] instanceof EmptyFree)) {
+                            if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
+                                    imageView2.getY() == imageView1.getY()) {
+                                swapImages(imageView1, imageView2);
+                                Label label = new Label("Number of Moves " + getNumberOfMoves());
+                                StackPane stackPane = new StackPane();
+                                stackPane.getChildren().add(label);
+                                getBorderPane().setTop(stackPane);
 
+                            }
+                            if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
+                                    imageView2.getX() == imageView1.getX()) {
+                                swapImages(imageView1, imageView2);
+                                Label label = new Label("Number of Moves " + getNumberOfMoves());
+                                StackPane stackPane = new StackPane();
+                                stackPane.getChildren().add(label);
+                                getBorderPane().setTop(stackPane);
+
+                            }
                         }
-                        if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
-                                imageView2.getX() == imageView1.getX() ) {
-                            swapImages(imageView1, imageView2);
-                            Label label = new Label("Number of Moves " + getNumberOfMoves());
-                            StackPane stackPane = new StackPane();
-                            stackPane.getChildren().add(label);
-                            getBorderPane().setTop(stackPane);
+                    } else {
+                        if ((tiles[index1x][index1y] instanceof Movable) && (tiles[index2x][index2y] instanceof Movable)
+                                && !(tiles[index1x][index1y] instanceof EmptyFree)) {
+                            if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
+                                    imageView2.getY() == imageView1.getY()) {
+                                swapImages(imageView1, imageView2);
+                                Label label = new Label("Number of Moves " + getNumberOfMoves());
+                                StackPane stackPane = new StackPane();
+                                stackPane.getChildren().add(label);
+                                getBorderPane().setTop(stackPane);
 
-                        }
-                    }
-                }
-                else {
-                    if ((tiles[index1x][index1y] instanceof Movable) && (tiles[index2x][index2y] instanceof Movable)
-                            && !(tiles[index1x][index1y] instanceof EmptyFree)) {
-                        if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
-                                imageView2.getY() == imageView1.getY()) {
-                            swapImages(imageView1, imageView2);
-                            Label label = new Label("Number of Moves " + getNumberOfMoves());
-                            StackPane stackPane = new StackPane();
-                            stackPane.getChildren().add(label);
-                            getBorderPane().setTop(stackPane);
+                            }
+                            if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
+                                    imageView2.getX() == imageView1.getX()) {
+                                swapImages(imageView1, imageView2);
+                                Label label = new Label("Number of Moves " + getNumberOfMoves());
+                                StackPane stackPane = new StackPane();
+                                stackPane.getChildren().add(label);
+                                getBorderPane().setTop(stackPane);
 
-                        }
-                        if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
-                                imageView2.getX() == imageView1.getX()) {
-                            swapImages(imageView1, imageView2);
-                            Label label = new Label("Number of Moves " + getNumberOfMoves());
-                            StackPane stackPane = new StackPane();
-                            stackPane.getChildren().add(label);
-                            getBorderPane().setTop(stackPane);
-
+                            }
                         }
                     }
                 }
