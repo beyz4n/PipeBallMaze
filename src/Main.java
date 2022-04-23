@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -267,6 +270,7 @@ public class Main extends Application {
             drag(imageViews, tiles);
             //Number Of Moves
             Label label = new Label("Number of Moves " + getNumberOfMoves());
+            label.setFont(Font.font("Arial", FontWeight.BOLD, 30));
             label.setStyle("-fx-text-fill: white");
            EdgePane edgePane = new EdgePane(label);
             edgePane.setBackground(new Background(backgroundImage));
