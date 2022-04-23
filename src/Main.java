@@ -61,7 +61,7 @@ public class Main extends Application {
             primaryStage.show();
         });
 
-
+    /*
         File folder = new File("src\\Levels");
         ArrayList<File> levels = new ArrayList<>();
         for (int l = 0; l < folder.list().length; l++) {
@@ -69,12 +69,12 @@ public class Main extends Application {
             File file = new File("src\\Levels\\level" + levelNo + ".txt");
             levels.add(file);
         }
-
+*/
         //for (int m = 0; m < levels.size(); m++) { }
-
+        File file = new File("input.txt");
             Scanner input = null;
             try {
-                input = new Scanner(levels.get(1));
+                input = new Scanner(file);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
