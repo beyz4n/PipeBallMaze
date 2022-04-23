@@ -137,117 +137,123 @@ public class Main extends Application {
 
             BorderPane borderPane = new BorderPane();
             Pane pane = new Pane();
-            borderPane.setTop(new EdgePane("Top"));
-            borderPane.setRight(new EdgePane("Right"));
-            borderPane.setBottom(new EdgePane("Bottom"));
+            borderPane.setRight(new EdgePane(new Label("Right"))); // sonradan sileriz
 
+            //Check
+        /*
             StackPane spane = new StackPane();
             spane.getChildren().add(new Button("Check!"));
             spane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
             borderPane.setBottom(spane);
 
+         */
 
-            borderPane.setLeft(new EdgePane("Left"));
+        Button checkButton = new Button("Check !");
+        borderPane.setBottom(new EdgePane(checkButton));
+
+            borderPane.setLeft(new EdgePane(new Label("Left"))); // sonradan sileriz
             borderPane.setCenter(pane);
             setBorderPane(borderPane);
+
+            final double sizeOfTile = 140;
 
 
             ImageView imageView1 = new ImageView(tiles[0][0].getImage());
             imageView1.setX(0);
             imageView1.setY(0);
-            imageView1.setFitHeight(175);
-            imageView1.setFitWidth(175);
+            imageView1.setFitHeight(sizeOfTile);
+            imageView1.setFitWidth(sizeOfTile);
 
             ImageView imageView2 = new ImageView(tiles[0][1].getImage());
-            imageView2.setX(178);
+            imageView2.setX(143);
             imageView2.setY(0);
-            imageView2.setFitHeight(175);
-            imageView2.setFitWidth(175);
+            imageView2.setFitHeight(sizeOfTile);
+            imageView2.setFitWidth(sizeOfTile);
 
             ImageView imageView3 = new ImageView(tiles[0][2].getImage());
-            imageView3.setX(356);
+            imageView3.setX(286);
             imageView3.setY(0);
-            imageView3.setFitHeight(175);
-            imageView3.setFitWidth(175);
+            imageView3.setFitHeight(sizeOfTile);
+            imageView3.setFitWidth(sizeOfTile);
 
             ImageView imageView4 = new ImageView(tiles[0][3].getImage());
-            imageView4.setX(534);
+            imageView4.setX(429);
             imageView4.setY(0);
-            imageView4.setFitHeight(175);
-            imageView4.setFitWidth(175);
+            imageView4.setFitHeight(sizeOfTile);
+            imageView4.setFitWidth(sizeOfTile);
 
             ImageView imageView5 = new ImageView(tiles[1][0].getImage());
             imageView5.setX(0);
-            imageView5.setY(178);
-            imageView5.setFitHeight(175);
-            imageView5.setFitWidth(175);
+            imageView5.setY(143);
+            imageView5.setFitHeight(sizeOfTile);
+            imageView5.setFitWidth(sizeOfTile);
 
             ImageView imageView6 = new ImageView(tiles[1][1].getImage());
-            imageView6.setX(178);
-            imageView6.setY(178);
-            imageView6.setFitHeight(175);
-            imageView6.setFitWidth(175);
+            imageView6.setX(143);
+            imageView6.setY(143);
+            imageView6.setFitHeight(sizeOfTile);
+            imageView6.setFitWidth(sizeOfTile);
 
             ImageView imageView7 = new ImageView(tiles[1][2].getImage());
-            imageView7.setX(356);
-            imageView7.setY(178);
-            imageView7.setFitHeight(175);
-            imageView7.setFitWidth(175);
+            imageView7.setX(286);
+            imageView7.setY(143);
+            imageView7.setFitHeight(sizeOfTile);
+            imageView7.setFitWidth(sizeOfTile);
 
             ImageView imageView8 = new ImageView(tiles[1][3].getImage());
-            imageView8.setX(534);
-            imageView8.setY(178);
-            imageView8.setFitHeight(175);
-            imageView8.setFitWidth(175);
+            imageView8.setX(429);
+            imageView8.setY(143);
+            imageView8.setFitHeight(sizeOfTile);
+            imageView8.setFitWidth(sizeOfTile);
 
             ImageView imageView9 = new ImageView(tiles[2][0].getImage());
             imageView9.setX(0);
-            imageView9.setY(356);
-            imageView9.setFitHeight(175);
-            imageView9.setFitWidth(175);
+            imageView9.setY(286);
+            imageView9.setFitHeight(sizeOfTile);
+            imageView9.setFitWidth(sizeOfTile);
 
             ImageView imageView10 = new ImageView(tiles[2][1].getImage());
-            imageView10.setX(178);
-            imageView10.setY(356);
-            imageView10.setFitHeight(175);
-            imageView10.setFitWidth(175);
+            imageView10.setX(143);
+            imageView10.setY(286);
+            imageView10.setFitHeight(sizeOfTile);
+            imageView10.setFitWidth(sizeOfTile);
 
             ImageView imageView11 = new ImageView(tiles[2][2].getImage());
-            imageView11.setX(356);
-            imageView11.setY(356);
-            imageView11.setFitHeight(175);
-            imageView11.setFitWidth(175);
+            imageView11.setX(286);
+            imageView11.setY(286);
+            imageView11.setFitHeight(sizeOfTile);
+            imageView11.setFitWidth(sizeOfTile);
 
             ImageView imageView12 = new ImageView(tiles[2][3].getImage());
-            imageView12.setX(534);
-            imageView12.setY(356);
-            imageView12.setFitHeight(175);
-            imageView12.setFitWidth(175);
+            imageView12.setX(429);
+            imageView12.setY(286);
+            imageView12.setFitHeight(sizeOfTile);
+            imageView12.setFitWidth(sizeOfTile);
 
             ImageView imageView13 = new ImageView(tiles[3][0].getImage());
             imageView13.setX(0);
-            imageView13.setY(534);
-            imageView13.setFitHeight(175);
-            imageView13.setFitWidth(175);
+            imageView13.setY(429);
+            imageView13.setFitHeight(sizeOfTile);
+            imageView13.setFitWidth(sizeOfTile);
 
             ImageView imageView14 = new ImageView(tiles[3][1].getImage());
-            imageView14.setX(178);
-            imageView14.setY(534);
-            imageView14.setFitHeight(175);
-            imageView14.setFitWidth(175);
+            imageView14.setX(143);
+            imageView14.setY(429);
+            imageView14.setFitHeight(sizeOfTile);
+            imageView14.setFitWidth(sizeOfTile);
 
             ImageView imageView15 = new ImageView(tiles[3][2].getImage());
-            imageView15.setX(356);
-            imageView15.setY(534);
-            imageView15.setFitHeight(175);
-            imageView15.setFitWidth(175);
+            imageView15.setX(286);
+            imageView15.setY(429);
+            imageView15.setFitHeight(sizeOfTile);
+            imageView15.setFitWidth(sizeOfTile);
 
             ImageView imageView16 = new ImageView(tiles[3][3].getImage());
-            imageView16.setX(534);
-            imageView16.setY(534);
-            imageView16.setFitHeight(175);
-            imageView16.setFitWidth(175);
+            imageView16.setX(429);
+            imageView16.setY(429);
+            imageView16.setFitHeight(sizeOfTile);
+            imageView16.setFitWidth(sizeOfTile);
 
 
             pane.getChildren().addAll(imageView1, imageView2, imageView3, imageView4,
@@ -262,12 +268,11 @@ public class Main extends Application {
             //Number Of Moves
             Label label = new Label("Number of Moves " + getNumberOfMoves());
             label.setStyle("-fx-text-fill: white");
-            StackPane stackPane = new StackPane();
-            stackPane.setBackground(new Background(backgroundImage));
-            stackPane.getChildren().add(label);
+           EdgePane edgePane = new EdgePane(label);
+            edgePane.setBackground(new Background(backgroundImage));
             pane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-            borderPane.setTop(stackPane);
+            borderPane.setTop(edgePane);
 
             Scene scene = new Scene(borderPane, 950, 780);
             primaryStage.setTitle("PipeBallMaze");
@@ -308,11 +313,10 @@ public class Main extends Application {
                                 swapImages(imageView1, imageView2);
                                 Label label = new Label("Number of Moves " + getNumberOfMoves());
                                 label.setStyle("-fx-text-fill: white");
-                                StackPane stackPane = new StackPane();
-                                stackPane.getChildren().add(label);
-                                stackPane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                                EdgePane edgePane = new EdgePane(label);
+                                edgePane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                                         BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-                                getBorderPane().setTop(stackPane);
+                                getBorderPane().setTop(edgePane);
                                 Tile temp = tiles[index1x][index1y];
                                 tiles[index1x][index1y] = tiles[index2x][index2y];
                                 tiles[index2x][index2y] = temp;
@@ -323,11 +327,10 @@ public class Main extends Application {
                                 swapImages(imageView1, imageView2);
                                 Label label = new Label("Number of Moves " + getNumberOfMoves());
                                 label.setStyle("-fx-text-fill: white");
-                                StackPane stackPane = new StackPane();
-                                stackPane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                                EdgePane edgePane = new EdgePane(label);
+                                edgePane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                                         BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-                                stackPane.getChildren().add(label);
-                                getBorderPane().setTop(stackPane);
+                                getBorderPane().setTop(edgePane);
                                 Tile temp = tiles[index1x][index1y];
                                 tiles[index1x][index1y] = tiles[index2x][index2y];
                                 tiles[index2x][index2y] = temp;
@@ -342,11 +345,10 @@ public class Main extends Application {
                                 swapImages(imageView1, imageView2);
                                 Label label = new Label("Number of Moves " + getNumberOfMoves());
                                 label.setStyle("-fx-text-fill: white");
-                                StackPane stackPane = new StackPane();
-                                stackPane.getChildren().add(label);
-                                stackPane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                                EdgePane edgePane = new EdgePane(label);
+                                edgePane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                                         BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-                                getBorderPane().setTop(stackPane);
+                                getBorderPane().setTop(edgePane);
                                 Tile temp = tiles[index1x][index1y];
                                 tiles[index1x][index1y] = tiles[index2x][index2y];
                                 tiles[index2x][index2y] = temp;
@@ -357,11 +359,10 @@ public class Main extends Application {
                                 swapImages(imageView1, imageView2);
                                 Label label = new Label("Number of Moves " + getNumberOfMoves());
                                 label.setStyle("-fx-text-fill: white");
-                                StackPane stackPane = new StackPane();
-                                stackPane.getChildren().add(label);
-                                stackPane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                                EdgePane edgePane = new EdgePane(label);
+                                edgePane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                                         BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-                                getBorderPane().setTop(stackPane);
+                                getBorderPane().setTop(edgePane);
                                 Tile temp = tiles[index1x][index1y];
                                 tiles[index1x][index1y] = tiles[index2x][index2y];
                                 tiles[index2x][index2y] = temp;
@@ -390,10 +391,20 @@ public class Main extends Application {
 }
 
 class EdgePane extends StackPane {
-    public EdgePane(String title) {
-        getChildren().add(new Label(title));
-        setStyle("-fx-border-color: darkblue");
-        setPadding(new Insets(25.5, 57.5, 30.5, 36.5));
+    public EdgePane(Button button){
+
+        getChildren().add(button);
+        //setStyle("-fx-border-color: white");
+        setPadding(new Insets(25.5, 57.5, 50.5, 45.5));
+
+        //For EdgePane's Background
+        setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+    }
+    public EdgePane(Label label) {
+        getChildren().add(label);
+        //setStyle("-fx-border-color: white");
+        setPadding(new Insets(10, 57.5, 75, 105.5));
 
         //For EdgePane's Background
         setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
