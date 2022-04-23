@@ -115,6 +115,13 @@ public class Main extends Application {
             borderPane.setTop(new EdgePane("Top"));
             borderPane.setRight(new EdgePane("Right"));
             borderPane.setBottom(new EdgePane("Bottom"));
+            //Check button
+            /*
+            StackPane spane = new StackPane();
+            spane.getChildren().add(new Button("Check!"));
+           borderPane.setBottom(spane);
+             */
+
             borderPane.setLeft(new EdgePane("Left"));
             borderPane.setCenter(pane);
 
@@ -225,6 +232,12 @@ public class Main extends Application {
                     imageView11, imageView12, imageView13, imageView14, imageView15, imageView16};
 
             drag(imageViews, tiles);
+            /* Number Of Moves
+            Label label = new Label("Number of Moves ");
+            StackPane stackPane = new StackPane();
+            stackPane.getChildren().add(label);
+            borderPane.setTop(stackPane);
+            */
 
             Scene scene = new Scene(borderPane, 930, 850);
             primaryStage.setTitle("PipeBallMaze");
