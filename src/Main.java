@@ -140,6 +140,8 @@ public class Main extends Application {
 
             BorderPane borderPane = new BorderPane();
             Pane pane = new Pane();
+            pane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
             borderPane.setRight(new EdgePane(new Label("Right"))); // sonradan sileriz
 
             //Check
@@ -156,6 +158,7 @@ public class Main extends Application {
             borderPane.setBottom(new EdgePane(checkButton));
 
             borderPane.setLeft(new EdgePane(new Label("Left"))); // sonradan sileriz
+
             borderPane.setCenter(pane);
             setBorderPane(borderPane);
 
@@ -270,14 +273,6 @@ public class Main extends Application {
             drag(imageViews, tiles);
             //Number Of Moves
 
-            Label label = new Label("Number of Moves " + getNumberOfMoves());
-            label.setFont(Font.font("Arial", FontWeight.BOLD, 30));
-            label.setStyle("-fx-text-fill: white");
-           EdgePane edgePane = new EdgePane(label);
-            edgePane.setBackground(new Background(backgroundImage));
-            pane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-            borderPane.setTop(edgePane);
 
             displayNumberOfMoves();
 
@@ -379,6 +374,7 @@ public class Main extends Application {
     public void displayNumberOfMoves(){
         Label label = new Label("Number of Moves " + getNumberOfMoves());
         label.setStyle("-fx-text-fill: white");
+        label.setFont(Font.font("Arial", FontWeight.BOLD, 30));
         EdgePane edgePane = new EdgePane(label);
         edgePane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
