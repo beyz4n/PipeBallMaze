@@ -299,6 +299,9 @@ public class Main extends Application {
                                 StackPane stackPane = new StackPane();
                                 stackPane.getChildren().add(label);
                                 getBorderPane().setTop(stackPane);
+                                Tile temp = tiles[index1x][index1y];
+                                tiles[index1x][index1y] = tiles[index2x][index2y];
+                                tiles[index2x][index2y] = temp;
 
                             }
                             if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
@@ -308,6 +311,9 @@ public class Main extends Application {
                                 StackPane stackPane = new StackPane();
                                 stackPane.getChildren().add(label);
                                 getBorderPane().setTop(stackPane);
+                                Tile temp = tiles[index1x][index1y];
+                                tiles[index1x][index1y] = tiles[index2x][index2y];
+                                tiles[index2x][index2y] = temp;
 
                             }
                         }
@@ -321,6 +327,9 @@ public class Main extends Application {
                                 StackPane stackPane = new StackPane();
                                 stackPane.getChildren().add(label);
                                 getBorderPane().setTop(stackPane);
+                                Tile temp = tiles[index1x][index1y];
+                                tiles[index1x][index1y] = tiles[index2x][index2y];
+                                tiles[index2x][index2y] = temp;
 
                             }
                             if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
@@ -330,16 +339,14 @@ public class Main extends Application {
                                 StackPane stackPane = new StackPane();
                                 stackPane.getChildren().add(label);
                                 getBorderPane().setTop(stackPane);
-
+                                Tile temp = tiles[index1x][index1y];
+                                tiles[index1x][index1y] = tiles[index2x][index2y];
+                                tiles[index2x][index2y] = temp;
                             }
                         }
                     }
                 }
                 // maybe we should move these into the if's ? not sure tho, will ask
-                Tile temp = tiles[index1x][index1y];
-                tiles[index1x][index1y] = tiles[index2x][index2y];
-                tiles[index2x][index2y] = temp;
-
 
             });
         }
