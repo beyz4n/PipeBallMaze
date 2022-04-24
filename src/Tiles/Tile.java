@@ -8,14 +8,14 @@ public abstract class Tile {
    // private String location;
    private Image image;
 
-  private String attribute;
+  private String status;
 
-   public String getAttribute() {
-      return attribute;
+   public String status() {
+      return status;
    }
 
-   public void setAttribute(String attribute) {
-      this.attribute = attribute;
+   public void setStatus(String attribute) {
+      this.status = attribute;
    }
 
    public void setImage(Image image) {
