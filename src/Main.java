@@ -52,6 +52,7 @@ public class Main extends Application {
                 pathTransition.setDuration(Duration.seconds(3));
                 pathTransition.play();
                 gameBoard.setLevelCompleted(true);
+                gameBoard.setLevelNo(gameBoard.getLevelNo() + 1);
             }
         });
 
