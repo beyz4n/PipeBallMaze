@@ -10,13 +10,14 @@ public abstract class Tile {
 
   private String status;
 
-   public String status() {
+   public String getStatus() {
       return status;
    }
 
    public void setStatus(String attribute) {
       this.status = attribute;
    }
+
 
    public void setImage(Image image) {
       this.image = image;

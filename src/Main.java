@@ -9,6 +9,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Main extends Application {
     private static int numberOfMoves;
 
@@ -25,7 +27,7 @@ public class Main extends Application {
 
 
                 ((EdgePane) gameBoard.getBorderPane().getBottom()).getButton().setOnMouseClicked(event -> {
-                    checkForSolution();
+                    checkForSolution(gameBoard);
                 });
 
 
@@ -126,8 +128,266 @@ public class Main extends Application {
         gameBoard.getTiles()[index2x][index2y] = temp;
     }
 
-    public void checkForSolution(){
-        System.out.println("denedin :)");
+    public boolean checkForSolution(GameBoard gameBoard){
+        boolean tileTrue = false;
+        boolean tileTrue2 = false;
+        boolean tileTrue3 = false;
+        boolean tileTrue4 = false;
+        boolean tileTrue5 = false;
+        boolean tileTrue6 = false;
+        ArrayList<Boolean> checkBooleanList = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                tileTrue = false;
+                tileTrue2 = false;
+                tileTrue3 = false;
+                tileTrue4 = false;
+                tileTrue5 = false;
+                tileTrue6 = false;
+
+
+                if (gameBoard.getTiles()[i][j] instanceof StartPipe) {
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical") && (i != 3)) {
+                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
+                            tileTrue2 = true;
+                        }
+                        if (gameBoard.getTiles()[i+1][j].getStatus().equals("00")&& (i != 3)){
+                            tileTrue4 = true;
+                        }
+                        else if (gameBoard.getTiles()[i+1][j].getStatus().equals("01")&& (i != 3)){
+                            tileTrue4 = true;
+                        }
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal") && (j != 0)) {
+                        if (gameBoard.getTiles()[i][j - 1].getStatus().equals("Horizontal")) {
+                            tileTrue = true;
+                        }
+                        if (gameBoard.getTiles()[i][j-1].getStatus().equals("01")&& (j != 0)){
+                            tileTrue4 = true;
+                        }
+                        else if (gameBoard.getTiles()[i][j-1].getStatus().equals("11")&& (j != 0)){
+                            tileTrue4 = true;
+                        }
+                    }
+                    tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
+                    checkBooleanList.add(tileTrue3);
+                }
+
+
+
+
+                if (gameBoard.getTiles()[i][j] instanceof EndPipe) {
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical")&& (i != 3)) {
+                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
+                            tileTrue = true;
+                        }
+                        if (gameBoard.getTiles()[i+1][j].getStatus().equals("00")&& (i != 3)){
+                            tileTrue4 = true;
+                        }
+                        else if (gameBoard.getTiles()[i+1][j].getStatus().equals("01")&& (i != 3)){
+                            tileTrue4 = true;
+                        }
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal") && (j != 0)) {
+                        if (gameBoard.getTiles()[i][j - 1].getStatus().equals("Horizontal")) {
+                            tileTrue2 = true;
+                        }
+                        if (gameBoard.getTiles()[i][j-1].getStatus().equals("01")&& (j != 0)){
+                            tileTrue4 = true;
+                        }
+                        else if (gameBoard.getTiles()[i][j-1].getStatus().equals("11")&& (j != 0)){
+                            tileTrue4 = true;
+                        }
+                    }
+                    tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
+                    checkBooleanList.add(tileTrue3);
+                }
+
+
+
+
+                if (gameBoard.getTiles()[i][j] instanceof LinearPipe) {
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical") && (i != 3)) {
+                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
+                            tileTrue = true;
+                        }
+                        if (gameBoard.getTiles()[i+1][j].getStatus().equals("00")&& (i != 3)){
+                            tileTrue4 = true;
+                        }
+                        else if (gameBoard.getTiles()[i+1][j].getStatus().equals("01")&& (i != 3)){
+                            tileTrue4 = true;
+                        }
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal")&& (j != 3)) {
+                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
+                            tileTrue2 = true;
+                        }
+                        if (gameBoard.getTiles()[i][j-1].getStatus().equals("01")&& (j != 0)){
+                            tileTrue4 = true;
+                        }
+                        else if (gameBoard.getTiles()[i][j-1].getStatus().equals("11")&& (j != 0)){
+                            tileTrue4 = true;
+                        }
+                    }
+                    tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
+                    checkBooleanList.add(tileTrue3);
+                }
+                if (gameBoard.getTiles()[i][j] instanceof NormalPipeStatic) {
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical") && (i != 3)) {
+                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
+                            tileTrue = true;
+                        }
+                        if (gameBoard.getTiles()[i][j-1].getStatus().equals("00")&& (i != 3)){
+                            tileTrue4 = true;
+                        }
+                        else if (gameBoard.getTiles()[i][j-1].getStatus().equals("01")&& (i != 3)){
+                            tileTrue4 = true;
+                        }
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal")&& (j != 3)) {
+                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
+                            tileTrue2 = true;
+                        }
+                        if (gameBoard.getTiles()[i][j-1].getStatus().equals("01")&& (j != 0)){
+                            tileTrue4 = true;
+                        }
+                        else if (gameBoard.getTiles()[i][j-1].getStatus().equals("11")&& (j != 0)){
+                            tileTrue4 = true;
+                        }
+                    }
+                    tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
+                    checkBooleanList.add(tileTrue3);
+                }
+                if (gameBoard.getTiles()[i][j] instanceof CurvedPipeMovable) {
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("00") && (i != 0 && j != 0)) {
+                        if (gameBoard.getTiles()[i][j-1].getStatus().equals("Horizontal")) {
+                            if (gameBoard.getTiles()[i-1][j].getStatus().equals("Vertical")) {
+                                tileTrue = true;
+                            }
+                            if (gameBoard.getTiles()[i][j-1].getStatus().equals("01")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                            else if (gameBoard.getTiles()[i][j-1].getStatus().equals("11")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                        }
+
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("01") && (i != 0) && (j != 3)) {
+                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
+                            if (gameBoard.getTiles()[i-1][j].getStatus().equals("Vertical")) {
+                                tileTrue2 = true;
+                            }
+                            if (gameBoard.getTiles()[i][j-1].getStatus().equals("01")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                            else if (gameBoard.getTiles()[i][j-1].getStatus().equals("11")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                        }
+
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("10") && (j != 0) && (i != 3)) {
+                        if (gameBoard.getTiles()[i][j - 1].getStatus().equals("Horizontal")) {
+                            if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
+                                tileTrue4 = true;
+                            }
+                            if (gameBoard.getTiles()[i][j-1].getStatus().equals("01")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                            else if (gameBoard.getTiles()[i][j-1].getStatus().equals("11")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                        }
+
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("11") && (i != 3) && (j != 3)) {
+                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
+                            if (gameBoard.getTiles()[i+1][j].getStatus().equals("Vertical")) {
+                                tileTrue5 = true;
+                            }
+                            if (gameBoard.getTiles()[i][j-1].getStatus().equals("01")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                            else if (gameBoard.getTiles()[i][j-1].getStatus().equals("11")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                        }
+
+                    }
+                    tileTrue3 = tileTrue || tileTrue2 || tileTrue4 || tileTrue5 || tileTrue6;
+                    checkBooleanList.add(tileTrue3);
+                }
+                if (gameBoard.getTiles()[i][j] instanceof CurvedPipeStatic) {
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("00") && (i != 0 && j != 0)) {
+                        if (gameBoard.getTiles()[i][j-1].getStatus().equals("Horizontal")) {
+                            if (gameBoard.getTiles()[i-1][j].getStatus().equals("Vertical")) {
+                                tileTrue = true;
+                            }
+                            if (gameBoard.getTiles()[i][j-1].getStatus().equals("01")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                            else if (gameBoard.getTiles()[i][j-1].getStatus().equals("11")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                        }
+
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("01") && (i != 0) && (j != 3)) {
+                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
+                            if (gameBoard.getTiles()[i-1][j].getStatus().equals("Vertical")) {
+                                tileTrue2 = true;
+                            }
+                            if (gameBoard.getTiles()[i][j-1].getStatus().equals("01")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                            else if (gameBoard.getTiles()[i][j-1].getStatus().equals("11")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                        }
+
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("10") && (j != 0) && (i != 3)) {
+                        if (gameBoard.getTiles()[i][j - 1].getStatus().equals("Horizontal")) {
+                            if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
+                                tileTrue4 = true;
+                            }
+                            if (gameBoard.getTiles()[i][j-1].getStatus().equals("01")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                            else if (gameBoard.getTiles()[i][j-1].getStatus().equals("11")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                        }
+
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("11") && (i != 3) && (j != 3)) {
+                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
+                            if (gameBoard.getTiles()[i+1][j].getStatus().equals("Vertical")) {
+                                tileTrue5 = true;
+                            }
+                            if (gameBoard.getTiles()[i][j-1].getStatus().equals("01")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                            else if (gameBoard.getTiles()[i][j-1].getStatus().equals("11")&& (j != 0)){
+                                tileTrue6 = true;
+                            }
+                        }
+
+                    }
+                    tileTrue3 = tileTrue || tileTrue2 || tileTrue4 || tileTrue5 || tileTrue6;
+                    checkBooleanList.add(tileTrue3);
+                }
+            }
+        }
+        if (checkBooleanList.contains(false)){
+            System.out.println("false");
+            return false;
+        }
+        else {
+            System.out.println("true");
+            return true;
+        }
     }
     public static int getNumberOfMoves() {
         return numberOfMoves;
