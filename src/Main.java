@@ -1,5 +1,6 @@
 import Tiles.*;
 import javafx.application.Application;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,7 +22,13 @@ public class Main extends Application {
             GameBoard gameBoard = new GameBoard();
             drag(gameBoard.getImageViews(), gameBoard.getTiles(),gameBoard);
             displayNumberOfMoves(gameBoard);
-
+            /*
+            if ( ((EdgePane)gameBoard.getBorderPane().getBottom()).getButton() != null) {
+                ((EdgePane) gameBoard.getBorderPane().getBottom()).getButton().setOnMouseClicked(event -> {
+                    checkForSolution();
+                });
+            }
+             */
 }
 
     private void drag(ImageView[] imageViews, Tile[][] tiles, GameBoard gameBoard) {
@@ -120,7 +127,7 @@ public class Main extends Application {
     }
 
     public void checkForSolution(){
-
+        System.out.println("denedin :)");
     }
     public static int getNumberOfMoves() {
         return numberOfMoves;

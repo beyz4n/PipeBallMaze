@@ -262,6 +262,7 @@ public class GameBoard{ //extends Application {
 
 }
 class EdgePane extends StackPane {
+    private Button button;
     public EdgePane(Button button){
 
         getChildren().add(button);
@@ -281,4 +282,11 @@ class EdgePane extends StackPane {
         setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
     }
+    public Button getButton(){
+        return button;
+    }
+    public void setButton(Button button){
+        this.button = button;
+    }
+
 }
