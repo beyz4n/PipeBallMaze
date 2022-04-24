@@ -26,21 +26,4 @@ public abstract class Tile {
       return image;
    }
 
-   /*
-   public String getName() {
-      return name;
-   }
-   public void setName(String name) {
-      this.name = name;
-   }
-
-   public String getLocation() {
-      return location;
-   }
-
-   public void setLocation(String location) {
-      this.location = location;
-   }
-    */
-   //(kullanmıyoruz diye name'le locationu commendledim(Sena)
 }
