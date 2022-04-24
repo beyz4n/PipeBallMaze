@@ -71,8 +71,6 @@ public class CurvedPipeStatic extends Tile implements Fixed {
         this.endPointY = endPointY;
     }
 
-
-
     @Override
     public boolean isFixed() {
         return true;

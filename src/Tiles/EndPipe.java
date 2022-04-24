@@ -26,5 +26,11 @@ public class EndPipe extends PipeStatic implements Fixed {
     }
 
 
+    public double getStartPointY() {
+        return startPointY;
+    }
 
+    public void setStartPointY(double startPointY) {
+        this.startPointY = startPointY;
+    }
 }
