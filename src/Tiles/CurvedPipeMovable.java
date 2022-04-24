@@ -31,13 +31,6 @@ public class CurvedPipeMovable extends Tile implements Movable {
     }
 
 
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
 }
 
 
