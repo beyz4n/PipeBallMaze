@@ -1,4 +1,5 @@
 import Tiles.*;
+import javafx.animation.PathTransition;
 import javafx.application.Application;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +13,7 @@ import javafx.scene.shape.Path;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -37,9 +39,17 @@ public class Main extends Application {
 
         ((EdgePane) gameBoard.getBorderPane().getBottom()).getButton().setOnMouseClicked(event -> {
             checkForSolution(gameBoard);
+            gameBoard.getPane().getChildren().add(getPath());
+            PathTransition pathTransition = new PathTransition();
+            pathTransition.setPath(getPath());
+            pathTransition.setNode(gameBoard.getBall());
+            pathTransition.setDuration(Duration.seconds(3));
+            pathTransition.play();
         });
 
-        //gameBoard.getPane().
+
+
+
 
     }
 
@@ -198,20 +208,19 @@ public class Main extends Application {
                         }
                     }
 
-                    Path path = new Path();
                     if (gameBoard.getTiles()[indexOfStartX][indexOfStartY].getStatus().equals("Vertical")) {
                         MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 50.5);
                         LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 141.5);
-                        path.getElements().addAll(moveTo, lineTo);
+                        getPath().getElements().addAll(moveTo, lineTo);
                     }
                     if (gameBoard.getTiles()[indexOfStartX][indexOfStartX].getStatus().equals("Horizontal")) {
                         MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 90, gameBoard.getImageViews()[imageViewIndex].getY() + 70);
                         LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX(), gameBoard.getImageViews()[imageViewIndex].getY() + 70);
-                        path.getElements().addAll(moveTo, lineTo);
+                        getPath().getElements().addAll(moveTo, lineTo);
                     }
-                    path.setStroke(Color.WHITE);
-                    gameBoard.getPane().getChildren().add(path);
-                    //getPath().getElements().add(path)
+                    getPath().setStroke(Color.WHITE);
+                    //gameBoard.getPane().getChildren().add(getPath());
+
 
 
                 }
@@ -256,19 +265,19 @@ public class Main extends Application {
 
                     //PATH CREATION
 
-                    Path path = new Path();
+
                     if (gameBoard.getTiles()[indexOfEndX][indexOfEndY].getStatus().equals("Vertical")) {
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 50.5);
-                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 141.5);
-                        path.getElements().addAll(moveTo, lineTo);
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 50.5);
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 141.5);
+                        getPath().getElements().addAll(moveTo, lineTo);
                     }
                     if (gameBoard.getTiles()[indexOfEndX][indexOfEndY].getStatus().equals("Horizontal")) {
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 90, gameBoard.getImageViews()[imageViewIndex].getY() + 70);
-                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX(), gameBoard.getImageViews()[imageViewIndex].getY() + 70);
-                        path.getElements().addAll(moveTo, lineTo);
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 90, gameBoard.getImageViews()[imageViewIndex].getY() + 70);
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX(), gameBoard.getImageViews()[imageViewIndex].getY() + 70);
+                        getPath().getElements().addAll(moveTo, lineTo);
                     }
-                    path.setStroke(Color.WHITE);
-                    gameBoard.getPane().getChildren().add(path);
+                    getPath().setStroke(Color.WHITE);
+                    //gameBoard.getPane().getChildren().add(getPath());
 
 
                 }
@@ -317,20 +326,20 @@ public class Main extends Application {
                     }
                     //PATH CREATION
                     // 3LÜK ARA EKLENECEK!
-                    Path path = new Path();
+
                     if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical")) {
                         MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY());
 
                         LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 140);
-                        path.getElements().addAll(moveTo, lineTo);
+                        getPath().getElements().addAll(moveTo, lineTo);
                     }
                     if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal")) {
                         MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX(), gameBoard.getImageViews()[imageViewIndex].getY()+70);
                         LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 140, gameBoard.getImageViews()[imageViewIndex].getY() + 70);
-                        path.getElements().addAll(moveTo, lineTo);
+                        getPath().getElements().addAll(moveTo, lineTo);
                     }
-                    path.setStroke(Color.WHITE);
-                    gameBoard.getPane().getChildren().add(path);
+                    getPath().setStroke(Color.WHITE);
+                    //gameBoard.getPane().getChildren().add(getPath());
 
 
                 }
@@ -381,20 +390,20 @@ public class Main extends Application {
                     }
                     //PATH CREATION
                     // 3LÜK ARA EKLENECEK!
-                    Path path = new Path();
+
                     if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical")) {
                         MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY());
 
                         LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 140);
-                        path.getElements().addAll(moveTo, lineTo);
+                        getPath().getElements().addAll(moveTo, lineTo);
                     }
                     if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal")) {
                         MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX(), gameBoard.getImageViews()[imageViewIndex].getY()+70);
                         LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 140, gameBoard.getImageViews()[imageViewIndex].getY() + 70);
-                        path.getElements().addAll(moveTo, lineTo);
+                        getPath().getElements().addAll(moveTo, lineTo);
                     }
-                    path.setStroke(Color.WHITE);
-                    gameBoard.getPane().getChildren().add(path);
+                    getPath().setStroke(Color.WHITE);
+                    //gameBoard.getPane().getChildren().add(getPath());
 
                 }
 
