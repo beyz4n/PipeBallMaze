@@ -5,6 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -166,6 +170,22 @@ public class Main extends Application {
 
                     tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
                     checkBooleanList.add(tileTrue3);
+
+
+                    //PATH CREATION
+                    MoveTo moveTo = new MoveTo(gameBoard.getBall().getX() + 28, gameBoard.getBall().getY() + 28.5);
+                    Path path = new Path();
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical")) {
+                        LineTo lineTo = new LineTo(gameBoard.getBall().getX() + 28, gameBoard.getBall().getY() + 112.5);
+                        path.getElements().addAll(moveTo, lineTo);
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal")) {
+                        LineTo lineTo = new LineTo(gameBoard.getBall().getX() - 53, gameBoard.getBall().getY() + 28.5);
+                        path.getElements().addAll(moveTo, lineTo);
+                    }
+                    path.setStroke(Color.WHITE);
+                    gameBoard.getPane().getChildren().add(path);
+
                 }
 
 
@@ -185,6 +205,9 @@ public class Main extends Application {
                     }
                     tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
                     checkBooleanList.add(tileTrue3);
+
+
+
                 }
 
 

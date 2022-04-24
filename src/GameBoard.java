@@ -18,8 +18,15 @@ public class GameBoard{ //extends Application {
     private Tile[][] tiles;
     private ImageView[] imageViews;
     private ImageView ball;
+    private Pane pane;
 
+    public Pane getPane() {
+        return pane;
+    }
 
+    public void setPane(Pane pane) {
+        this.pane = pane;
+    }
 
     public GameBoard(){
         BackgroundImage backgroundImage = new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
@@ -245,15 +252,25 @@ public class GameBoard{ //extends Application {
         }
         int imageViewIndex = 0;
         for (int i = 0; i < 16; i++){
-            if(tiles[indexOfStarterX][indexOfStarterX].getImage().equals(imageViews[i])){
+            if(tiles[indexOfStarterX][indexOfStarterY].getImage().equals(imageViews[i].getImage())){
                 imageViewIndex = i;
             }
         }
-        ball.setFitWidth(55);
-        ball.setFitHeight(55);
-        ball.setX(getImageViews()[imageViewIndex].getX()+ 42.5);
-        ball.setY(getImageViews()[imageViewIndex].getY()  + 30);
+        if (tiles[indexOfStarterX][indexOfStarterY].getStatus().equals("Vertical")) {
+            ball.setFitWidth(55);
+            ball.setFitHeight(55);
+            ball.setX(getImageViews()[imageViewIndex].getX()+ 42.5);
+            ball.setY(getImageViews()[imageViewIndex].getY()  + 30);
+        }
+        if (tiles[indexOfStarterX][indexOfStarterY].getStatus().equals("Horizontal")) {
+            ball.setFitWidth(55);
+            ball.setFitHeight(55);
+            ball.setX(getImageViews()[imageViewIndex].getX()+ 52.5);
+            ball.setY(getImageViews()[imageViewIndex].getY()  + 42.3);
+        }
         pane.getChildren().add(ball);
+        setBall(ball);
+        setPane(pane);
         Scene scene = new Scene(borderPane, 950, 780);
         primaryStage.setTitle("PipeBallMaze");
         primaryStage.setScene(scene);
