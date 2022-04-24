@@ -17,6 +17,9 @@ public class GameBoard{ //extends Application {
     private BorderPane borderPane;
     private Tile[][] tiles;
     private ImageView[] imageViews;
+    private ImageView ball;
+
+
 
     public GameBoard(){
         BackgroundImage backgroundImage = new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
@@ -37,6 +40,7 @@ public class GameBoard{ //extends Application {
             startStage.hide();
             primaryStage.show();
         });
+
         File folder = new File("src/Levels");
         ArrayList<File> levels = new ArrayList<>();
         for (int l = 0; l < folder.list().length; l++) {
@@ -47,7 +51,7 @@ public class GameBoard{ //extends Application {
 
         Scanner input;
         try {
-            input = new Scanner(levels.get(5));
+            input = new Scanner(levels.get(3));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -228,6 +232,28 @@ public class GameBoard{ //extends Application {
                 imageView11, imageView12, imageView13, imageView14, imageView15, imageView16};
         setImageViews(imageViews);
         setTiles(tiles);
+        ImageView ball = new ImageView(new Image("ball.png"));
+        int indexOfStarterX = 0;
+        int indexOfStarterY = 0;
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                if (tiles[i][j] instanceof StartPipe){
+                    indexOfStarterX = i;
+                    indexOfStarterY = j;
+                }
+            }
+        }
+        int imageViewIndex = 0;
+        for (int i = 0; i < 16; i++){
+            if(tiles[indexOfStarterX][indexOfStarterX].getImage().equals(imageViews[i])){
+                imageViewIndex = i;
+            }
+        }
+        ball.setFitWidth(55);
+        ball.setFitHeight(55);
+        ball.setX(getImageViews()[imageViewIndex].getX()+ 42.5);
+        ball.setY(getImageViews()[imageViewIndex].getY()  + 30);
+        pane.getChildren().add(ball);
         Scene scene = new Scene(borderPane, 950, 780);
         primaryStage.setTitle("PipeBallMaze");
         primaryStage.setScene(scene);
@@ -258,6 +284,13 @@ public class GameBoard{ //extends Application {
 
     public void setImageViews(ImageView[] imageViews) {
         this.imageViews = imageViews;
+    }
+    public ImageView getBall() {
+        return ball;
+    }
+
+    public void setBall(ImageView ball) {
+        this.ball = ball;
     }
 
 }
