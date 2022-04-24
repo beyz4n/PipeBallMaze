@@ -22,6 +22,7 @@ public class Main extends Application {
     private static int numberOfMoves;
     private Path path;
     private boolean levelCompleted;
+    private ArrayList<Tile> orderedPipes;
 
 
 
@@ -155,6 +156,7 @@ public class Main extends Application {
     }
 
     public boolean checkForSolution(GameBoard gameBoard){
+        orderedPipes = new ArrayList<>();
         boolean tileTrue = false;
         boolean tileTrue2 = false;
         boolean tileTrue3 = false;
@@ -177,11 +179,15 @@ public class Main extends Application {
                     if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical") && (i != 3)) {
                         if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
                             tileTrue2 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j]);
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
                         if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00") && (i != 3)) {
                             tileTrue4 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01") && (i != 3)) {
                             tileTrue4 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
                     }
 
@@ -218,22 +224,28 @@ public class Main extends Application {
                     if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical") && (i != 3)) {
                         if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
                             tileTrue = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
                         if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00") && (i != 3)) {
                             tileTrue4 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01") && (i != 3)) {
                             tileTrue4 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
                     }
 
                     if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal") && (j != 3)) {
                         if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
                             tileTrue2 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
                         if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
                             tileTrue4 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
                             tileTrue4 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
                     }
                     tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
@@ -245,22 +257,28 @@ public class Main extends Application {
                     if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical") && (i != 3)) {
                         if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
                             tileTrue = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
                         if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00") && (i != 3)) {
                             tileTrue4 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01") && (i != 3)) {
                             tileTrue4 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
                     }
 
                     if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal") && (j != 3)) {
                         if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
                             tileTrue2 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
                         if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
                             tileTrue4 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
                             tileTrue4 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
                     }
                     tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
@@ -272,46 +290,62 @@ public class Main extends Application {
 
                     if (gameBoard.getTiles()[i][j].getStatus().equals("00") && (i != 0 && j != 0)) {
                         tileTrue7 = true;
+                        orderedPipes.add(gameBoard.getTiles()[i - 1][j]);
                     }
 
                     if (gameBoard.getTiles()[i][j].getStatus().equals("01") && (i != 0) && (j != 3)) {
                         if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
                             tileTrue = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
                         if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
                     }
                     if (gameBoard.getTiles()[i][j].getStatus().equals("10") && (j != 0) && (i != 3)) {
                         if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
                             tileTrue4 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
+                        /*
                         if (gameBoard.getTiles()[i][j - 1].getStatus().equals("00") && (j != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j-1]);
+
                         } else if (gameBoard.getTiles()[i][j - 1].getStatus().equals("01") && (j != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j-1]);
                         }
+                         */
                     }
                     if (gameBoard.getTiles()[i][j].getStatus().equals("11")) {
                         if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal") && (j != 3)) {
                             tileTrue2 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
                         if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical") && (i != 3)) {
                             tileTrue5 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
                         // YANA BAKANLAR
                         if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
                         // ALTA BAKANLAR
                         else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00") && (i != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01") && (i != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
                     }
 
@@ -328,41 +362,55 @@ public class Main extends Application {
                     if (gameBoard.getTiles()[i][j].getStatus().equals("01") && (i != 0) && (j != 3)) {
                         if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
                             tileTrue = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
                         if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
                     }
                     if (gameBoard.getTiles()[i][j].getStatus().equals("10") && (j != 0) && (i != 3)) {
                         if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
                             tileTrue4 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
+                        /*
                         if (gameBoard.getTiles()[i][j - 1].getStatus().equals("00") && (j != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j-1]);
                         } else if (gameBoard.getTiles()[i][j - 1].getStatus().equals("01") && (j != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j-1]);
                         }
+                         */
                     }
                     if (gameBoard.getTiles()[i][j].getStatus().equals("11")) {
                         if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal") && (j != 3)) {
                             tileTrue2 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
                         if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical") && (i != 3)) {
                             tileTrue5 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
                         // YANA BAKANLAR
                         if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
                         // ALTA BAKANLAR
                         else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00") && (i != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01") && (i != 3)) {
                             tileTrue6 = true;
+                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
                     }
 
@@ -594,5 +642,13 @@ public class Main extends Application {
 
     public void setLevelCompleted(boolean levelCompleted) {
         this.levelCompleted = levelCompleted;
+    }
+
+    public ArrayList<Tile> getOrderedPipes() {
+        return orderedPipes;
+    }
+
+    public void setOrderedPipes(ArrayList<Tile> orderedPipes) {
+        this.orderedPipes = orderedPipes;
     }
 }
