@@ -208,6 +208,40 @@ public class Main extends Application {
 
 
 
+                    int indexOfEndX = 0;
+                    int indexOfEndY = 0;
+                    for (int k = 0; k < 4; k++){
+                        for (int l = 0; l < 4; l++){
+                            if (gameBoard.getTiles()[k][l] instanceof EndPipe){
+                                indexOfEndX = i;
+                                indexOfEndY = j;
+                            }
+                        }
+                    }
+                    int imageViewIndex = 0;
+                    for (int m = 0; m < 16; m++){
+                        if(gameBoard.getTiles()[indexOfEndX][indexOfEndY].getImage().equals(gameBoard.getImageViews()[m].getImage())){
+                            imageViewIndex = m;
+                        }
+                    }
+
+                    //PATH CREATION
+
+                    Path path = new Path();
+                    if (gameBoard.getTiles()[indexOfEndX][indexOfEndY].getStatus().equals("Vertical")) {
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 50.5);
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 141.5);
+                        path.getElements().addAll(moveTo, lineTo);
+                    }
+                    if (gameBoard.getTiles()[indexOfEndX][indexOfEndY].getStatus().equals("Horizontal")) {
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 90, gameBoard.getImageViews()[imageViewIndex].getY() + 70);
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX(), gameBoard.getImageViews()[imageViewIndex].getY() + 70);
+                        path.getElements().addAll(moveTo, lineTo);
+                    }
+                    path.setStroke(Color.WHITE);
+                    gameBoard.getPane().getChildren().add(path);
+
+
                 }
 
 
