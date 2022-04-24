@@ -25,17 +25,17 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-            GameBoard gameBoard = new GameBoard();
-            drag(gameBoard.getImageViews(), gameBoard.getTiles(),gameBoard);
-            displayNumberOfMoves(gameBoard);
+        GameBoard gameBoard = new GameBoard();
+        drag(gameBoard.getImageViews(), gameBoard.getTiles(),gameBoard);
+        displayNumberOfMoves(gameBoard);
 
 
-                ((EdgePane) gameBoard.getBorderPane().getBottom()).getButton().setOnMouseClicked(event -> {
-                    checkForSolution(gameBoard);
-                });
+        ((EdgePane) gameBoard.getBorderPane().getBottom()).getButton().setOnMouseClicked(event -> {
+            checkForSolution(gameBoard);
+        });
 
 
-}
+    }
 
     private void drag(ImageView[] imageViews, Tile[][] tiles, GameBoard gameBoard) {
         for (ImageView imageView : imageViews) {
@@ -173,13 +173,34 @@ public class Main extends Application {
 
 
                     //PATH CREATION
-                    MoveTo moveTo = new MoveTo(gameBoard.getBall().getX() + 28, gameBoard.getBall().getY() + 28.5);
+
+
+                    int indexOfStartX = 0;
+                    int indexOfStartY = 0;
+                    for (int k = 0; k < 4; k++){
+                        for (int l = 0; l < 4; l++){
+                            if (gameBoard.getTiles()[k][l] instanceof StartPipe){
+                                indexOfStartX = k;
+                                indexOfStartY = l;
+                            }
+                        }
+                    }
+                    int imageViewIndex = 0;
+                    for (int m = 0; m < 16; m++){
+                        if(gameBoard.getTiles()[indexOfStartX][indexOfStartY].getImage().equals(gameBoard.getImageViews()[m].getImage())){
+                            imageViewIndex = m;
+                        }
+                    }
+
+
                     Path path = new Path();
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical")) {
-                        LineTo lineTo = new LineTo(gameBoard.getBall().getX() + 28, gameBoard.getBall().getY() + 109.5);
+                    if (gameBoard.getTiles()[indexOfStartX][indexOfStartY].getStatus().equals("Vertical")) {
+                        MoveTo moveTo = new MoveTo(gameBoard.getBall().getX() + 28, gameBoard.getBall().getY() + 28.5);
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 50.5);
                         path.getElements().addAll(moveTo, lineTo);
                     }
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal")) {
+                    if (gameBoard.getTiles()[indexOfStartX][indexOfStartY].getStatus().equals("Horizontal")) {
+                        MoveTo moveTo = new MoveTo(gameBoard.getBall().getX() + 28, gameBoard.getBall().getY() + 28.5);
                         LineTo lineTo = new LineTo(gameBoard.getBall().getX() - 53, gameBoard.getBall().getY() + 28.5);
                         path.getElements().addAll(moveTo, lineTo);
                     }
@@ -187,6 +208,7 @@ public class Main extends Application {
                     gameBoard.getPane().getChildren().add(path);
 
                 }
+
 
 
                 if (gameBoard.getTiles()[i][j] instanceof EndPipe) {
@@ -386,36 +408,36 @@ public class Main extends Application {
                             tileTrue6 = true;
                         }
                     }
-                if (gameBoard.getTiles()[i][j].getStatus().equals("10") && (j != 0) && (i != 3)) {
-                    if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
-                        tileTrue4 = true;
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("10") && (j != 0) && (i != 3)) {
+                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
+                            tileTrue4 = true;
+                        }
+                        if (gameBoard.getTiles()[i][j - 1].getStatus().equals("00") && (j != 3)) {
+                            tileTrue6 = true;
+                        } else if (gameBoard.getTiles()[i][j - 1].getStatus().equals("01") && (j != 3)) {
+                            tileTrue6 = true;
+                        }
                     }
-                    if (gameBoard.getTiles()[i][j - 1].getStatus().equals("00") && (j != 3)) {
-                        tileTrue6 = true;
-                    } else if (gameBoard.getTiles()[i][j - 1].getStatus().equals("01") && (j != 3)) {
-                        tileTrue6 = true;
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("11")) {
+                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal") && (j != 3)) {
+                            tileTrue2 = true;
+                        }
+                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical") && (i != 3)) {
+                            tileTrue5 = true;
+                        }
+                        // YANA BAKANLAR
+                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
+                            tileTrue6 = true;
+                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
+                            tileTrue6 = true;
+                        }
+                        // ALTA BAKANLAR
+                        else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00") && (i != 3)) {
+                            tileTrue6 = true;
+                        } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01") && (i != 3)) {
+                            tileTrue6 = true;
+                        }
                     }
-                }
-                if (gameBoard.getTiles()[i][j].getStatus().equals("11")) {
-                    if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal") && (j != 3)) {
-                        tileTrue2 = true;
-                    }
-                    if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical") && (i != 3)) {
-                        tileTrue5 = true;
-                    }
-                    // YANA BAKANLAR
-                    if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
-                        tileTrue6 = true;
-                    } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
-                        tileTrue6 = true;
-                    }
-                    // ALTA BAKANLAR
-                    else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00") && (i != 3)) {
-                        tileTrue6 = true;
-                    } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01") && (i != 3)) {
-                        tileTrue6 = true;
-                    }
-                }
 
                     tileTrue3 = tileTrue ||tileTrue2 || tileTrue4 || tileTrue5 || tileTrue6 || tileTrue7;
                     checkBooleanList.add(tileTrue3);
