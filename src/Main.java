@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcTo;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -459,6 +460,95 @@ public class Main extends Application {
                     }
                     path.setStroke(Color.WHITE);
                 }
+
+
+
+                if (gameBoard.getTiles()[i][j] instanceof CurvedPipeMovable) {
+                    int indexOfImageView = indexFinder(gameBoard, gameBoard.getTiles()[i][j]);
+
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("00")){
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
+                        ArcTo arcTo = new ArcTo();
+                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
+                        arcTo.setRadiusX(70);
+                        arcTo.setRadiusY(70);
+                        path.getElements().addAll(moveTo, arcTo);
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("01")){
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
+                        ArcTo arcTo = new ArcTo();
+                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
+                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        arcTo.setRadiusX(70);
+                        arcTo.setRadiusY(70);
+                        path.getElements().addAll(moveTo, arcTo);
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("10")){ // mantıken yapıyorum deneyemedim
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        ArcTo arcTo = new ArcTo();
+                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                        arcTo.setRadiusX(70);
+                        arcTo.setRadiusY(70);
+                        path.getElements().addAll(moveTo, arcTo);
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("11")){ // mantıken yapıyorum deneyemedim
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                        ArcTo arcTo = new ArcTo();
+                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
+                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        arcTo.setRadiusX(70);
+                        arcTo.setRadiusY(70);
+                        path.getElements().addAll(moveTo, arcTo);
+                    }
+                    path.setStroke(Color.WHITE);
+                }
+
+
+                if (gameBoard.getTiles()[i][j] instanceof CurvedPipeStatic) {
+                    int indexOfImageView = indexFinder(gameBoard, gameBoard.getTiles()[i][j]);
+
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("00")){
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
+                        ArcTo arcTo = new ArcTo();
+                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
+                        arcTo.setRadiusX(70);
+                        arcTo.setRadiusY(70);
+                        path.getElements().addAll(moveTo, arcTo);
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("01")){
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
+                        ArcTo arcTo = new ArcTo();
+                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
+                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        arcTo.setRadiusX(70);
+                        arcTo.setRadiusY(70);
+                        path.getElements().addAll(moveTo, arcTo);
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("10")){ // mantıken yapıyorum deneyemedim
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        ArcTo arcTo = new ArcTo();
+                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                        arcTo.setRadiusX(70);
+                        arcTo.setRadiusY(70);
+                        path.getElements().addAll(moveTo, arcTo);
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("11")){ // mantıken yapıyorum deneyemedim
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                        ArcTo arcTo = new ArcTo();
+                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
+                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        arcTo.setRadiusX(70);
+                        arcTo.setRadiusY(70);
+                        path.getElements().addAll(moveTo, arcTo);
+                    }
+                    path.setStroke(Color.WHITE);
+                }
+
+
             }
         }
         setPath(path);
