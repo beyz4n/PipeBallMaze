@@ -8,6 +8,16 @@ public abstract class Tile {
    // private String location;
    private Image image;
 
+  private String attribute;
+
+   public String getAttribute() {
+      return attribute;
+   }
+
+   public void setAttribute(String attribute) {
+      this.attribute = attribute;
+   }
+
    public void setImage(Image image) {
       this.image = image;
    }
