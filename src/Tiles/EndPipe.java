@@ -3,6 +3,9 @@ package Tiles;
 import javafx.scene.image.Image;
 
 public class EndPipe extends PipeStatic implements Fixed {
+    private double startPointX;
+    private double startPointY;
+
 
     public EndPipe(String status){
         if(status.equals("Vertical")) {
@@ -14,6 +17,14 @@ public class EndPipe extends PipeStatic implements Fixed {
             setStatus(status);
         }
     }
+    public double getStartPointX() {
+        return startPointX;
+    }
+
+    public void setStartPointX(double startPointX) {
+        this.startPointX = startPointX;
+    }
+
 
 
 }
