@@ -19,6 +19,7 @@ public class GameBoard{ //extends Application {
     private ImageView[] imageViews;
     private ImageView ball;
     private Pane pane;
+    private boolean isLevelCompleted;
 
     public Pane getPane() {
         return pane;
@@ -47,7 +48,6 @@ public class GameBoard{ //extends Application {
             startStage.hide();
             primaryStage.show();
         });
-
         File folder = new File("src/Levels");
         ArrayList<File> levels = new ArrayList<>();
         for (int l = 0; l < folder.list().length; l++) {
@@ -55,8 +55,14 @@ public class GameBoard{ //extends Application {
             File file = new File("src/Levels/level" + levelNo + ".txt");
             levels.add(file);
         }
+        /*
+        int levelNo = 0;
+        if (isLevelCompleted){
+            levelNo++;
+        }
+         */
 
-        Scanner input;
+            Scanner input;
         try {
             input = new Scanner(levels.get(4));
         } catch (FileNotFoundException e) {
@@ -310,6 +316,13 @@ public class GameBoard{ //extends Application {
         this.ball = ball;
     }
 
+    public boolean isLevelCompleted() {
+        return isLevelCompleted;
+    }
+
+    public void setLevelCompleted(boolean levelCompleted) {
+        isLevelCompleted = levelCompleted;
+    }
 }
 class EdgePane extends StackPane {
     private Button button;
