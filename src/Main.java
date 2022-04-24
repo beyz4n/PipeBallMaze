@@ -17,6 +17,9 @@ import java.util.ArrayList;
 
 public class Main extends Application {
     private static int numberOfMoves;
+    private Path path;
+
+
 
     public static void main(String[] args) {
         launch(args);
@@ -24,6 +27,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        Path path = new Path();
+        setPath(path);
 
         GameBoard gameBoard = new GameBoard();
         drag(gameBoard.getImageViews(), gameBoard.getTiles(),gameBoard);
@@ -34,6 +39,7 @@ public class Main extends Application {
             checkForSolution(gameBoard);
         });
 
+        //gameBoard.getPane().
 
     }
 
@@ -192,20 +198,21 @@ public class Main extends Application {
                         }
                     }
 
-
                     Path path = new Path();
                     if (gameBoard.getTiles()[indexOfStartX][indexOfStartY].getStatus().equals("Vertical")) {
-                        MoveTo moveTo = new MoveTo(gameBoard.getBall().getX() + 28, gameBoard.getBall().getY() + 28.5);
-                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 50.5);
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 50.5);
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 141.5);
                         path.getElements().addAll(moveTo, lineTo);
                     }
-                    if (gameBoard.getTiles()[indexOfStartX][indexOfStartY].getStatus().equals("Horizontal")) {
-                        MoveTo moveTo = new MoveTo(gameBoard.getBall().getX() + 28, gameBoard.getBall().getY() + 28.5);
-                        LineTo lineTo = new LineTo(gameBoard.getBall().getX() - 53, gameBoard.getBall().getY() + 28.5);
+                    if (gameBoard.getTiles()[indexOfStartX][indexOfStartX].getStatus().equals("Horizontal")) {
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 90, gameBoard.getImageViews()[imageViewIndex].getY() + 70);
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX(), gameBoard.getImageViews()[imageViewIndex].getY() + 70);
                         path.getElements().addAll(moveTo, lineTo);
                     }
                     path.setStroke(Color.WHITE);
                     gameBoard.getPane().getChildren().add(path);
+                    //getPath().getElements().add(path)
+
 
                 }
 
@@ -511,5 +518,11 @@ public class Main extends Application {
     public static void setNumberOfMoves(int numberOfMoves) {
         Main.numberOfMoves = numberOfMoves;
     }
+    public Path getPath() {
+        return path;
+    }
 
+    public void setPath(Path path) {
+        this.path = path;
+    }
 }
