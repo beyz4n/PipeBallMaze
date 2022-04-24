@@ -35,7 +35,7 @@ public class GameBoard{ //extends Application {
         StackPane startPane = new StackPane();
         startPane.getChildren().add(startButton);
         startPane.setBackground(new Background(backgroundImage));
-        Scene startScene = new Scene(startPane,850,780);
+        Scene startScene = new Scene(startPane,950,780);
         Stage startStage = new Stage();
 
         startStage.setScene(startScene);

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class Main extends Application {
     private static int numberOfMoves;
     private Path path;
+    private boolean levelCompleted;
 
 
 
@@ -29,22 +30,26 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Path path = new Path();
-        setPath(path);
+
 
         GameBoard gameBoard = new GameBoard();
         drag(gameBoard.getImageViews(), gameBoard.getTiles(),gameBoard);
         displayNumberOfMoves(gameBoard);
 
-
+        Path path = new Path();
+        setPath(path);
         ((EdgePane) gameBoard.getBorderPane().getBottom()).getButton().setOnMouseClicked(event -> {
-            checkForSolution(gameBoard);
-            gameBoard.getPane().getChildren().add(getPath());
-            PathTransition pathTransition = new PathTransition();
-            pathTransition.setPath(getPath());
-            pathTransition.setNode(gameBoard.getBall());
-            pathTransition.setDuration(Duration.seconds(3));
-            pathTransition.play();
+            setLevelCompleted(checkForSolution(gameBoard));
+            if (isLevelCompleted()) {
+                setWholePath(gameBoard);
+                setPath(getPath());
+                gameBoard.getPane().getChildren().add(getPath());
+                PathTransition pathTransition = new PathTransition();
+                pathTransition.setPath(getPath());
+                pathTransition.setNode(gameBoard.getBall());
+                pathTransition.setDuration(Duration.seconds(3));
+                pathTransition.play();
+            }
         });
 
 
@@ -167,7 +172,6 @@ public class Main extends Application {
                 tileTrue6 = false;
                 tileTrue7 = false;
 
-
                 if (gameBoard.getTiles()[i][j] instanceof StartPipe) {
                     if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical") && (i != 3)) {
                         if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
@@ -186,43 +190,6 @@ public class Main extends Application {
 
                     tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
                     checkBooleanList.add(tileTrue3);
-
-
-                    //PATH CREATION
-
-
-                    int indexOfStartX = 0;
-                    int indexOfStartY = 0;
-                    for (int k = 0; k < 4; k++){
-                        for (int l = 0; l < 4; l++){
-                            if (gameBoard.getTiles()[k][l] instanceof StartPipe){
-                                indexOfStartX = k;
-                                indexOfStartY = l;
-                            }
-                        }
-                    }
-                    int imageViewIndex = 0;
-                    for (int m = 0; m < 16; m++){
-                        if(gameBoard.getTiles()[indexOfStartX][indexOfStartY].getImage().equals(gameBoard.getImageViews()[m].getImage())){
-                            imageViewIndex = m;
-                        }
-                    }
-
-                    if (gameBoard.getTiles()[indexOfStartX][indexOfStartY].getStatus().equals("Vertical")) {
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 50.5);
-                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 141.5);
-                        getPath().getElements().addAll(moveTo, lineTo);
-                    }
-                    if (gameBoard.getTiles()[indexOfStartX][indexOfStartX].getStatus().equals("Horizontal")) {
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 90, gameBoard.getImageViews()[imageViewIndex].getY() + 70);
-                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX(), gameBoard.getImageViews()[imageViewIndex].getY() + 70);
-                        getPath().getElements().addAll(moveTo, lineTo);
-                    }
-                    getPath().setStroke(Color.WHITE);
-                    //gameBoard.getPane().getChildren().add(getPath());
-
-
-
                 }
 
 
@@ -243,43 +210,6 @@ public class Main extends Application {
                     }
                     tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
                     checkBooleanList.add(tileTrue3);
-
-
-
-                    int indexOfEndX = 0;
-                    int indexOfEndY = 0;
-                    for (int k = 0; k < 4; k++){
-                        for (int l = 0; l < 4; l++){
-                            if (gameBoard.getTiles()[k][l] instanceof EndPipe){
-                                indexOfEndX = i;
-                                indexOfEndY = j;
-                            }
-                        }
-                    }
-                    int imageViewIndex = 0;
-                    for (int m = 0; m < 16; m++){
-                        if(gameBoard.getTiles()[indexOfEndX][indexOfEndY].getImage().equals(gameBoard.getImageViews()[m].getImage())){
-                            imageViewIndex = m;
-                        }
-                    }
-
-                    //PATH CREATION
-
-
-                    if (gameBoard.getTiles()[indexOfEndX][indexOfEndY].getStatus().equals("Vertical")) {
-                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 50.5);
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 141.5);
-                        getPath().getElements().addAll(moveTo, lineTo);
-                    }
-                    if (gameBoard.getTiles()[indexOfEndX][indexOfEndY].getStatus().equals("Horizontal")) {
-                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 90, gameBoard.getImageViews()[imageViewIndex].getY() + 70);
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX(), gameBoard.getImageViews()[imageViewIndex].getY() + 70);
-                        getPath().getElements().addAll(moveTo, lineTo);
-                    }
-                    getPath().setStroke(Color.WHITE);
-                    //gameBoard.getPane().getChildren().add(getPath());
-
-
                 }
 
 
@@ -307,41 +237,6 @@ public class Main extends Application {
                     }
                     tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
                     checkBooleanList.add(tileTrue3);
-
-                    int indexOfEndX = 0;
-                    int indexOfEndY = 0;
-                    for (int k = 0; k < 4; k++){
-                        for (int l = 0; l < 4; l++){
-                            if (gameBoard.getTiles()[k][l] instanceof LinearPipe){
-                                indexOfEndX = i;
-                                indexOfEndY = j;
-                            }
-                        }
-                    }
-                    int imageViewIndex = 0;
-                    for (int m = 0; m < 16; m++){
-                        if(gameBoard.getTiles()[indexOfEndX][indexOfEndY].getImage().equals(gameBoard.getImageViews()[m].getImage())){
-                            imageViewIndex = m;
-                        }
-                    }
-                    //PATH CREATION
-                    // 3LÜK ARA EKLENECEK!
-
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical")) {
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY());
-
-                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 140);
-                        getPath().getElements().addAll(moveTo, lineTo);
-                    }
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal")) {
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX(), gameBoard.getImageViews()[imageViewIndex].getY()+70);
-                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 140, gameBoard.getImageViews()[imageViewIndex].getY() + 70);
-                        getPath().getElements().addAll(moveTo, lineTo);
-                    }
-                    getPath().setStroke(Color.WHITE);
-                    //gameBoard.getPane().getChildren().add(getPath());
-
-
                 }
 
 
@@ -369,42 +264,6 @@ public class Main extends Application {
                     }
                     tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
                     checkBooleanList.add(tileTrue3);
-
-
-
-                    int indexOfEndX = 0;
-                    int indexOfEndY = 0;
-                    for (int k = 0; k < 4; k++){
-                        for (int l = 0; l < 4; l++){
-                            if (gameBoard.getTiles()[k][l] instanceof NormalPipeStatic){
-                                indexOfEndX = i;
-                                indexOfEndY = j;
-                            }
-                        }
-                    }
-                    int imageViewIndex = 0;
-                    for (int m = 0; m < 16; m++){
-                        if(gameBoard.getTiles()[indexOfEndX][indexOfEndY].getImage().equals(gameBoard.getImageViews()[m].getImage())){
-                            imageViewIndex = m;
-                        }
-                    }
-                    //PATH CREATION
-                    // 3LÜK ARA EKLENECEK!
-
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical")) {
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY());
-
-                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 70, gameBoard.getImageViews()[imageViewIndex].getY() + 140);
-                        getPath().getElements().addAll(moveTo, lineTo);
-                    }
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal")) {
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[imageViewIndex].getX(), gameBoard.getImageViews()[imageViewIndex].getY()+70);
-                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[imageViewIndex].getX() + 140, gameBoard.getImageViews()[imageViewIndex].getY() + 70);
-                        getPath().getElements().addAll(moveTo, lineTo);
-                    }
-                    getPath().setStroke(Color.WHITE);
-                    //gameBoard.getPane().getChildren().add(getPath());
-
                 }
 
 
@@ -520,6 +379,110 @@ public class Main extends Application {
             return true;
         }
     }
+
+    public void setWholePath(GameBoard gameBoard){
+        Path path = new Path();
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+
+
+                if (gameBoard.getTiles()[i][j] instanceof StartPipe) {
+                    int indexOfImageView = indexFinder(gameBoard, gameBoard.getTiles()[i][j]);
+
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical")) {
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 50.5);
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 141.5);
+                        path.getElements().addAll(moveTo, lineTo);
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal")) {
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 90, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        path.getElements().addAll(moveTo, lineTo);
+                    }
+                    path.setStroke(Color.WHITE);
+
+                }
+
+
+                if (gameBoard.getTiles()[i][j] instanceof EndPipe) {
+                    int indexOfImageView = indexFinder(gameBoard, gameBoard.getTiles()[i][j]);
+
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical")) {
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 50.5);
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 141.5);
+                        path.getElements().addAll(moveTo, lineTo);
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal")) {
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 90, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        path.getElements().addAll(moveTo, lineTo);
+                    }
+                    path.setStroke(Color.WHITE);
+                }
+
+
+
+
+                if (gameBoard.getTiles()[i][j] instanceof LinearPipe) {
+                    int indexOfImageView = indexFinder(gameBoard, gameBoard.getTiles()[i][j]);
+
+
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical")) {
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
+
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                        path.getElements().addAll(moveTo, lineTo);
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal")) {
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        path.getElements().addAll(moveTo, lineTo);
+                    }
+                    path.setStroke(Color.WHITE);
+                }
+
+
+
+                if (gameBoard.getTiles()[i][j] instanceof NormalPipeStatic) {
+                    int indexOfImageView = indexFinder(gameBoard, gameBoard.getTiles()[i][j]);
+
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical")) {
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
+
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                        path.getElements().addAll(moveTo, lineTo);
+                    }
+                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal")) {
+                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY()+70);
+                        LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        path.getElements().addAll(moveTo, lineTo);
+                    }
+                    path.setStroke(Color.WHITE);
+                }
+            }
+        }
+        setPath(path);
+    }
+
+    public int indexFinder(GameBoard gameBoard, Tile tile){
+        int indexOfRow = 0;
+        int indexOfColumn = 0;
+        for (int k = 0; k < 4; k++){
+            for (int l = 0; l < 4; l++){
+                if (gameBoard.getTiles()[k][l].equals(tile)) {
+                    indexOfRow = k;
+                    indexOfColumn = l;
+                }
+                }
+            }
+        int imageViewIndex = 0;
+        for (int m = 0; m < 16; m++) {
+            if (gameBoard.getTiles()[indexOfRow][indexOfColumn].getImage().equals(gameBoard.getImageViews()[m].getImage())) {
+                imageViewIndex = m;
+            }
+        }
+        return  imageViewIndex;
+    }
     public static int getNumberOfMoves() {
         return numberOfMoves;
     }
@@ -533,5 +496,13 @@ public class Main extends Application {
 
     public void setPath(Path path) {
         this.path = path;
+    }
+
+    public boolean isLevelCompleted() {
+        return levelCompleted;
+    }
+
+    public void setLevelCompleted(boolean levelCompleted) {
+        this.levelCompleted = levelCompleted;
     }
 }
