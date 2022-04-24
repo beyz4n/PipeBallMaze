@@ -22,13 +22,13 @@ public class Main extends Application {
             GameBoard gameBoard = new GameBoard();
             drag(gameBoard.getImageViews(), gameBoard.getTiles(),gameBoard);
             displayNumberOfMoves(gameBoard);
-            /*
-            if ( ((EdgePane)gameBoard.getBorderPane().getBottom()).getButton() != null) {
+
+
                 ((EdgePane) gameBoard.getBorderPane().getBottom()).getButton().setOnMouseClicked(event -> {
                     checkForSolution();
                 });
-            }
-             */
+
+
 }
 
     private void drag(ImageView[] imageViews, Tile[][] tiles, GameBoard gameBoard) {

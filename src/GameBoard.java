@@ -266,6 +266,7 @@ class EdgePane extends StackPane {
     public EdgePane(Button button){
 
         getChildren().add(button);
+        setButton(button);
         //setStyle("-fx-border-color: white");
         setPadding(new Insets(25.5, 57.5, 50.5, 45.5));
 
