@@ -49,6 +49,8 @@ public class GameBoard{ //extends Application {
             startStage.hide();
             primaryStage.show();
         });
+        Button nextButton = new Button("Next");
+
         File folder = new File("src/Levels");
         ArrayList<File> levels = new ArrayList<>();
         for (int l = 0; l < folder.list().length; l++) {
@@ -56,6 +58,14 @@ public class GameBoard{ //extends Application {
             File file = new File("src/Levels/level" + levelNo + ".txt");
             levels.add(file);
         }
+        nextButton.setOnMouseClicked(event -> {
+            Scanner input;
+            try {
+                input = new Scanner(levels.get(getLevelNo()));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
 
             Scanner input;
@@ -125,7 +135,7 @@ public class GameBoard{ //extends Application {
 
 
         Button checkButton = new Button("Check !");
-        borderPane.setBottom(new EdgePane(checkButton));
+        borderPane.setBottom(new EdgePane(checkButton,nextButton));
 
         borderPane.setLeft(new EdgePane(new Label("Left"))); // delete later
 
@@ -330,10 +340,11 @@ public class GameBoard{ //extends Application {
 }
 class EdgePane extends StackPane {
     private Button button;
-    public EdgePane(Button button){
+    public EdgePane(Button button, Button button2){
 
         getChildren().add(button);
         setButton(button);
+        //getChildren().add(button2);
         //setStyle("-fx-border-color: white");
         setPadding(new Insets(25.5, 57.5, 50.5, 45.5));
 

@@ -1,7 +1,6 @@
 import Tiles.*;
 import javafx.animation.PathTransition;
 import javafx.application.Application;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -159,13 +158,13 @@ public class Main extends Application {
 
     public boolean checkForSolution(GameBoard gameBoard){
         orderedPipes = new ArrayList<>();
-        boolean tileTrue = false;
-        boolean tileTrue2 = false;
-        boolean tileTrue3 = false;
-        boolean tileTrue4 = false;
-        boolean tileTrue5 = false;
-        boolean tileTrue6 = false;
-        boolean tileTrue7 = false;
+        boolean tileTrue;
+        boolean tileTrue2;
+        boolean tileTrue3;
+        boolean tileTrue4;
+        boolean tileTrue5;
+        boolean tileTrue6;
+        boolean tileTrue7;
         ArrayList<Boolean> checkBooleanList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -184,10 +183,10 @@ public class Main extends Application {
                             orderedPipes.add(gameBoard.getTiles()[i][j]);
                             orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00") && (i != 3)) {
+                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00")) {
                             tileTrue4 = true;
                             orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01") && (i != 3)) {
+                        } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01")) {
                             tileTrue4 = true;
                             orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
@@ -208,9 +207,9 @@ public class Main extends Application {
                         if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
                             tileTrue = true;
                         }
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00") && (i != 3)) {
+                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00")) {
                             tileTrue4 = true;
-                        } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01") && (i != 3)) {
+                        } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01")) {
                             tileTrue4 = true;
                         }
                     }
@@ -228,10 +227,11 @@ public class Main extends Application {
                             tileTrue = true;
                             orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00") && (i != 3)) {
+                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00")) {
                             tileTrue4 = true;
                             orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01") && (i != 3)) {
+                        }
+                        else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01")) {
                             tileTrue4 = true;
                             orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
@@ -242,10 +242,10 @@ public class Main extends Application {
                             tileTrue2 = true;
                             orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
+                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00")) {
                             tileTrue4 = true;
                             orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
+                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10")) {
                             tileTrue4 = true;
                             orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
@@ -261,10 +261,10 @@ public class Main extends Application {
                             tileTrue = true;
                             orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00") && (i != 3)) {
+                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00")) {
                             tileTrue4 = true;
                             orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01") && (i != 3)) {
+                        } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01")) {
                             tileTrue4 = true;
                             orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
                         }
@@ -275,10 +275,10 @@ public class Main extends Application {
                             tileTrue2 = true;
                             orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
+                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00")) {
                             tileTrue4 = true;
                             orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
+                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10")) {
                             tileTrue4 = true;
                             orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
@@ -300,10 +300,10 @@ public class Main extends Application {
                             tileTrue = true;
                             orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
+                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00")) {
                             tileTrue6 = true;
                             orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
+                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10")) {
                             tileTrue6 = true;
                             orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
@@ -366,10 +366,10 @@ public class Main extends Application {
                             tileTrue = true;
                             orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
+                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00")) {
                             tileTrue6 = true;
                             orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
+                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10")) {
                             tileTrue6 = true;
                             orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
                         }
