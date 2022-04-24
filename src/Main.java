@@ -36,7 +36,6 @@ public class Main extends Application {
         GameBoard gameBoard = new GameBoard();
         drag(gameBoard.getImageViews(), gameBoard.getTiles(),gameBoard);
         displayNumberOfMoves(gameBoard);
-
         Path path = new Path();
         setPath(path);
         ((EdgePane) gameBoard.getBorderPane().getBottom()).getButton().setOnMouseClicked(event -> {
@@ -54,6 +53,31 @@ public class Main extends Application {
                 gameBoard.setLevelNo(gameBoard.getLevelNo() + 1);
             }
         });
+/*
+        gameBoard.getNextButton().setOnMouseClicked(e -> {
+        drag(gameBoard.getImageViews(), gameBoard.getTiles(),gameBoard);
+        displayNumberOfMoves(gameBoard);
+
+        Path path2 = new Path();
+        setPath(path2);
+        ((EdgePane) gameBoard.getBorderPane().getBottom()).getButton().setOnMouseClicked(event -> {
+            setLevelCompleted(checkForSolution(gameBoard));
+            if (isLevelCompleted()) {
+                setWholePath(gameBoard);
+                setPath(getPath());
+                gameBoard.getPane().getChildren().add(getPath());
+                PathTransition pathTransition = new PathTransition();
+                pathTransition.setPath(getPath());
+                pathTransition.setNode(gameBoard.getBall());
+                pathTransition.setDuration(Duration.seconds(3));
+                pathTransition.play();
+                gameBoard.setLevelCompleted(true);
+                gameBoard.setLevelNo(gameBoard.getLevelNo() + 1);
+            }
+        });
+        });
+
+ */
 
 
 
