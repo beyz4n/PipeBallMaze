@@ -70,7 +70,7 @@ public class GameBoard{ //extends Application {
 
             Scanner input;
         try {
-            input = new Scanner(levels.get(getLevelNo()));
+            input = new Scanner(levels.get(3));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
