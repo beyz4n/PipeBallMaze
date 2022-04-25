@@ -22,14 +22,6 @@ public class GameBoard{ //extends Application {
     private boolean isLevelCompleted;
     private int levelNo;
 
-    public Pane getPane() {
-        return pane;
-    }
-
-    public void setPane(Pane pane) {
-        this.pane = pane;
-    }
-
     public GameBoard(){
         BackgroundImage backgroundImage = new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -337,6 +329,15 @@ public class GameBoard{ //extends Application {
     public void setLevelNo(int levelNo) {
         this.levelNo = levelNo;
     }
+
+    public Pane getPane() {
+        return pane;
+    }
+
+    public void setPane(Pane pane) {
+        this.pane = pane;
+    }
+
 }
 class EdgePane extends StackPane {
     private Button button;
