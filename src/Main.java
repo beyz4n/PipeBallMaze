@@ -558,13 +558,15 @@ public class Main extends Application {
                         arcTo.setRadiusY(70);
                         path.getElements().addAll(moveTo, arcTo);
                     }
-                    if (getOrderedPipes().get(i).getStatus().equals("10")){ // mantıken yapıyorum deneyemedim
+                    if (getOrderedPipes().get(i).getStatus().equals("10")){
                         MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                         ArcTo arcTo = new ArcTo();
                         arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
                         arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                         arcTo.setRadiusX(70);
                         arcTo.setRadiusY(70);
+                        arcTo.setLargeArcFlag(false);
+                        arcTo.setSweepFlag(true);
                         path.getElements().addAll(moveTo, arcTo);
                     }
                     if (getOrderedPipes().get(i).getStatus().equals("11")){ // mantıken yapıyorum deneyemedim
@@ -574,6 +576,8 @@ public class Main extends Application {
                         arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                         arcTo.setRadiusX(70);
                         arcTo.setRadiusY(70);
+                        arcTo.setLargeArcFlag(false);
+                        arcTo.setSweepFlag(true);
                         path.getElements().addAll(moveTo, arcTo);
                     }
                     path.setStroke(Color.WHITE);
@@ -601,13 +605,15 @@ public class Main extends Application {
                         arcTo.setRadiusY(70);
                         path.getElements().addAll(moveTo, arcTo);
                     }
-                    if (getOrderedPipes().get(i).getStatus().equals("10")){ // mantıken yapıyorum deneyemedim
+                    if (getOrderedPipes().get(i).getStatus().equals("10")){
                         MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                         ArcTo arcTo = new ArcTo();
                         arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
                         arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                         arcTo.setRadiusX(70);
                         arcTo.setRadiusY(70);
+                        arcTo.setLargeArcFlag(false);
+                        arcTo.setSweepFlag(true);
                         path.getElements().addAll(moveTo, arcTo);
                     }
                     if (getOrderedPipes().get(i).getStatus().equals("11")){ // mantıken yapıyorum deneyemedim
@@ -617,6 +623,8 @@ public class Main extends Application {
                         arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                         arcTo.setRadiusX(70);
                         arcTo.setRadiusY(70);
+                        arcTo.setLargeArcFlag(false);
+                        arcTo.setSweepFlag(true);
                         path.getElements().addAll(moveTo, arcTo);
                     }
                     path.setStroke(Color.WHITE);
