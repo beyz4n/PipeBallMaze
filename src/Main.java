@@ -90,66 +90,71 @@ public class Main extends Application {
 
             imageView.setOnMouseReleased(e -> {
                 ImageView imageView1 = (ImageView) e.getTarget(); // gets the first node
-                ImageView imageView2 = (ImageView) e.getPickResult().getIntersectedNode(); // gets the last node
-                int index1x = 0;
-                int index1y = 0;
-                int index2x = 0;
-                int index2y = 0;
-                for (int k = 0; k < 4; k++) {
-                    for (int j = 0; j < 4; j++) {
-                        if (tiles[k][j].getImage().equals(imageView1.getImage())) {
-                            index1x = k;
-                            index1y = j;
-                        }
-                        if (tiles[k][j].getImage().equals(imageView2.getImage())) {
-                            index2x = k;
-                            index2y = j;
-                        }
-                    }
+                ImageView imageView2 = null;
+                if(e.getPickResult().getIntersectedNode() instanceof ImageView) {
+                    imageView2 = (ImageView) e.getPickResult().getIntersectedNode(); // gets the last node
                 }
-                if(tiles[index2x][index2y] instanceof  EmptyFree) {
-                    if (!((index1x == index2x) && (index1y == index2y))) {
-                        if (tiles[index1x][index1y] instanceof EmptyFree) {
-                            if ((tiles[index1x][index1y] instanceof Movable) && (tiles[index2x][index2y] instanceof Movable)
-                                    && !(tiles[index1x][index1y] instanceof EmptyFree)) {
-                                if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
-                                        imageView2.getY() == imageView1.getY()) {
-                                    swapImages(imageView1, imageView2);
-                                    displayNumberOfMoves(gameBoard);
-                                    swapTiles(index1x, index1y, index2x, index2y, gameBoard);
-
-                                }
-                                if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
-                                        imageView2.getX() == imageView1.getX()) {
-                                    swapImages(imageView1, imageView2);
-                                    displayNumberOfMoves(gameBoard);
-                                    swapTiles(index1x, index1y, index2x, index2y, gameBoard);
-
-                                }
+                if (imageView2 != null) {
+                    int index1x = 0;
+                    int index1y = 0;
+                    int index2x = 0;
+                    int index2y = 0;
+                    for (int k = 0; k < 4; k++) {
+                        for (int j = 0; j < 4; j++) {
+                            if (tiles[k][j].getImage().equals(imageView1.getImage())) {
+                                index1x = k;
+                                index1y = j;
                             }
-                        } else {
-                            if ((tiles[index1x][index1y] instanceof Movable) && (tiles[index2x][index2y] instanceof Movable)
-                                    && !(tiles[index1x][index1y] instanceof EmptyFree)) {
-                                if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
-                                        imageView2.getY() == imageView1.getY()) {
-                                    swapImages(imageView1, imageView2);
-                                    displayNumberOfMoves(gameBoard);
-                                    swapTiles(index1x, index1y, index2x, index2y, gameBoard);
-
-                                }
-                                if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
-                                        imageView2.getX() == imageView1.getX()) {
-                                    swapImages(imageView1, imageView2);
-                                    displayNumberOfMoves(gameBoard);
-                                    swapTiles(index1x, index1y, index2x, index2y, gameBoard);
-                                }
+                            if (tiles[k][j].getImage().equals(imageView2.getImage())) {
+                                index2x = k;
+                                index2y = j;
                             }
                         }
                     }
-                }
+                    if (tiles[index2x][index2y] instanceof EmptyFree) {
+                        if (!((index1x == index2x) && (index1y == index2y))) {
+                            if (tiles[index1x][index1y] instanceof EmptyFree) {
+                                if ((tiles[index1x][index1y] instanceof Movable) && (tiles[index2x][index2y] instanceof Movable)
+                                        && !(tiles[index1x][index1y] instanceof EmptyFree)) {
+                                    if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
+                                            imageView2.getY() == imageView1.getY()) {
+                                        swapImages(imageView1, imageView2);
+                                        displayNumberOfMoves(gameBoard);
+                                        swapTiles(index1x, index1y, index2x, index2y, gameBoard);
 
+                                    }
+                                    if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
+                                            imageView2.getX() == imageView1.getX()) {
+                                        swapImages(imageView1, imageView2);
+                                        displayNumberOfMoves(gameBoard);
+                                        swapTiles(index1x, index1y, index2x, index2y, gameBoard);
+
+                                    }
+                                }
+                            } else {
+                                if ((tiles[index1x][index1y] instanceof Movable) && (tiles[index2x][index2y] instanceof Movable)
+                                        && !(tiles[index1x][index1y] instanceof EmptyFree)) {
+                                    if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
+                                            imageView2.getY() == imageView1.getY()) {
+                                        swapImages(imageView1, imageView2);
+                                        displayNumberOfMoves(gameBoard);
+                                        swapTiles(index1x, index1y, index2x, index2y, gameBoard);
+
+                                    }
+                                    if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
+                                            imageView2.getX() == imageView1.getX()) {
+                                        swapImages(imageView1, imageView2);
+                                        displayNumberOfMoves(gameBoard);
+                                        swapTiles(index1x, index1y, index2x, index2y, gameBoard);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             });
         }
+
     }
 
     public void swapImages(ImageView imageView1, ImageView imageView2){
