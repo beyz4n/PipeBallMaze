@@ -545,38 +545,91 @@ public class Main extends Application {
                 if (getOrderedPipes().get(i) instanceof CurvedPipeMovable) {
                     int indexOfImageView = indexFinder(gameBoard, getOrderedPipes().get(i));
 
-                    if (getOrderedPipes().get(i).getStatus().equals("00")){
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
+                    if (getOrderedPipes().get(i).getStatus().equals("00")){ // denendi onaylandı (iki yönlü de çalışıyor)
+                        MoveTo moveTo;
                         ArcTo arcTo = new ArcTo();
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
+                        if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Horizontal") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("01") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("11"))){
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
+                        }
+                        else {
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX());
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                            arcTo.setLargeArcFlag(false);
+                            arcTo.setSweepFlag(true);
+                        }
                         arcTo.setRadiusX(70);
                         arcTo.setRadiusY(70);
                         path.getElements().addAll(moveTo, arcTo);
                     }
-                    if (getOrderedPipes().get(i).getStatus().equals("01")){
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
+
+                    if (getOrderedPipes().get(i).getStatus().equals("01")){ // denendi onaylandı (iki yönlü de çalışıyor)
+                        MoveTo moveTo;
                         ArcTo arcTo = new ArcTo();
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Vertical") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("10") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("11"))) {
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        }
+                        else{
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
+                            arcTo.setLargeArcFlag(false);
+                            arcTo.setSweepFlag(true);
+                        }
                         arcTo.setRadiusX(70);
                         arcTo.setRadiusY(70);
                         path.getElements().addAll(moveTo, arcTo);
                     }
-                    if (getOrderedPipes().get(i).getStatus().equals("10")){ // mantıken yapıyorum deneyemedim
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+
+
+                    if (getOrderedPipes().get(i).getStatus().equals("10")){ // denendi onaylandı (iki yönlü de çalışıyor)
+                        MoveTo moveTo;
                         ArcTo arcTo = new ArcTo();
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                        if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Horizontal") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("01") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("11"))) {
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                            arcTo.setLargeArcFlag(false);
+                            arcTo.setSweepFlag(true);
+                        }
+                        else{
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX());
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        }
                         arcTo.setRadiusX(70);
                         arcTo.setRadiusY(70);
                         path.getElements().addAll(moveTo, arcTo);
                     }
-                    if (getOrderedPipes().get(i).getStatus().equals("11")){ // mantıken yapıyorum deneyemedim
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+
+
+                    if (getOrderedPipes().get(i).getStatus().equals("11")){ // onaylandı (iki yönlü de çalışıyor olmalı)
+                        MoveTo moveTo;
                         ArcTo arcTo = new ArcTo();
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Horizontal") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("00") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("01"))) {
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                            arcTo.setLargeArcFlag(false);
+                            arcTo.setSweepFlag(true);
+                        }
+                        else{
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140 , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                        }
                         arcTo.setRadiusX(70);
                         arcTo.setRadiusY(70);
                         path.getElements().addAll(moveTo, arcTo);
@@ -588,38 +641,90 @@ public class Main extends Application {
                 if (getOrderedPipes().get(i) instanceof CurvedPipeStatic) {
                     int indexOfImageView = indexFinder(gameBoard, getOrderedPipes().get(i));
 
-                    if (getOrderedPipes().get(i).getStatus().equals("00")){
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
+                    if (getOrderedPipes().get(i).getStatus().equals("00")){ //  onaylandı (iki yönlü de çalışıyor olmalı)
+                        MoveTo moveTo;
                         ArcTo arcTo = new ArcTo();
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
+                        if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Horizontal") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("01") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("11"))){
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
+                        }
+                        else {
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX());
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                            arcTo.setLargeArcFlag(false);
+                            arcTo.setSweepFlag(true);
+                        }
                         arcTo.setRadiusX(70);
                         arcTo.setRadiusY(70);
                         path.getElements().addAll(moveTo, arcTo);
                     }
-                    if (getOrderedPipes().get(i).getStatus().equals("01")){
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
+
+                    if (getOrderedPipes().get(i).getStatus().equals("01")){ // onaylandı (iki yönlü de çalışıyor olmalı)
+                        MoveTo moveTo;
                         ArcTo arcTo = new ArcTo();
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Vertical") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("10") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("11"))) {
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        }
+                        else{
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
+                            arcTo.setLargeArcFlag(false);
+                            arcTo.setSweepFlag(true);
+                        }
                         arcTo.setRadiusX(70);
                         arcTo.setRadiusY(70);
                         path.getElements().addAll(moveTo, arcTo);
                     }
-                    if (getOrderedPipes().get(i).getStatus().equals("10")){ // mantıken yapıyorum deneyemedim
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+
+                    if (getOrderedPipes().get(i).getStatus().equals("10")){ // onaylandı (iki yönlü de çalışıyor olmalı)
+                        MoveTo moveTo;
                         ArcTo arcTo = new ArcTo();
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                        if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Horizontal") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("01") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("11"))) {
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                            arcTo.setLargeArcFlag(false);
+                            arcTo.setSweepFlag(true);
+                        }
+                        else{
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX());
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        }
                         arcTo.setRadiusX(70);
                         arcTo.setRadiusY(70);
                         path.getElements().addAll(moveTo, arcTo);
                     }
-                    if (getOrderedPipes().get(i).getStatus().equals("11")){ // mantıken yapıyorum deneyemedim
-                        MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+
+
+                    if (getOrderedPipes().get(i).getStatus().equals("11")){ // onaylandı (iki yönlü de çalışıyor olmalı)
+                        MoveTo moveTo;
                         ArcTo arcTo = new ArcTo();
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Horizontal") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("00") ||
+                                getOrderedPipes().get(i-1).getStatus().equals("01"))) {
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                            arcTo.setLargeArcFlag(false);
+                            arcTo.setSweepFlag(true);
+                        }
+                        else{
+                            moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140 , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                            arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                            arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                        }
                         arcTo.setRadiusX(70);
                         arcTo.setRadiusY(70);
                         path.getElements().addAll(moveTo, arcTo);
