@@ -1,7 +1,7 @@
-1,End,Vertical
+1,Starter,Vertical
 2,Pipe,11
 3,Pipe,10
-4,Starter,Vertical
+4,End,Vertical
 5,Pipe,Vertical
 6,Pipe,Vertical
 7,Pipe,Vertical

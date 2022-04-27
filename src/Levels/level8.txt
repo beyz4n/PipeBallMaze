@@ -1,7 +1,7 @@
 1,Pipe,11
 2,Pipe,Horizontal
 3,Pipe,Horizontal
-4,Starter,Horizontal
+4,End,Horizontal
 5,Pipe,01
 6,Pipe,Horizontal
 7,Pipe,Horizontal
@@ -13,4 +13,4 @@
 13,Pipe,01
 14,Pipe,Horizontal
 15,Pipe,Horizontal
-16,End,Horizontal
+16,Starter,Horizontal
