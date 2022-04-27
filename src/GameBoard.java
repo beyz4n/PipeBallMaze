@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -38,6 +40,10 @@ public class GameBoard{ //extends Application {
         Stage primaryStage = new Stage();
 
         startButton.setOnMouseClicked(event -> {
+            //This creates a dialog box maybe use for nexy?
+            //JOptionPane.showMessageDialog(null, "Level Completed.\nPress okay to precede.");
+
+
             startStage.hide();
             primaryStage.show();
         });
@@ -62,7 +68,7 @@ public class GameBoard{ //extends Application {
 
             Scanner input;
         try {
-            input = new Scanner(levels.get(3));
+            input = new Scanner(levels.get(10));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
