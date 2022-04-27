@@ -65,11 +65,11 @@ public class Main extends Application {
         });
 
         gameBoard.getNextButton().setOnMouseClicked(event -> {
-            if(clickCount < (GameBoard.getTotalLevelNo() - 1)) {
+            if(getLevelNumber() < (GameBoard.getTotalLevelNo())) {
                 primaryStage.setScene(levelCompletedScene(nextButton));
                 primaryStage.show();
             }
-            else if(clickCount == (GameBoard.getTotalLevelNo() - 1)){
+            else if(getLevelNumber() == (GameBoard.getTotalLevelNo())){
                 StackPane stackPane = new StackPane();
                 stackPane.getChildren().add(new Label("The game is completed."));
                 Scene scene = new Scene(stackPane, 950, 780);
