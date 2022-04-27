@@ -15,6 +15,7 @@ import javafx.scene.shape.Path;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.nio.channels.Pipe;
 import java.util.ArrayList;
 
 
@@ -23,18 +24,9 @@ public class Main extends Application {
     private static int numberOfMoves;
     private Path path;
     private boolean levelCompleted;
-    private ArrayList<Tile> orderedPipes;
+    private ArrayList<Tile> pipesInOrder;
     private static int levelNumber;
     public static int clickCount;
-    private boolean isClickedToCheck;
-
-    public boolean isClickedToCheck() {
-        return isClickedToCheck;
-    }
-
-    public void setClickedToCheck(boolean clickedToCheck) {
-        isClickedToCheck = clickedToCheck;
-    }
 
     public static void main(String[] args) {
         launch(args);
@@ -55,7 +47,6 @@ public class Main extends Application {
 
         GameBoard gameBoard = new GameBoard();
         Button nextButton = new Button("next");
-        isClickedToCheck = false;
 
 
         startButton.setOnMouseClicked(event -> {
@@ -70,13 +61,22 @@ public class Main extends Application {
 
 
         gameBoard.getCheckButton().setOnMouseClicked(event -> {
-            animate(gameBoard);
+            //animate(gameBoard);
             gameBoard.getNextButton().setDisable(false);
         });
 
         gameBoard.getNextButton().setOnMouseClicked(event -> {
-            primaryStage.setScene(levelCompletedScene(nextButton));
-            primaryStage.show();
+            if(clickCount < (GameBoard.getTotalLevelNo() - 1)) {
+                primaryStage.setScene(levelCompletedScene(nextButton));
+                primaryStage.show();
+            }
+            else if(clickCount == (GameBoard.getTotalLevelNo() - 1)){
+                StackPane stackPane = new StackPane();
+                stackPane.getChildren().add(new Label("The game is completed."));
+                Scene scene = new Scene(stackPane, 950, 780);
+                primaryStage.setScene(scene);
+                primaryStage.show();
+            }
         });
 
 
@@ -211,270 +211,184 @@ public class Main extends Application {
     }
 
     public boolean checkForSolution(GameBoard gameBoard){
-        orderedPipes = new ArrayList<>();
-        boolean tileTrue;
-        boolean tileTrue2;
-        boolean tileTrue3;
-        boolean tileTrue4;
-        boolean tileTrue5;
-        boolean tileTrue6;
-        boolean tileTrue7;
-        ArrayList<Boolean> checkBooleanList = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                tileTrue = false;
-                tileTrue2 = false;
-                tileTrue3 = false;
-                tileTrue4 = false;
-                tileTrue5 = false;
-                tileTrue6 = false;
-                tileTrue7 = false;
 
-                if (gameBoard.getTiles()[i][j] instanceof StartPipe) {
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical") && (i != 3)) {
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
-                            tileTrue2 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j]);
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        }
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00")) {
-                            tileTrue4 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01")) {
-                            tileTrue4 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        }
-                    }
-
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal") && (j != 0)) {
-                        tileTrue = true;
-                    }
-
-                    tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
-                    checkBooleanList.add(tileTrue3);
+        pipesInOrder = new ArrayList<>();
+        int indexOfStartX = 0;
+        int indexOfStartY = 0;
+        int curveCount = 0;
+        for (int i = 0 ; i < 4 ; i++){
+            for (int j = 0 ; j < 4 ; j++){
+                if (gameBoard.getTiles()[i][j] instanceof StartPipe){
+                     indexOfStartX = i;
+                     indexOfStartY = j;
                 }
-
-
-
-                if (gameBoard.getTiles()[i][j] instanceof EndPipe) {
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical") && (i != 3)) {
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
-                            tileTrue = true;
-                        }
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00")) {
-                            tileTrue4 = true;
-                        } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01")) {
-                            tileTrue4 = true;
-                        }
-                    }
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal") && (j != 0)) {
-                        tileTrue2 = true;
-                    }
-                    tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
-                    checkBooleanList.add(tileTrue3);
-                }
-
-
-                if (gameBoard.getTiles()[i][j] instanceof LinearPipe) {
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical") && (i != 3)) {
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
-                            tileTrue = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        }
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00")) {
-                            tileTrue4 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        }
-                        else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01")) {
-                            tileTrue4 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        }
-                    }
-
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal") && (j != 3)) {
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
-                            tileTrue2 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        }
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00")) {
-                            tileTrue4 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10")) {
-                            tileTrue4 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        }
-                    }
-                    tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
-                    checkBooleanList.add(tileTrue3);
-                }
-
-
-                if (gameBoard.getTiles()[i][j] instanceof NormalPipeStatic) {
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Vertical") && (i != 3)) {
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
-                            tileTrue = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        }
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00")) {
-                            tileTrue4 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01")) {
-                            tileTrue4 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        }
-                    }
-
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("Horizontal") && (j != 3)) {
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
-                            tileTrue2 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        }
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00")) {
-                            tileTrue4 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10")) {
-                            tileTrue4 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        }
-                    }
-                    tileTrue3 = tileTrue || tileTrue2 || tileTrue4;
-                    checkBooleanList.add(tileTrue3);
-                }
-
-
-                if (gameBoard.getTiles()[i][j] instanceof CurvedPipeMovable) {
-
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("00") && (i != 0 && j != 0)) {
-                        tileTrue7 = true;
-                        orderedPipes.add(gameBoard.getTiles()[i - 1][j]);
-                    }
-
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("01") && (i != 0) && (j != 3)) {
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
-                            tileTrue = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        }
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00")) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10")) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        }
-                    }
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("10") && (j != 0) && (i != 3)) {
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
-                            tileTrue4 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        }
-                        /*
-                        if (gameBoard.getTiles()[i][j - 1].getStatus().equals("00") && (j != 3)) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j-1]);
-
-                        } else if (gameBoard.getTiles()[i][j - 1].getStatus().equals("01") && (j != 3)) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j-1]);
-                        }
-                         */
-                    }
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("11")) {
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal") && (j != 3)) {
-                            tileTrue2 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        }
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical") && (i != 3)) {
-                            tileTrue5 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        }
-                        // YANA BAKANLAR
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        }
-                        // ALTA BAKANLAR
-                        else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00") && (i != 3)) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01") && (i != 3)) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        }
-                    }
-
-                    tileTrue3 = tileTrue ||tileTrue2 || tileTrue4 || tileTrue5 || tileTrue6 || tileTrue7;
-                    checkBooleanList.add(tileTrue3);
-                }
-
-                if (gameBoard.getTiles()[i][j] instanceof CurvedPipeStatic) {
-
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("00") && (i != 0 && j != 0)) {
-                        tileTrue7 = true;
-                    }
-
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("01") && (i != 0) && (j != 3)) {
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal")) {
-                            tileTrue = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        }
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00")) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10")) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        }
-                    }
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("10") && (j != 0) && (i != 3)) {
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical")) {
-                            tileTrue4 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        }
-                        /*
-                        if (gameBoard.getTiles()[i][j - 1].getStatus().equals("00") && (j != 3)) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j-1]);
-                        } else if (gameBoard.getTiles()[i][j - 1].getStatus().equals("01") && (j != 3)) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j-1]);
-                        }
-                         */
-                    }
-                    if (gameBoard.getTiles()[i][j].getStatus().equals("11")) {
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("Horizontal") && (j != 3)) {
-                            tileTrue2 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i][j + 1]);
-                        }
-                        if (gameBoard.getTiles()[i + 1][j].getStatus().equals("Vertical") && (i != 3)) {
-                            tileTrue5 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        }
-                        // YANA BAKANLAR
-                        if (gameBoard.getTiles()[i][j + 1].getStatus().equals("00") && (j != 3)) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        } else if (gameBoard.getTiles()[i][j + 1].getStatus().equals("10") && (j != 3)) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        }
-                        // ALTA BAKANLAR
-                        else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("00") && (i != 3)) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        } else if (gameBoard.getTiles()[i + 1][j].getStatus().equals("01") && (i != 3)) {
-                            tileTrue6 = true;
-                            orderedPipes.add(gameBoard.getTiles()[i + 1][j]);
-                        }
-                    }
-
-                    tileTrue3 = tileTrue ||tileTrue2 || tileTrue4 || tileTrue5 || tileTrue6 || tileTrue7;
-                    checkBooleanList.add(tileTrue3);
+                if((gameBoard.getTiles()[i][j] instanceof CurvedPipeStatic) &&
+                    (gameBoard.getTiles()[i][j] instanceof CurvedPipeStatic)){
+                    curveCount++;
                 }
             }
         }
+        int indexX = 0;
+        int indexY = 0;
+        String previousStatus = "";
+        pipesInOrder.add(gameBoard.getTiles()[indexOfStartX][indexOfStartY]);
+        if (gameBoard.getTiles()[indexOfStartX][indexOfStartY].getStatus().equals("Vertical")) {
+            for (int i = indexOfStartY + 1; i <= 3; i++) {
+                if ((gameBoard.getTiles()[indexOfStartX][i] instanceof LinearPipe) ||
+                        (gameBoard.getTiles()[indexOfStartX][i] instanceof NormalPipeStatic)) {
+                    pipesInOrder.add(gameBoard.getTiles()[indexOfStartX][i]);
+                } else if ((gameBoard.getTiles()[indexOfStartX][i] instanceof CurvedPipeMovable) ||
+                        (gameBoard.getTiles()[indexOfStartX][i] instanceof CurvedPipeStatic)) {
+                    pipesInOrder.add(gameBoard.getTiles()[indexOfStartX][i]);
+                    indexX = indexOfStartX;
+                    indexY = i;
+                    previousStatus = "Vertical";
+                    break;
+                }
+                else if ((gameBoard.getTiles()[indexOfStartX][i] instanceof EndPipe)){
+                    pipesInOrder.add(gameBoard.getTiles()[indexOfStartX][i]);
+                    System.out.println("true");
+                    gameBoard.getCheckButton().setDisable(false);
+                    levelNumber++;
+                    return true;
+                    //break;
+                } else
+                    break;
+            }
+
+            if (gameBoard.getTiles()[indexOfStartX][indexOfStartY].getStatus().equals("Horizontal")) {
+                for (int i = indexOfStartX - 1; i >= 0; i--) {
+                    if ((gameBoard.getTiles()[i][indexOfStartY] instanceof LinearPipe) ||
+                            (gameBoard.getTiles()[i][indexOfStartY] instanceof NormalPipeStatic)) {
+                        pipesInOrder.add(gameBoard.getTiles()[i][indexOfStartY]);
+                    } else if ((gameBoard.getTiles()[i][indexOfStartY] instanceof CurvedPipeMovable) ||
+                            (gameBoard.getTiles()[i][indexOfStartY] instanceof CurvedPipeStatic)) {
+                        pipesInOrder.add(gameBoard.getTiles()[i][indexOfStartY]);
+                        indexX = i;
+                        indexY = indexOfStartY;
+                        previousStatus = "Horizontal";
+                        break;
+                    }
+                    else if ((gameBoard.getTiles()[i][indexOfStartY] instanceof EndPipe)){
+                        pipesInOrder.add(gameBoard.getTiles()[i][indexOfStartY]);
+                        System.out.println("true");
+                        gameBoard.getCheckButton().setDisable(false);
+                        levelNumber++;
+                        return true;
+                        //break;
+                    } else
+                        break;
+                }
+            }
+
+            for(int  a = 1 ; a < curveCount; a++) {
+                if(directionFinder(gameBoard.getTiles()[indexX][indexY].getStatus(), previousStatus).equals("down")){
+                    for (int i = indexY + 1; i <= 3; i++) {
+                        if ((gameBoard.getTiles()[indexX][i] instanceof LinearPipe) ||
+                                (gameBoard.getTiles()[indexX][i] instanceof NormalPipeStatic)) {
+                            pipesInOrder.add(gameBoard.getTiles()[indexX][i]);
+                        } else if ((gameBoard.getTiles()[indexX][i] instanceof CurvedPipeMovable) ||
+                                (gameBoard.getTiles()[indexX][i] instanceof CurvedPipeStatic)) {
+                            pipesInOrder.add(gameBoard.getTiles()[indexX][i]);
+                            indexY = i;
+                            previousStatus = "Vertical";
+                            break;
+                        }
+                        else if ((gameBoard.getTiles()[indexX][i] instanceof EndPipe)){
+                            pipesInOrder.add(gameBoard.getTiles()[indexX][i]);
+                            System.out.println("true");
+                            gameBoard.getCheckButton().setDisable(false);
+                            levelNumber++;
+                            return true;
+                            //break;
+                        } else
+                            break;
+                    }
+                }
+                if(directionFinder(gameBoard.getTiles()[indexX][indexY].getStatus(), previousStatus).equals("up")){
+                    for (int i = indexY - 1; i >= 0; i--) {
+                        if ((gameBoard.getTiles()[indexX][i] instanceof LinearPipe) ||
+                                (gameBoard.getTiles()[indexX][i] instanceof NormalPipeStatic)) {
+                            pipesInOrder.add(gameBoard.getTiles()[indexX][i]);
+                        } else if ((gameBoard.getTiles()[indexX][i] instanceof CurvedPipeMovable) ||
+                                (gameBoard.getTiles()[indexX][i] instanceof CurvedPipeStatic)) {
+                            pipesInOrder.add(gameBoard.getTiles()[indexX][i]);
+                            indexY = i;
+                            previousStatus = "Vertical";
+                            break;
+                        }
+                        else if ((gameBoard.getTiles()[indexX][i] instanceof EndPipe)){
+                            pipesInOrder.add(gameBoard.getTiles()[indexX][i]);
+                            System.out.println("true");
+                            gameBoard.getCheckButton().setDisable(false);
+                            levelNumber++;
+                            return true;
+                            //break;
+                        } else
+                            break;
+                    }
+                }
+                if(directionFinder(gameBoard.getTiles()[indexX][indexY].getStatus(), previousStatus).equals("right")){
+                    for (int i = indexX + 1; i <= 3; i++) {
+                        if ((gameBoard.getTiles()[i][indexY] instanceof LinearPipe) ||
+                                (gameBoard.getTiles()[i][indexY] instanceof NormalPipeStatic)) {
+                            pipesInOrder.add(gameBoard.getTiles()[i][indexY]);
+                        } else if ((gameBoard.getTiles()[i][indexY] instanceof CurvedPipeMovable) ||
+                                (gameBoard.getTiles()[i][indexY] instanceof CurvedPipeStatic)) {
+                            pipesInOrder.add(gameBoard.getTiles()[i][indexY]);
+                            indexX = i;
+                            previousStatus = "Horizontal";
+                            break;
+                        }
+                        else if ((gameBoard.getTiles()[i][indexY] instanceof EndPipe)){
+                            pipesInOrder.add(gameBoard.getTiles()[i][indexY]);
+                            System.out.println("true");
+                            gameBoard.getCheckButton().setDisable(false);
+                            levelNumber++;
+                            return true;
+                            //break;
+                        } else
+                            break;
+                    }
+                }
+                if(directionFinder(gameBoard.getTiles()[indexX][indexY].getStatus(), previousStatus).equals("left")){
+                    for (int i = indexX - 1; i >= 0; i--) {
+                        if ((gameBoard.getTiles()[i][indexY] instanceof LinearPipe) ||
+                                (gameBoard.getTiles()[i][indexY] instanceof NormalPipeStatic)) {
+                            pipesInOrder.add(gameBoard.getTiles()[i][indexY]);
+                        } else if ((gameBoard.getTiles()[i][indexY] instanceof CurvedPipeMovable) ||
+                                (gameBoard.getTiles()[i][indexY] instanceof CurvedPipeStatic)) {
+                            pipesInOrder.add(gameBoard.getTiles()[i][indexY]);
+                            indexX = i;
+                            previousStatus = "Horizontal";
+                            break;
+                        }
+                        else if ((gameBoard.getTiles()[i][indexY] instanceof EndPipe)){
+                            pipesInOrder.add(gameBoard.getTiles()[i][indexY]);
+                            System.out.println("true");
+                            gameBoard.getCheckButton().setDisable(false);
+                            levelNumber++;
+                            return true;
+                            //break;
+                        } else
+                            break;
+                    }
+                }
+            }
+
+
+
+        }
+
+
+
+
+        return false;
+
+
+
+
+        /*
         if (checkBooleanList.contains(false)){
             System.out.println("false");
             return false;
@@ -485,21 +399,43 @@ public class Main extends Application {
             levelNumber++;
             return true;
         }
+         */
     }
+
+    public String directionFinder(String statusCurve, String statusPrevious ){
+
+        if(statusPrevious.equals("Horizontal") && statusCurve.equals("00"))
+            return "up";
+        else if(statusPrevious.equals("Horizontal") && statusCurve.equals("01"))
+            return "up";
+        else if(statusPrevious.equals("Horizontal") && statusCurve.equals("10"))
+            return "down";
+        else if(statusPrevious.equals("Horizontal") && statusCurve.equals("11"))
+            return "down";
+        else if(statusPrevious.equals("Vertical") && statusCurve.equals("00"))
+            return "left";
+        else if(statusPrevious.equals("Vertical") && statusCurve.equals("01"))
+            return "right";
+        else if(statusPrevious.equals("Vertical") && statusCurve.equals("10"))
+            return "left";
+        else
+            return "right";
+    }
+
 
     public void setWholePath(GameBoard gameBoard){
         Path path = new Path();
-        for (int i = 0; i < getOrderedPipes().size(); i++){
+        for (int i = 0; i < getPipesInOrder().size(); i++){
 
-            if (getOrderedPipes().get(i) instanceof StartPipe) {
-                int indexOfImageView = indexFinder(gameBoard, getOrderedPipes().get(i));
+            if (getPipesInOrder().get(i) instanceof StartPipe) {
+                int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
 
-                if (getOrderedPipes().get(i).getStatus().equals("Vertical")) {
+                if (getPipesInOrder().get(i).getStatus().equals("Vertical")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 50.5);
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 141.5);
                     path.getElements().addAll(moveTo, lineTo);
                 }
-                if (getOrderedPipes().get(i).getStatus().equals("Horizontal")) {
+                if (getPipesInOrder().get(i).getStatus().equals("Horizontal")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 90, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     path.getElements().addAll(moveTo, lineTo);
@@ -509,15 +445,15 @@ public class Main extends Application {
             }
 
 
-            if (getOrderedPipes().get(i) instanceof EndPipe) {
-                int indexOfImageView = indexFinder(gameBoard, getOrderedPipes().get(i));
+            if (getPipesInOrder().get(i) instanceof EndPipe) {
+                int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
 
-                if (getOrderedPipes().get(i).getStatus().equals("Vertical")) {
+                if (getPipesInOrder().get(i).getStatus().equals("Vertical")) {
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 50.5);
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 141.5);
                     path.getElements().addAll(moveTo, lineTo);
                 }
-                if (getOrderedPipes().get(i).getStatus().equals("Horizontal")) {
+                if (getPipesInOrder().get(i).getStatus().equals("Horizontal")) {
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 90, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     path.getElements().addAll(moveTo, lineTo);
@@ -528,17 +464,17 @@ public class Main extends Application {
 
 
 
-            if (getOrderedPipes().get(i) instanceof LinearPipe) {
-                int indexOfImageView = indexFinder(gameBoard, getOrderedPipes().get(i));
+            if (getPipesInOrder().get(i) instanceof LinearPipe) {
+                int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
 
 
-                if (getOrderedPipes().get(i).getStatus().equals("Vertical")) {
+                if (getPipesInOrder().get(i).getStatus().equals("Vertical")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
 
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                     path.getElements().addAll(moveTo, lineTo);
                 }
-                if (getOrderedPipes().get(i).getStatus().equals("Horizontal")) {
+                if (getPipesInOrder().get(i).getStatus().equals("Horizontal")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     path.getElements().addAll(moveTo, lineTo);
@@ -548,16 +484,16 @@ public class Main extends Application {
 
 
 
-            if (getOrderedPipes().get(i) instanceof NormalPipeStatic) {
-                int indexOfImageView = indexFinder(gameBoard, getOrderedPipes().get(i));
+            if (getPipesInOrder().get(i) instanceof NormalPipeStatic) {
+                int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
 
-                if (getOrderedPipes().get(i).getStatus().equals("Vertical")) {
+                if (getPipesInOrder().get(i).getStatus().equals("Vertical")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
 
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                     path.getElements().addAll(moveTo, lineTo);
                 }
-                if (getOrderedPipes().get(i).getStatus().equals("Horizontal")) {
+                if (getPipesInOrder().get(i).getStatus().equals("Horizontal")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY()+70);
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     path.getElements().addAll(moveTo, lineTo);
@@ -567,15 +503,15 @@ public class Main extends Application {
 
 
 
-            if (getOrderedPipes().get(i) instanceof CurvedPipeMovable) {
-                int indexOfImageView = indexFinder(gameBoard, getOrderedPipes().get(i));
+            if (getPipesInOrder().get(i) instanceof CurvedPipeMovable) {
+                int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
 
-                if (getOrderedPipes().get(i).getStatus().equals("00")){ // denendi onaylandı (iki yönlü de çalışıyor)
+                if (getPipesInOrder().get(i).getStatus().equals("00")){ // denendi onaylandı (iki yönlü de çalışıyor)
                     MoveTo moveTo;
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Horizontal") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("01") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("11"))){
+                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Horizontal") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("01") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("11"))){
                         moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
                         arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
                         arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
@@ -592,12 +528,12 @@ public class Main extends Application {
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
-                if (getOrderedPipes().get(i).getStatus().equals("01")){ // denendi onaylandı (iki yönlü de çalışıyor)
+                if (getPipesInOrder().get(i).getStatus().equals("01")){ // denendi onaylandı (iki yönlü de çalışıyor)
                     MoveTo moveTo;
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Vertical") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("10") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("11"))) {
+                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Vertical") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("10") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("11"))) {
                         moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
                         arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
                         arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
@@ -615,12 +551,12 @@ public class Main extends Application {
                 }
 
 
-                if (getOrderedPipes().get(i).getStatus().equals("10")){ // denendi onaylandı (iki yönlü de çalışıyor)
+                if (getPipesInOrder().get(i).getStatus().equals("10")){ // denendi onaylandı (iki yönlü de çalışıyor)
                     MoveTo moveTo;
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Horizontal") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("01") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("11"))) {
+                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Horizontal") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("01") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("11"))) {
                         moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                         arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
                         arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
@@ -638,12 +574,12 @@ public class Main extends Application {
                 }
 
 
-                if (getOrderedPipes().get(i).getStatus().equals("11")){ // onaylandı (iki yönlü de çalışıyor olmalı)
+                if (getPipesInOrder().get(i).getStatus().equals("11")){ // onaylandı (iki yönlü de çalışıyor olmalı)
                     MoveTo moveTo;
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Horizontal") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("00") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("01"))) {
+                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Horizontal") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("00") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("01"))) {
                         moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                         arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
                         arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
@@ -663,15 +599,15 @@ public class Main extends Application {
             }
 
 
-            if (getOrderedPipes().get(i) instanceof CurvedPipeStatic) {
-                int indexOfImageView = indexFinder(gameBoard, getOrderedPipes().get(i));
+            if (getPipesInOrder().get(i) instanceof CurvedPipeStatic) {
+                int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
 
-                if (getOrderedPipes().get(i).getStatus().equals("00")){ //  onaylandı (iki yönlü de çalışıyor olmalı)
+                if (getPipesInOrder().get(i).getStatus().equals("00")){ //  onaylandı (iki yönlü de çalışıyor olmalı)
                     MoveTo moveTo;
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Horizontal") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("01") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("11"))){
+                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Horizontal") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("01") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("11"))){
                         moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
                         arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
                         arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
@@ -688,12 +624,12 @@ public class Main extends Application {
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
-                if (getOrderedPipes().get(i).getStatus().equals("01")){ // onaylandı (iki yönlü de çalışıyor olmalı)
+                if (getPipesInOrder().get(i).getStatus().equals("01")){ // onaylandı (iki yönlü de çalışıyor olmalı)
                     MoveTo moveTo;
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Vertical") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("10") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("11"))) {
+                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Vertical") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("10") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("11"))) {
                         moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
                         arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
                         arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
@@ -710,12 +646,12 @@ public class Main extends Application {
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
-                if (getOrderedPipes().get(i).getStatus().equals("10")){ // onaylandı (iki yönlü de çalışıyor olmalı)
+                if (getPipesInOrder().get(i).getStatus().equals("10")){ // onaylandı (iki yönlü de çalışıyor olmalı)
                     MoveTo moveTo;
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Horizontal") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("01") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("11"))) {
+                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Horizontal") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("01") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("11"))) {
                         moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                         arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
                         arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
@@ -733,12 +669,12 @@ public class Main extends Application {
                 }
 
 
-                if (getOrderedPipes().get(i).getStatus().equals("11")){ // onaylandı (iki yönlü de çalışıyor olmalı)
+                if (getPipesInOrder().get(i).getStatus().equals("11")){ // onaylandı (iki yönlü de çalışıyor olmalı)
                     MoveTo moveTo;
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getOrderedPipes().get(i-1).getStatus().equals("Horizontal") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("00") ||
-                            getOrderedPipes().get(i-1).getStatus().equals("01"))) {
+                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Horizontal") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("00") ||
+                            getPipesInOrder().get(i-1).getStatus().equals("01"))) {
                         moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                         arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
                         arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
@@ -808,12 +744,12 @@ public class Main extends Application {
         this.levelCompleted = levelCompleted;
     }
 
-    public ArrayList<Tile> getOrderedPipes() {
-        return orderedPipes;
+    public ArrayList<Tile> getPipesInOrder() {
+        return pipesInOrder;
     }
 
-    public void setOrderedPipes(ArrayList<Tile> orderedPipes) {
-        this.orderedPipes = orderedPipes;
+    public void setPipesInOrder(ArrayList<Tile> pipesInOrder) {
+        this.pipesInOrder = pipesInOrder;
     }
 
     public static int getLevelNumber() {
