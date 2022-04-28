@@ -1,7 +1,6 @@
 import Tiles.*;
 import javafx.animation.PathTransition;
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -38,6 +37,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        Media media = new Media(new File("gas.wav").toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
         primaryStage.setResizable(false);
         Label gameName = new Label("Pipe Ball Maze");
         gameName.setFont(Font.font("Arial", FontWeight.BOLD, 50));
@@ -53,11 +55,10 @@ public class Main extends Application {
         Scene startScene = new Scene(startPane,950,780);
         primaryStage.setScene(startScene);
         primaryStage.setTitle("PipeBallMaze");
-        //MEDIA_URL = "file:///Users/senaektiricioglu/Desktop/Flashback.mp3";
-        Media media = new Media(new File("Flashback.mp3").toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
         primaryStage.show();
+
+
+
 
 
         GameBoard gameBoard = new GameBoard();
@@ -148,10 +149,7 @@ public class Main extends Application {
         vBox.alignmentProperty().set(Pos.CENTER);
 
         Scene levelCompletedScene = new Scene(vBox, 950, 780);
-        //MEDIA_URL = "file:///Users/senaektiricioglu/Desktop/Kids%20Cheering.mp3";
-        Media media = new Media(new File("Kids_Cheering.mp3").toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
+
         return levelCompletedScene;
         /*
         Pane pane = new Pane();
@@ -239,10 +237,6 @@ public class Main extends Application {
                                 }
                             }
                         }
-                      //  MEDIA_URL = "file:///Users/senaektiricioglu/Desktop/Bell_Transition.mp3";
-                        Media media = new Media(new File("Bell_Transition.mp3").toURI().toString());
-                        MediaPlayer mediaPlayer = new MediaPlayer(media);
-                        mediaPlayer.play();
                         setLevelCompleted(checkForSolution(gameBoard));
                     }
                 }
@@ -275,7 +269,7 @@ public class Main extends Application {
                 imageView2.getX() + 70 , imageView2.getY() + 70);
         pathTransition.setPath(line);
         pathTransition.setNode(imageView1);
-        pathTransition.setDuration(Duration.seconds(0.75));
+        pathTransition.setDuration(Duration.seconds(0.50));
         pathTransition.play();
         pathTransition.setOnFinished(event -> {
             imageView1.toBack();
