@@ -153,6 +153,7 @@ public class Main extends Application {
                                     if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
                                             imageView2.getY() == imageView1.getY()) {
                                         dragAnimation(imageView1,imageView2);
+                                        imageView1.toBack();
                                         swapImages(imageView1, imageView2);
                                         gameBoard.displayNumberOfMoves();
                                         swapTiles(gameBoard, index1x, index1y, index2x, index2y);
@@ -161,6 +162,7 @@ public class Main extends Application {
                                     if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                             imageView2.getX() == imageView1.getX()) {
                                         dragAnimation(imageView1,imageView2);
+                                        imageView1.toBack();
                                         swapImages(imageView1, imageView2);
                                         gameBoard.displayNumberOfMoves();
                                         swapTiles(gameBoard, index1x, index1y, index2x, index2y);
@@ -173,6 +175,7 @@ public class Main extends Application {
                                     if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
                                             imageView2.getY() == imageView1.getY()) {
                                         dragAnimation(imageView1,imageView2);
+                                        imageView1.toBack();
                                         swapImages(imageView1, imageView2);
                                         gameBoard.displayNumberOfMoves();
                                         swapTiles(gameBoard, index1x, index1y, index2x, index2y);
@@ -181,6 +184,7 @@ public class Main extends Application {
                                     if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                             imageView2.getX() == imageView1.getX()) {
                                         dragAnimation(imageView1,imageView2);
+                                        imageView1.toBack();
                                         swapImages(imageView1, imageView2);
                                         gameBoard.displayNumberOfMoves();
                                         swapTiles(gameBoard, index1x, index1y, index2x, index2y);
