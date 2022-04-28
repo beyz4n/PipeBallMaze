@@ -1,6 +1,8 @@
 import Tiles.*;
 import javafx.animation.PathTransition;
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,6 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -42,7 +46,7 @@ public class Main extends Application {
 
 
         GameBoard gameBoard = new GameBoard();
-        Button nextButton = new Button("next");
+        Button nextButton = new Button("Next Level ->");
 
         startButton.setOnMouseClicked(event -> {
             numberOfMoves = 0;
@@ -105,11 +109,27 @@ public class Main extends Application {
 
 
     public Scene levelCompletedScene(Button button){
+        VBox vBox = new VBox(20);
+
+        vBox.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+
+        Label levelCompletedText = new Label("Level " + getLevelNumber() +" is completed in " + getNumberOfMoves() + " moves!");
+        levelCompletedText.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        vBox.getChildren().add(levelCompletedText);
+        button.setPrefSize(100, 50);
+        vBox.getChildren().add(button);
+        vBox.alignmentProperty().set(Pos.CENTER);
+
+        Scene levelCompletedScene = new Scene(vBox, 950, 780);
+        return levelCompletedScene;
+        /*
         Pane pane = new Pane();
         pane.getChildren().add(new Label("level completed. press next!"));
         pane.getChildren().add(button);
         Scene scene = new Scene(pane, 950,780);
         return scene;
+         */
     }
 
 
