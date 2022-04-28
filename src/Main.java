@@ -194,11 +194,9 @@ public class Main extends Application {
                         }
                     }
                     imageView1.toFront();
-                    if (tiles[index2x][index2y] instanceof EmptyFree) {
+                    if ((tiles[index2x][index2y] instanceof EmptyFree) && !(tiles[index1x][index1y] instanceof EmptyFree)) {
                         if (!((index1x == index2x) && (index1y == index2y))) {
-                            if (tiles[index1x][index1y] instanceof EmptyFree) {
-                                if ((tiles[index1x][index1y] instanceof Movable) && (tiles[index2x][index2y] instanceof Movable)
-                                        && !(tiles[index1x][index1y] instanceof EmptyFree)) {
+                                if ((tiles[index1x][index1y] instanceof Movable)){
                                     if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
                                             imageView2.getY() == imageView1.getY()) {
                                         dragAnimation(imageView1,imageView2);
@@ -216,26 +214,6 @@ public class Main extends Application {
 
                                     }
                                 }
-                            } else {
-                                if ((tiles[index1x][index1y] instanceof Movable) && (tiles[index2x][index2y] instanceof Movable)
-                                        && !(tiles[index1x][index1y] instanceof EmptyFree)) {
-                                    if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
-                                            imageView2.getY() == imageView1.getY()) {
-                                        dragAnimation(imageView1,imageView2);
-                                        swapImages(imageView1, imageView2);
-                                        gameBoard.displayNumberOfMoves();
-                                        swapTiles(gameBoard, index1x, index1y, index2x, index2y);
-
-                                    }
-                                    if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
-                                            imageView2.getX() == imageView1.getX()) {
-                                        dragAnimation(imageView1,imageView2);
-                                        swapImages(imageView1, imageView2);
-                                        gameBoard.displayNumberOfMoves();
-                                        swapTiles(gameBoard, index1x, index1y, index2x, index2y);
-                                    }
-                                }
-                            }
                         }
                         setLevelCompleted(checkForSolution(gameBoard));
                     }
