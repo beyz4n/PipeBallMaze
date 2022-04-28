@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.text.Font;
@@ -16,10 +18,12 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
 public class Main extends Application {
+    private static String MEDIA_URL;
     private boolean isClicked;
     private static int numberOfMoves;
     private Path path;
@@ -49,6 +53,10 @@ public class Main extends Application {
         Scene startScene = new Scene(startPane,950,780);
         primaryStage.setScene(startScene);
         primaryStage.setTitle("PipeBallMaze");
+        //MEDIA_URL = "file:///Users/senaektiricioglu/Desktop/Flashback.mp3";
+        Media media = new Media(new File("Flashback.mp3").toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
         primaryStage.show();
 
 
@@ -140,6 +148,10 @@ public class Main extends Application {
         vBox.alignmentProperty().set(Pos.CENTER);
 
         Scene levelCompletedScene = new Scene(vBox, 950, 780);
+        //MEDIA_URL = "file:///Users/senaektiricioglu/Desktop/Kids%20Cheering.mp3";
+        Media media = new Media(new File("Kids_Cheering.mp3").toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
         return levelCompletedScene;
         /*
         Pane pane = new Pane();
@@ -227,6 +239,10 @@ public class Main extends Application {
                                 }
                             }
                         }
+                      //  MEDIA_URL = "file:///Users/senaektiricioglu/Desktop/Bell_Transition.mp3";
+                        Media media = new Media(new File("Bell_Transition.mp3").toURI().toString());
+                        MediaPlayer mediaPlayer = new MediaPlayer(media);
+                        mediaPlayer.play();
                         setLevelCompleted(checkForSolution(gameBoard));
                     }
                 }
