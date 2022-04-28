@@ -116,6 +116,7 @@ public class Main extends Application {
 
         Label levelCompletedText = new Label("Level " + getLevelNumber() +" is completed in " + getNumberOfMoves() + " moves!");
         levelCompletedText.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        levelCompletedText.setStyle("-fx-text-fill: white");
         vBox.getChildren().add(levelCompletedText);
         button.setPrefSize(100, 50);
         vBox.getChildren().add(button);
