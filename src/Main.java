@@ -8,10 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcTo;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
+import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -125,10 +122,13 @@ public class Main extends Application {
             imageView.setOnMouseReleased(e -> {
                 ImageView imageView1 = (ImageView) e.getTarget(); // gets the first node
                 ImageView imageView2 = null;
+
                 if(e.getPickResult().getIntersectedNode() instanceof ImageView) {
                     imageView2 = (ImageView) e.getPickResult().getIntersectedNode(); // gets the last node
                 }
                 if (imageView2 != null) {
+                    imageView1.toFront();
+
                     int index1x = 0;
                     int index1y = 0;
                     int index2x = 0;
@@ -152,6 +152,7 @@ public class Main extends Application {
                                         && !(tiles[index1x][index1y] instanceof EmptyFree)) {
                                     if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
                                             imageView2.getY() == imageView1.getY()) {
+                                        dragAnimation(imageView1,imageView2);
                                         swapImages(imageView1, imageView2);
                                         gameBoard.displayNumberOfMoves();
                                         swapTiles(gameBoard, index1x, index1y, index2x, index2y);
@@ -159,6 +160,7 @@ public class Main extends Application {
                                     }
                                     if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                             imageView2.getX() == imageView1.getX()) {
+                                        dragAnimation(imageView1,imageView2);
                                         swapImages(imageView1, imageView2);
                                         gameBoard.displayNumberOfMoves();
                                         swapTiles(gameBoard, index1x, index1y, index2x, index2y);
@@ -170,6 +172,7 @@ public class Main extends Application {
                                         && !(tiles[index1x][index1y] instanceof EmptyFree)) {
                                     if (Math.abs(imageView2.getX() - imageView1.getX()) <= 180 &&
                                             imageView2.getY() == imageView1.getY()) {
+                                        dragAnimation(imageView1,imageView2);
                                         swapImages(imageView1, imageView2);
                                         gameBoard.displayNumberOfMoves();
                                         swapTiles(gameBoard, index1x, index1y, index2x, index2y);
@@ -177,6 +180,7 @@ public class Main extends Application {
                                     }
                                     if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                             imageView2.getX() == imageView1.getX()) {
+                                        dragAnimation(imageView1,imageView2);
                                         swapImages(imageView1, imageView2);
                                         gameBoard.displayNumberOfMoves();
                                         swapTiles(gameBoard, index1x, index1y, index2x, index2y);
@@ -208,6 +212,16 @@ public class Main extends Application {
         Tile temp = gameBoard.getTiles()[index1x][index1y];
         gameBoard.getTiles()[index1x][index1y] = gameBoard.getTiles()[index2x][index2y];
         gameBoard.getTiles()[index2x][index2y] = temp;
+    }
+
+    public void dragAnimation(ImageView imageView1, ImageView imageView2){
+        PathTransition pathTransition = new PathTransition();
+        Line line = new Line(imageView1.getX() + 70, imageView1.getY() + 70,
+                imageView2.getX() + 70 , imageView2.getY() + 70);
+        pathTransition.setPath(line);
+        pathTransition.setNode(imageView1);
+        pathTransition.setDuration(Duration.seconds(0.75));
+        pathTransition.play();
     }
 
     public boolean checkForSolution(GameBoard gameBoard){
