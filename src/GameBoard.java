@@ -28,14 +28,6 @@ public class GameBoard {
     private static int totalLevelNo;
     private ArrayList<File> levels;
 
-    public Button getNextButton() {
-        return nextButton;
-    }
-
-    public void setNextButton(Button nextButton) {
-        this.nextButton = nextButton;
-    }
-
     public GameBoard(){
         File folder = new File("src/Levels");
         ArrayList<File> levels = new ArrayList<>();
@@ -76,10 +68,10 @@ public class GameBoard {
         Pane pane = new Pane();
         pane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        borderPane.setRight(new EdgePane(new Label("Right"))); // delete later
+        borderPane.setRight(new EdgePane(new Label(" "))); // delete later
         pane.getChildren().addAll(getImageViews());
         borderPane.setBottom(new TwoButtons(getCheckButton(), getNextButton()));
-        borderPane.setLeft(new EdgePane(new Label("Left"))); // delete later
+        borderPane.setLeft(new EdgePane(new Label(" "))); // delete later
         borderPane.setCenter(pane);
 
         pane.getChildren().add(createBall());
@@ -288,6 +280,14 @@ public class GameBoard {
 
     public void setLevels(ArrayList<File> levels) {
         this.levels = levels;
+    }
+
+    public Button getNextButton() {
+        return nextButton;
+    }
+
+    public void setNextButton(Button nextButton) {
+        this.nextButton = nextButton;
     }
 }
 

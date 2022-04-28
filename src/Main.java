@@ -99,7 +99,7 @@ public class Main extends Application {
         PathTransition pathTransition = new PathTransition();
         pathTransition.setPath(getPath());
         pathTransition.setNode(gameBoard.getBall());
-        pathTransition.setDuration(Duration.seconds(10));
+        pathTransition.setDuration(Duration.seconds(2));
         pathTransition.play();
     }
 
