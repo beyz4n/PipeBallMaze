@@ -394,8 +394,6 @@ public class Main extends Application {
 
 
 
-
-//a
         return false;
 
 
@@ -593,16 +591,16 @@ public class Main extends Application {
                     if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Horizontal") ||
                             getPipesInOrder().get(i-1).getStatus().equals("00") ||
                             getPipesInOrder().get(i-1).getStatus().equals("01"))) {
+                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140 , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                    }
+                    else{
                         moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                         arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
                         arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                         arcTo.setLargeArcFlag(false);
                         arcTo.setSweepFlag(true);
-                    }
-                    else{
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140 , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                     }
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
