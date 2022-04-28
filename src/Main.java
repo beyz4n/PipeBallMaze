@@ -34,9 +34,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Button startButton = new Button("Start");
-        StackPane startPane = new StackPane();
+        primaryStage.setResizable(false);
+        Label gameName = new Label("Pipe Ball Maze");
+        gameName.setFont(Font.font("Arial", FontWeight.BOLD, 50));
+        gameName.setStyle("-fx-text-fill: white");
+        Button startButton = new Button("Play the Game!");
+        startButton.setPrefSize(120,50);
+        VBox startPane = new VBox(50);
+        startPane.getChildren().add(gameName);
         startPane.getChildren().add(startButton);
+        startPane.alignmentProperty().set(Pos.CENTER);
         startPane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         Scene startScene = new Scene(startPane,950,780);
@@ -71,11 +78,21 @@ public class Main extends Application {
                 primaryStage.show();
             }
             else if(getLevelNumber() == (GameBoard.getTotalLevelNo())){
-                StackPane stackPane = new StackPane();
-                stackPane.getChildren().add(new Label("The game is completed."));
-                Scene scene = new Scene(stackPane, 950, 780);
-                primaryStage.setScene(scene);
+                nextButton.setText("Finish");
+                primaryStage.setScene(levelCompletedScene(nextButton));
                 primaryStage.show();
+                nextButton.setOnMouseClicked(event1 -> {
+                    StackPane stackPane = new StackPane();
+                    stackPane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                            BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+                    Label label = new Label("The game is completed.");
+                    label.setFont(Font.font("Arial", FontWeight.BOLD, 30));;
+                    label.setStyle("-fx-text-fill: white");
+                    stackPane.getChildren().add(label);
+                    Scene scene = new Scene(stackPane, 950, 780);
+                    primaryStage.setScene(scene);
+                    primaryStage.show();});
+
             }
         });
 
