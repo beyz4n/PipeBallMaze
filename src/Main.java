@@ -95,6 +95,7 @@ public class Main extends Application {
         setWholePath(gameBoard);
         setPath(getPath());
         gameBoard.getPane().getChildren().add(getPath());
+        gameBoard.getBall().toFront();
         PathTransition pathTransition = new PathTransition();
         pathTransition.setPath(getPath());
         pathTransition.setNode(gameBoard.getBall());
@@ -476,17 +477,20 @@ public class Main extends Application {
 
             if (getPipesInOrder().get(i) instanceof LinearPipe) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
-
+                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i-1));
 
                 if (getPipesInOrder().get(i).getStatus().equals("Vertical")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
-
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                    if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
+                        reverseDirection(moveTo, lineTo);
                     path.getElements().addAll(moveTo, lineTo);
                 }
                 if (getPipesInOrder().get(i).getStatus().equals("Horizontal")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                    if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
+                        reverseDirection(moveTo, lineTo);
                     path.getElements().addAll(moveTo, lineTo);
                 }
                 path.setStroke(Color.WHITE);
@@ -496,16 +500,20 @@ public class Main extends Application {
 
             if (getPipesInOrder().get(i) instanceof NormalPipeStatic) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
+                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i-1));
 
                 if (getPipesInOrder().get(i).getStatus().equals("Vertical")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
-
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
+                    if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
+                        reverseDirection(moveTo, lineTo);
                     path.getElements().addAll(moveTo, lineTo);
                 }
                 if (getPipesInOrder().get(i).getStatus().equals("Horizontal")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY()+70);
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                    if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
+                        reverseDirection(moveTo, lineTo);
                     path.getElements().addAll(moveTo, lineTo);
                 }
                 path.setStroke(Color.WHITE);
@@ -515,94 +523,55 @@ public class Main extends Application {
 
             if (getPipesInOrder().get(i) instanceof CurvedPipeMovable) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
+                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i-1));
 
-                if (getPipesInOrder().get(i).getStatus().equals("00")){ // denendi onaylandı (iki yönlü de çalışıyor)
-                    MoveTo moveTo;
+                if (getPipesInOrder().get(i).getStatus().equals("00")){
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Horizontal") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("01") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("11"))){
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
-                    }
-                    else {
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX());
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                        arcTo.setLargeArcFlag(false);
-                        arcTo.setSweepFlag(true);
-                    }
+                    arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                    arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
+                    if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() > 0)
+                        reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
-                if (getPipesInOrder().get(i).getStatus().equals("01")){ // denendi onaylandı (iki yönlü de çalışıyor)
-                    MoveTo moveTo;
+                if (getPipesInOrder().get(i).getStatus().equals("01")){
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Vertical") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("10") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("11"))) {
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                    }
-                    else{
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
-                        arcTo.setLargeArcFlag(false);
-                        arcTo.setSweepFlag(true);
-                    }
+                    arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
+                    arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
+                    if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
+                        reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
 
-                if (getPipesInOrder().get(i).getStatus().equals("10")){ // denendi onaylandı (iki yönlü de çalışıyor)
-                    MoveTo moveTo;
+                if (getPipesInOrder().get(i).getStatus().equals("10")){
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Horizontal") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("01") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("11"))) {
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
-                        arcTo.setLargeArcFlag(false);
-                        arcTo.setSweepFlag(true);
-                    }
-                    else{
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX());
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                    }
+                    arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX());
+                    arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
+                    if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() > 0)
+                        reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
 
-                if (getPipesInOrder().get(i).getStatus().equals("11")){ // onaylandı (iki yönlü de çalışıyor olmalı)
-                    MoveTo moveTo;
+                if (getPipesInOrder().get(i).getStatus().equals("11")){
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140 , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Horizontal") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("00") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("01"))) {
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140 , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
-                    }
-                    else{
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                        arcTo.setLargeArcFlag(false);
-                        arcTo.setSweepFlag(true);
-                    }
+                    arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                    arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
+                    if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
+                        reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
                 path.setStroke(Color.WHITE);
@@ -611,93 +580,54 @@ public class Main extends Application {
 
             if (getPipesInOrder().get(i) instanceof CurvedPipeStatic) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
+                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i-1));
 
-                if (getPipesInOrder().get(i).getStatus().equals("00")){ //  onaylandı (iki yönlü de çalışıyor olmalı)
-                    MoveTo moveTo;
+                if (getPipesInOrder().get(i).getStatus().equals("00")){
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Horizontal") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("01") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("11"))){
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
-                    }
-                    else {
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX());
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                        arcTo.setLargeArcFlag(false);
-                        arcTo.setSweepFlag(true);
-                    }
+                    arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                    arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
+                    if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() > 0)
+                        reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
-                if (getPipesInOrder().get(i).getStatus().equals("01")){ // onaylandı (iki yönlü de çalışıyor olmalı)
-                    MoveTo moveTo;
+                if (getPipesInOrder().get(i).getStatus().equals("01")){
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Vertical") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("10") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("11"))) {
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                    }
-                    else{
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
-                        arcTo.setLargeArcFlag(false);
-                        arcTo.setSweepFlag(true);
-                    }
+                    arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
+                    arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
+                    if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
+                        reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
-                if (getPipesInOrder().get(i).getStatus().equals("10")){ // onaylandı (iki yönlü de çalışıyor olmalı)
-                    MoveTo moveTo;
+                if (getPipesInOrder().get(i).getStatus().equals("10")){
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Horizontal") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("01") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("11"))) {
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
-                        arcTo.setLargeArcFlag(false);
-                        arcTo.setSweepFlag(true);
-                    }
-                    else{
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX());
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                    }
+                    arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX());
+                    arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
+                    if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() > 0)
+                        reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
 
-                if (getPipesInOrder().get(i).getStatus().equals("11")){ // onaylandı (iki yönlü de çalışıyor olmalı)
-                    MoveTo moveTo;
+                if (getPipesInOrder().get(i).getStatus().equals("11")){
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140 , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     ArcTo arcTo = new ArcTo();
-                    if( (i != 0) && (getPipesInOrder().get(i-1).getStatus().equals("Horizontal") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("00") ||
-                            getPipesInOrder().get(i-1).getStatus().equals("01"))) {
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY() + 140);
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                        arcTo.setLargeArcFlag(false);
-                        arcTo.setSweepFlag(true);
-                    }
-                    else{
-                        moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140 , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                        arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
-                        arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
-                    }
+                    arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
+                    arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
+                    if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
+                        reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
                 path.setStroke(Color.WHITE);
@@ -707,6 +637,26 @@ public class Main extends Application {
         }
 
         setPath(path);
+    }
+
+    public void reverseDirection(MoveTo moveTo, LineTo lineTo){
+        double tempX = moveTo.getX();
+        double tempY = moveTo.getY();
+        moveTo.setX(lineTo.getX());
+        moveTo.setY(lineTo.getY());
+        lineTo.setX(tempX);
+        lineTo.setY(tempY);
+    }
+    // overloading reverseDirection method
+    public void reverseDirection(MoveTo moveTo, ArcTo arcTo){
+        double tempX = moveTo.getX();
+        double tempY = moveTo.getY();
+        moveTo.setX(arcTo.getX());
+        moveTo.setY(arcTo.getY());
+        arcTo.setX(tempX);
+        arcTo.setY(tempY);
+        arcTo.setLargeArcFlag(false);
+        arcTo.setSweepFlag(true);
     }
 
     public int indexFinder(GameBoard gameBoard, Tile tile){
