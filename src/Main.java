@@ -37,7 +37,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Media media = new Media(new File("The_Town_of_Luncheon.mp3").toURI().toString());
+        Media media = new Media(new File("The_Town_of_Luncheon.wav").toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
         primaryStage.setResizable(false);
@@ -215,7 +215,7 @@ public class Main extends Application {
                                     }
                                 }
                         }
-                        Media media = new Media(new File("Tile_Swap.mp3").toURI().toString());
+                        Media media = new Media(new File("swap_tiles.mp3").toURI().toString());
                         MediaPlayer mediaPlayer = new MediaPlayer(media);
                         mediaPlayer.play();
                         setLevelCompleted(checkForSolution(gameBoard));
