@@ -40,6 +40,7 @@ public class Main extends Application {
         Media media = new Media(new File("The_Town_of_Luncheon.wav").toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
+        mediaPlayer.muteProperty().set(false);
         primaryStage.setResizable(false);
         Label gameName = new Label("Pipe Ball Maze");
         gameName.setFont(Font.font("Arial", FontWeight.BOLD, 50));
