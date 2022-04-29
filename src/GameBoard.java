@@ -293,20 +293,9 @@ public class GameBoard {
 
 
 class EdgePane extends StackPane {
-    /*
-        public EdgePane(Button button, Button button2){
-
-            getChildren().add(button);
-            getChildren().add(button2);
-            setPadding(new Insets(25.5, 57.5, 50.5, 45.5));
-
-            setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
-                    BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        }
-    */
     public EdgePane(Label label) {
         getChildren().add(label);
-        setPadding(new Insets(10, 57.5, 75, 105.5));
+        label.setPadding(new Insets(30, 115.5, 50, 70.5));
         setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
     }
@@ -318,7 +307,8 @@ class TwoButtons extends HBox {
     public TwoButtons(Button button, Button button2){
         getChildren().add(button);
         getChildren().add(button2);
-        setPadding(new Insets(25.5, 57.5, 50.5, 45.5));
+        setPadding(new Insets(0, 0, 55, 175));
+        //button2.setPadding(new Insets(20, 57.5, 20, 105.5));
 
         setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
