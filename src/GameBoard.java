@@ -127,30 +127,30 @@ public class GameBoard {
 
             int queue = Integer.parseInt(words.get(k)) - 1;
 
-            if (words.get(k + 1).equals("Starter")) {
+            if (words.get(k + 1).equalsIgnoreCase("Starter")) {
                 tiles[queue / 4][queue % 4] = new StartPipe(words.get(k + 2));
             }
 
-            if (words.get(k + 1).equals("Empty")) {
-                if (words.get(k + 2).equals("Free")) {
+            if (words.get(k + 1).equalsIgnoreCase("Empty")) {
+                if (words.get(k + 2).equalsIgnoreCase("Free")) {
                     tiles[queue / 4][queue % 4] = new EmptyFree();
                 }
 
-                if (words.get(k + 2).equals("none")) {
+                if (words.get(k + 2).equalsIgnoreCase("none")) {
                     tiles[queue / 4][queue % 4] = new Empty();
                 }
             }
 
-            if (words.get(k + 1).equals("Pipe")) {
-                if (words.get(k + 2).equals("Vertical") || words.get(k + 2).equals("Horizontal")) {
+            if (words.get(k + 1).equalsIgnoreCase("Pipe")) {
+                if (words.get(k + 2).equalsIgnoreCase("Vertical") || words.get(k + 2).equalsIgnoreCase("Horizontal")) {
                     tiles[queue / 4][queue % 4] = new LinearPipe(words.get(k + 2));
                 } else if (words.get(k + 2).equals("00") || words.get(k + 2).equals("01") || words.get(k + 2).equals("10") || words.get(k + 2).equals("11")) {
                     tiles[queue / 4][queue % 4] = new CurvedPipeMovable(words.get(k + 2));
                 }
             }
 
-            if (words.get(k + 1).equals("PipeStatic")) {
-                if (words.get(k + 2).equals("Vertical") || words.get(k + 2).equals("Horizontal")) {
+            if (words.get(k + 1).equalsIgnoreCase("PipeStatic")) {
+                if (words.get(k + 2).equalsIgnoreCase("Vertical") || words.get(k + 2).equalsIgnoreCase("Horizontal")) {
                     tiles[queue / 4][queue % 4] = new NormalPipeStatic(words.get(k + 2));
                 } else if (words.get(k + 2).equals("00") || words.get(k + 2).equals("01") || words.get(k + 2).equals("10") || words.get(k + 2).equals("11")) {
                     tiles[queue / 4][queue % 4] = new CurvedPipeStatic(words.get(k + 2));
@@ -158,7 +158,7 @@ public class GameBoard {
 
             }
 
-            if (words.get(k + 1).equals("End")) {
+            if (words.get(k + 1).equalsIgnoreCase("End")) {
                 tiles[queue / 4][queue % 4] = new EndPipe(words.get(k + 2));
             }
         }
@@ -184,13 +184,13 @@ public class GameBoard {
                 imageViewIndex = i;
             }
         }
-        if (tiles[indexOfStarterX][indexOfStarterY].getStatus().equals("Vertical")) {
+        if (tiles[indexOfStarterX][indexOfStarterY].getStatus().equalsIgnoreCase("Vertical")) {
             ball.setFitWidth(55);
             ball.setFitHeight(55);
             ball.setX(getImageViews()[imageViewIndex].getX()+ 42.5);
             ball.setY(getImageViews()[imageViewIndex].getY()  + 30);
         }
-        if (tiles[indexOfStarterX][indexOfStarterY].getStatus().equals("Horizontal")) {
+        if (tiles[indexOfStarterX][indexOfStarterY].getStatus().equalsIgnoreCase("Horizontal")) {
             ball.setFitWidth(55);
             ball.setFitHeight(55);
             ball.setX(getImageViews()[imageViewIndex].getX()+ 52.5);

@@ -215,6 +215,9 @@ public class Main extends Application {
                                     }
                                 }
                         }
+                        Media media = new Media(new File("Tile_Swap.mp3").toURI().toString());
+                        MediaPlayer mediaPlayer = new MediaPlayer(media);
+                        mediaPlayer.play();
                         setLevelCompleted(checkForSolution(gameBoard));
                     }
                 }
@@ -275,7 +278,7 @@ public class Main extends Application {
         int columnIndex = 0;
         String previousStatus = "";
         pipesInOrder.add(gameBoard.getTiles()[rowIndexOfStart][columnIndexOfStart]);
-        if (gameBoard.getTiles()[rowIndexOfStart][columnIndexOfStart].getStatus().equals("Vertical")) {
+        if (gameBoard.getTiles()[rowIndexOfStart][columnIndexOfStart].getStatus().equalsIgnoreCase("Vertical")) {
             for (int i = rowIndexOfStart + 1; i <= 3; i++) {
                 if ((gameBoard.getTiles()[i][columnIndexOfStart] instanceof LinearPipe) ||
                         (gameBoard.getTiles()[i][columnIndexOfStart] instanceof NormalPipeStatic)) {
@@ -298,7 +301,7 @@ public class Main extends Application {
                     break;
             }
         }
-            if (gameBoard.getTiles()[rowIndexOfStart][columnIndexOfStart].getStatus().equals("Horizontal")) {
+            if (gameBoard.getTiles()[rowIndexOfStart][columnIndexOfStart].getStatus().equalsIgnoreCase("Horizontal")) {
                 for (int i = columnIndexOfStart - 1; i >= 0; i--) {
                     if ((gameBoard.getTiles()[rowIndexOfStart][i] instanceof LinearPipe) ||
                             (gameBoard.getTiles()[rowIndexOfStart][i] instanceof NormalPipeStatic)) {
@@ -441,19 +444,19 @@ public class Main extends Application {
 
     public String directionFinder(String statusCurve, String statusPrevious ){
 
-        if(statusPrevious.equals("Horizontal") && statusCurve.equals("00"))
+        if(statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("00"))
             return "up";
-        else if(statusPrevious.equals("Horizontal") && statusCurve.equals("01"))
+        else if(statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("01"))
             return "up";
-        else if(statusPrevious.equals("Horizontal") && statusCurve.equals("10"))
+        else if(statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("10"))
             return "down";
-        else if(statusPrevious.equals("Horizontal") && statusCurve.equals("11"))
+        else if(statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("11"))
             return "down";
-        else if(statusPrevious.equals("Vertical") && statusCurve.equals("00"))
+        else if(statusPrevious.equalsIgnoreCase("Vertical") && statusCurve.equals("00"))
             return "left";
-        else if(statusPrevious.equals("Vertical") && statusCurve.equals("01"))
+        else if(statusPrevious.equalsIgnoreCase("Vertical") && statusCurve.equals("01"))
             return "right";
-        else if(statusPrevious.equals("Vertical") && statusCurve.equals("10"))
+        else if(statusPrevious.equalsIgnoreCase("Vertical") && statusCurve.equals("10"))
             return "left";
         else
             return "right";
@@ -467,12 +470,12 @@ public class Main extends Application {
             if (getPipesInOrder().get(i) instanceof StartPipe) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
 
-                if (getPipesInOrder().get(i).getStatus().equals("Vertical")) {
+                if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Vertical")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 50.5);
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 141.5);
                     path.getElements().addAll(moveTo, lineTo);
                 }
-                if (getPipesInOrder().get(i).getStatus().equals("Horizontal")) {
+                if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Horizontal")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 90, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     path.getElements().addAll(moveTo, lineTo);
@@ -485,12 +488,12 @@ public class Main extends Application {
             if (getPipesInOrder().get(i) instanceof EndPipe) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
 
-                if (getPipesInOrder().get(i).getStatus().equals("Vertical")) {
+                if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Vertical")) {
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 50.5);
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 141.5);
                     path.getElements().addAll(moveTo, lineTo);
                 }
-                if (getPipesInOrder().get(i).getStatus().equals("Horizontal")) {
+                if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Horizontal")) {
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 90, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     path.getElements().addAll(moveTo, lineTo);
@@ -505,14 +508,14 @@ public class Main extends Application {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
                 int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i-1));
 
-                if (getPipesInOrder().get(i).getStatus().equals("Vertical")) {
+                if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Vertical")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                     if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
                         reverseDirection(moveTo, lineTo);
                     path.getElements().addAll(moveTo, lineTo);
                 }
-                if (getPipesInOrder().get(i).getStatus().equals("Horizontal")) {
+                if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Horizontal")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
@@ -528,14 +531,14 @@ public class Main extends Application {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
                 int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i-1));
 
-                if (getPipesInOrder().get(i).getStatus().equals("Vertical")) {
+                if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Vertical")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                     if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
                         reverseDirection(moveTo, lineTo);
                     path.getElements().addAll(moveTo, lineTo);
                 }
-                if (getPipesInOrder().get(i).getStatus().equals("Horizontal")) {
+                if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Horizontal")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY()+70);
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
