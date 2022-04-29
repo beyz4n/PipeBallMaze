@@ -37,7 +37,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        Media media = new Media(new File("gas.wav").toURI().toString());
+        Media media = new Media(new File("The_Town_of_Luncheon.mp3").toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
         primaryStage.setResizable(false);
