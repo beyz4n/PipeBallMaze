@@ -183,7 +183,6 @@ public class Main extends Application {
         pathTransition.play();
         pathTransition.setOnFinished(event -> {
             gameBoard.getNextButton().setDisable(false);
-            gameBoard.getCheckButton().setDisable(true);
         });
 
     }
