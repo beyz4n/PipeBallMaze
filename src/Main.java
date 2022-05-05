@@ -77,7 +77,7 @@ public class Main extends Application implements Runnable  {
 
         Media media = new Media(new File("src/Assets/The_Town_of_Luncheon.wav").toURI().toString());
         AudioClip mediaPlayer = new AudioClip(media.getSource());
-        mediaPlayer.setVolume(0);
+        mediaPlayer.setVolume(20);
         mediaPlayer.play();
 
         primaryStage.setResizable(false);
@@ -252,9 +252,7 @@ public class Main extends Application implements Runnable  {
                                         swapImages(imageView1, imageView2);
                                         gameBoard.displayNumberOfMoves();
                                         swapTiles(gameBoard, index1x, index1y, index2x, index2y);
-                                        Media media = new Media(new File("src/Assets/swap_tiles.mp3").toURI().toString());
-                                        MediaPlayer mediaPlayer = new MediaPlayer(media);
-                                        mediaPlayer.play();
+
                                         setLevelCompleted(checkForSolution(gameBoard));
                                     }
                                     if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
@@ -264,9 +262,7 @@ public class Main extends Application implements Runnable  {
                                         swapImages(imageView1, imageView2);
                                         gameBoard.displayNumberOfMoves();
                                         swapTiles(gameBoard, index1x, index1y, index2x, index2y);
-                                        Media media = new Media(new File("src/Assets/swap_tiles.mp3").toURI().toString());
-                                        MediaPlayer mediaPlayer = new MediaPlayer(media);
-                                        mediaPlayer.play();
+
                                         setLevelCompleted(checkForSolution(gameBoard));
                                     }
                                 }
@@ -308,6 +304,10 @@ public class Main extends Application implements Runnable  {
         pathTransition.setNode(imageView1);
         pathTransition.setDuration(Duration.seconds(0.50));
         pathTransition.play();
+        Media media = new Media(new File("src/Assets/swap_tiles.mp3").toURI().toString());
+        AudioClip mediaPlayer = new AudioClip(media.getSource());
+        mediaPlayer.setVolume(45);
+        mediaPlayer.play();
         pathTransition.setOnFinished(event -> {
             imageView1.toBack();
         });
