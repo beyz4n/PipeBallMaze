@@ -1,5 +1,4 @@
 package Tiles;
-
 import javafx.scene.image.Image;
 
 public class Empty extends Tile implements Movable {
@@ -9,7 +8,7 @@ public class Empty extends Tile implements Movable {
         return true;
     }
     public Empty(){
-        setImage(new Image("Empty.png"));
+        setImage(new Image("Assets/Empty.png"));
         setStatus("Empty");
 }
 

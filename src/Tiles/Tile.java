@@ -4,11 +4,8 @@ import javafx.scene.image.Image;
 
 
 public abstract class Tile {
-   // private String name;
-   // private String location;
    private Image image;
-
-  private String status;
+   private String status;
 
    public String getStatus() {
       return status;

@@ -8,7 +8,7 @@ public class EmptyFree extends Tile implements Movable {
         return true;
     }
     public EmptyFree(){
-        setImage(new Image("EmptyFree.png"));
+        setImage(new Image("Assets/EmptyFree.png"));
         setStatus("EmptyFree");
     }
 }

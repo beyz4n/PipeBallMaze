@@ -15,20 +15,21 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class GameBoard {
+
+    public static int numberOfMoves;
     private BorderPane borderPane;
     private Tile[][] tiles;
     private ImageView[] imageViews;
     private ImageView ball;
     private Pane pane;
-    private boolean isLevelCompleted;
-    //private Stage primaryStage;
     private Scene boardScene;
     private Button checkButton;
     private Button nextButton;
     private static int totalLevelNo;
     private ArrayList<File> levels;
 
-    public GameBoard(){
+    public GameBoard() {
+
         File folder = new File("src/Levels");
         ArrayList<File> levels = new ArrayList<>();
         for (int l = 0; l < folder.list().length; l++) {
@@ -36,29 +37,34 @@ public class GameBoard {
             File file = new File("src/Levels/level" + levelNo + ".txt");
             levels.add(file);
         }
+
         Button checkButton = new Button("Check");
         checkButton.setDisable(true);
         setCheckButton(checkButton);
+
         Button nextButton = new Button("Next");
         nextButton.setDisable(true);
         setNextButton(nextButton);
+
         setLevels(levels);
         setTotalLevelNo(levels.size());
-        setBoardScene(makeScene(levels, Main.getLevelNumber()));
+        setBoardScene(makeScene());
     }
 
-    public void displayNumberOfMoves(){
-        Label label = new Label("Number of Moves " + Main.getNumberOfMoves());
+    protected void displayNumberOfMoves(){
+
+        Label label = new Label("Number of Moves " + getNumberOfMoves());
         label.setStyle("-fx-text-fill: white");
         label.setFont(Font.font("Arial", FontWeight.BOLD, 30));
         EdgePane edgePane = new EdgePane(label);
-        edgePane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+        edgePane.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         getBorderPane().setTop(edgePane);
+
     }
 
 
-    public Scene makeScene(ArrayList<File> levels,int levelNo){
+    protected Scene makeScene(){
 
         createTiles();
         createImageViews();
@@ -66,11 +72,11 @@ public class GameBoard {
         //Creating the pane
         BorderPane borderPane = new BorderPane();
         Pane pane = new Pane();
-        pane.setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+        pane.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         borderPane.setRight(new EdgePane(new Label(" "))); // delete later
         pane.getChildren().addAll(getImageViews());
-        borderPane.setBottom(new TwoButtons(getCheckButton(), getNextButton()));
+        borderPane.setBottom(new GameControlsPane(getCheckButton(), getNextButton()));
         borderPane.setLeft(new EdgePane(new Label(" "))); // delete later
         borderPane.setCenter(pane);
 
@@ -84,7 +90,8 @@ public class GameBoard {
     }
 
 
-    public ImageView[] createImageViews(){
+    private ImageView[] createImageViews(){
+
         ArrayList<ImageView> imageViewsArrayList = new ArrayList<>();
         for (int i = 0; i < 16; i++) {
             final double sizeOfTile = 140;
@@ -104,11 +111,13 @@ public class GameBoard {
         return imageViews;
     }
 
-    public Tile[][] createTiles(){
+    private Tile[][] createTiles(){
+
         Scanner input;
         try {
             input = new Scanner(getLevels().get(Main.getLevelNumber()));
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -162,12 +171,14 @@ public class GameBoard {
                 tiles[queue / 4][queue % 4] = new EndPipe(words.get(k + 2));
             }
         }
+
         setTiles(tiles);
         return tiles;
     }
 
-    public ImageView createBall(){
-        ImageView ball = new ImageView(new Image("ball.png"));
+    private ImageView createBall(){
+
+        ImageView ball = new ImageView(new Image("Assets/ball.png"));
         int indexOfStarterX = 0;
         int indexOfStarterY = 0;
         for (int i = 0; i < 4; i++){
@@ -200,6 +211,14 @@ public class GameBoard {
         return ball;
     }
 
+    public static int getNumberOfMoves() {
+        return numberOfMoves;
+    }
+
+    public static void setNumberOfMoves(int numberOfMoves) {
+        GameBoard.numberOfMoves = numberOfMoves;
+    }
+
     public BorderPane getBorderPane() {
         return borderPane;
     }
@@ -207,7 +226,6 @@ public class GameBoard {
     public void setBorderPane(BorderPane borderPane) {
         this.borderPane = borderPane;
     }
-
 
     public Tile[][] getTiles() {
         return tiles;
@@ -224,6 +242,7 @@ public class GameBoard {
     public void setImageViews(ImageView[] imageViews) {
         this.imageViews = imageViews;
     }
+
     public ImageView getBall() {
         return ball;
     }
@@ -231,15 +250,6 @@ public class GameBoard {
     public void setBall(ImageView ball) {
         this.ball = ball;
     }
-
-    public boolean isLevelCompleted() {
-        return isLevelCompleted;
-    }
-
-    public void setLevelCompleted(boolean levelCompleted) {
-        isLevelCompleted = levelCompleted;
-    }
-
 
     public Pane getPane() {
         return pane;
@@ -256,7 +266,6 @@ public class GameBoard {
     public void setBoardScene(Scene boardScene) {
         this.boardScene = boardScene;
     }
-
 
     public Button getCheckButton() {
         return checkButton;
@@ -293,24 +302,23 @@ public class GameBoard {
 
 
 class EdgePane extends StackPane {
+
     public EdgePane(Label label) {
         getChildren().add(label);
         label.setPadding(new Insets(30, 115.5, 50, 70.5));
-        setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+        setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
     }
 
 }
 
-class TwoButtons extends HBox {
+class GameControlsPane extends HBox {
 
-    public TwoButtons(Button button, Button button2){
+    public GameControlsPane(Button button, Button button2){
         getChildren().add(button);
         getChildren().add(button2);
         setPadding(new Insets(0, 0, 55, 175));
-        //button2.setPadding(new Insets(20, 57.5, 20, 105.5));
-
-        setBackground(new Background(new BackgroundImage(new Image("Background.jpg"), BackgroundRepeat.NO_REPEAT,
+        setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
     }
 
