@@ -72,7 +72,7 @@ public class GameBoard {
         //Creating the pane
         BorderPane borderPane = new BorderPane();
         Pane pane = new Pane();
-        pane.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
+        borderPane.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         borderPane.setRight(new EdgePane(new Label(" "))); // delete later
         pane.getChildren().addAll(getImageViews());
@@ -306,8 +306,7 @@ class EdgePane extends StackPane {
     public EdgePane(Label label) {
         getChildren().add(label);
         label.setPadding(new Insets(30, 115.5, 50, 70.5));
-        setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+
     }
 
 }
@@ -318,8 +317,7 @@ class GameControlsPane extends HBox {
         getChildren().add(button);
         getChildren().add(button2);
         setPadding(new Insets(0, 0, 55, 175));
-        setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+
     }
 
 }
