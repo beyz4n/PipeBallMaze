@@ -20,7 +20,7 @@ import javafx.util.Duration;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Main extends Application implements Runnable  {
+public class Main extends Application {
 
     private Path path;
     private boolean levelCompleted;
@@ -66,14 +66,14 @@ public class Main extends Application implements Runnable  {
 
     }
 
-    private void clickedOnClose(Button closeButton, Stage primaryStage){
+    private void clickedOnClose(Button closeButton, Stage primaryStage) {
         closeButton.setOnMouseClicked(event -> {
             primaryStage.close();
         });
 
     }
 
-    private void startPage(Stage primaryStage, Button startButton){
+    private void startPage(Stage primaryStage, Button startButton) {
 
         Media media = new Media(new File("src/Assets/The_Town_of_Luncheon.wav").toURI().toString());
         AudioClip mediaPlayer = new AudioClip(media.getSource());
@@ -85,19 +85,20 @@ public class Main extends Application implements Runnable  {
         Label gameName = new Label("Pipe Ball Maze");
         gameName.setFont(Font.font("Arial", FontWeight.BOLD, 50));
         gameName.setStyle("-fx-text-fill: white");
-        startButton.setPrefSize(120,50);
+        startButton.setPrefSize(120, 50);
         VBox startPane = new VBox(50);
         startPane.getChildren().add(gameName);
         startPane.getChildren().add(startButton);
         startPane.alignmentProperty().set(Pos.CENTER);
         startPane.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        Scene startScene = new Scene(startPane,950,780);
+        Scene startScene = new Scene(startPane, 950, 780);
         primaryStage.setScene(startScene);
         primaryStage.setTitle("PipeBallMaze");
         primaryStage.show();
     }
-    private void clickedOnStart(Button startButton, Stage primaryStage, GameBoard gameBoard){
+
+    private void clickedOnStart(Button startButton, Stage primaryStage, GameBoard gameBoard) {
 
         startButton.setOnMouseClicked(event -> {
             GameBoard.numberOfMoves = 0;
@@ -111,7 +112,7 @@ public class Main extends Application implements Runnable  {
 
     }
 
-    private void clickedOnCheck(GameBoard gameBoard){
+    private void clickedOnCheck(GameBoard gameBoard) {
 
         gameBoard.getCheckButton().setOnMouseClicked(event -> {
             animate(gameBoard);
@@ -119,14 +120,13 @@ public class Main extends Application implements Runnable  {
 
     }
 
-    private void clickedOnNext(GameBoard gameBoard, Stage primaryStage, Button nextLevelButton, Button closeButton){
+    private void clickedOnNext(GameBoard gameBoard, Stage primaryStage, Button nextLevelButton, Button closeButton) {
 
         gameBoard.getNextButton().setOnMouseClicked(event -> {
-            if(getLevelNumber() < (GameBoard.getTotalLevelNo())) {
+            if (getLevelNumber() < (GameBoard.getTotalLevelNo())) {
                 primaryStage.setScene(levelCompletedScene(nextLevelButton));
                 primaryStage.show();
-            }
-            else if(getLevelNumber() == (GameBoard.getTotalLevelNo())){
+            } else if (getLevelNumber() == (GameBoard.getTotalLevelNo())) {
                 nextLevelButton.setText("Finish");
                 primaryStage.setScene(levelCompletedScene(nextLevelButton));
                 primaryStage.show();
@@ -139,7 +139,7 @@ public class Main extends Application implements Runnable  {
                     label.setStyle("-fx-text-fill: white");
                     vBox.getChildren().add(label);
                     vBox.getChildren().add(closeButton);
-                    closeButton.setPrefSize(120,50);
+                    closeButton.setPrefSize(120, 50);
                     vBox.alignmentProperty().set(Pos.CENTER);
                     Scene scene = new Scene(vBox, 950, 780);
                     primaryStage.setScene(scene);
@@ -151,7 +151,7 @@ public class Main extends Application implements Runnable  {
 
     }
 
-    private void clickedOnNextLevel(GameBoard gameBoard, Stage primaryStage, Button nextLevelButton){
+    private void clickedOnNextLevel(GameBoard gameBoard, Stage primaryStage, Button nextLevelButton) {
 
         nextLevelButton.setOnMouseClicked(event -> {
             gameBoard.getCheckButton().setDisable(true);
@@ -169,7 +169,7 @@ public class Main extends Application implements Runnable  {
 
     }
 
-    private void animate(GameBoard gameBoard){
+    private void animate(GameBoard gameBoard) {
 
         setWholePath(gameBoard);
         setPath(getPath());
@@ -188,14 +188,14 @@ public class Main extends Application implements Runnable  {
 
     }
 
-    private Scene levelCompletedScene(Button button){
+    private Scene levelCompletedScene(Button button) {
 
         VBox vBox = new VBox(20);
 
         vBox.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
 
-        Label levelCompletedText = new Label("Level " + getLevelNumber() +" is completed in " + GameBoard.numberOfMoves + " moves!");
+        Label levelCompletedText = new Label("Level " + getLevelNumber() + " is completed in " + GameBoard.numberOfMoves + " moves!");
         levelCompletedText.setFont(Font.font("Arial", FontWeight.BOLD, 30));
         levelCompletedText.setStyle("-fx-text-fill: white");
         vBox.getChildren().add(levelCompletedText);
@@ -275,7 +275,7 @@ public class Main extends Application implements Runnable  {
 
     }
 
-    private void swapImages(ImageView imageView1, ImageView imageView2){
+    private void swapImages(ImageView imageView1, ImageView imageView2) {
 
         ImageView temp = new ImageView(imageView1.getImage());
         temp.setX(imageView1.getX());
@@ -288,18 +288,18 @@ public class Main extends Application implements Runnable  {
         GameBoard.numberOfMoves++;
     }
 
-    private void swapTiles(GameBoard gameBoard, int index1x, int index1y, int index2x, int index2y){
+    private void swapTiles(GameBoard gameBoard, int index1x, int index1y, int index2x, int index2y) {
 
         Tile temp = gameBoard.getTiles()[index1x][index1y];
         gameBoard.getTiles()[index1x][index1y] = gameBoard.getTiles()[index2x][index2y];
         gameBoard.getTiles()[index2x][index2y] = temp;
     }
 
-    private void dragAnimation(ImageView imageView1, ImageView imageView2){
+    private void dragAnimation(ImageView imageView1, ImageView imageView2) {
 
         PathTransition pathTransition = new PathTransition();
         Line line = new Line(imageView1.getX() + 70, imageView1.getY() + 70,
-                imageView2.getX() + 70 , imageView2.getY() + 70);
+                imageView2.getX() + 70, imageView2.getY() + 70);
         pathTransition.setPath(line);
         pathTransition.setNode(imageView1);
         pathTransition.setDuration(Duration.seconds(0.50));
@@ -314,7 +314,7 @@ public class Main extends Application implements Runnable  {
 
     }
 
-    private boolean checkForSolution(GameBoard gameBoard){
+    private boolean checkForSolution(GameBoard gameBoard) {
 
         pipesInOrder = new ArrayList<>();
         int rowIndexOfStart = 0;
@@ -470,30 +470,30 @@ public class Main extends Application implements Runnable  {
         return false;
     }
 
-    private String directionFinder(String statusCurve, String statusPrevious ){
+    private String directionFinder(String statusCurve, String statusPrevious) {
 
-        if(statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("00"))
+        if (statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("00"))
             return "up";
-        else if(statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("01"))
+        else if (statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("01"))
             return "up";
-        else if(statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("10"))
+        else if (statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("10"))
             return "down";
-        else if(statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("11"))
+        else if (statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("11"))
             return "down";
-        else if(statusPrevious.equalsIgnoreCase("Vertical") && statusCurve.equals("00"))
+        else if (statusPrevious.equalsIgnoreCase("Vertical") && statusCurve.equals("00"))
             return "left";
-        else if(statusPrevious.equalsIgnoreCase("Vertical") && statusCurve.equals("01"))
+        else if (statusPrevious.equalsIgnoreCase("Vertical") && statusCurve.equals("01"))
             return "right";
-        else if(statusPrevious.equalsIgnoreCase("Vertical") && statusCurve.equals("10"))
+        else if (statusPrevious.equalsIgnoreCase("Vertical") && statusCurve.equals("10"))
             return "left";
         else
             return "right";
     }
 
-    private void setWholePath(GameBoard gameBoard){
+    private void setWholePath(GameBoard gameBoard) {
 
         Path path = new Path();
-        for (int i = 0; i < getPipesInOrder().size(); i++){
+        for (int i = 0; i < getPipesInOrder().size(); i++) {
 
             if (getPipesInOrder().get(i) instanceof StartPipe) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
@@ -530,46 +530,43 @@ public class Main extends Application implements Runnable  {
             }
 
 
-
-
             if (getPipesInOrder().get(i) instanceof LinearPipe) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
-                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i-1));
+                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i - 1));
 
                 if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Vertical")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
-                    if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
+                    if (gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
                         reverseDirection(moveTo, lineTo);
                     path.getElements().addAll(moveTo, lineTo);
                 }
                 if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Horizontal")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                    if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
+                    if (gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
                         reverseDirection(moveTo, lineTo);
                     path.getElements().addAll(moveTo, lineTo);
                 }
                 path.setStroke(Color.WHITE);
             }
-
 
 
             if (getPipesInOrder().get(i) instanceof NormalPipeStatic) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
-                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i-1));
+                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i - 1));
 
                 if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Vertical")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
-                    if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
+                    if (gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
                         reverseDirection(moveTo, lineTo);
                     path.getElements().addAll(moveTo, lineTo);
                 }
                 if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Horizontal")) {
-                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY()+70);
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
-                    if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
+                    if (gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
                         reverseDirection(moveTo, lineTo);
                     path.getElements().addAll(moveTo, lineTo);
                 }
@@ -577,57 +574,56 @@ public class Main extends Application implements Runnable  {
             }
 
 
-
             if (getPipesInOrder().get(i) instanceof CurvedPipeMovable) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
-                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i-1));
+                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i - 1));
 
-                if (getPipesInOrder().get(i).getStatus().equals("00")){
-                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
+                if (getPipesInOrder().get(i).getStatus().equals("00")) {
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     ArcTo arcTo = new ArcTo();
                     arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
                     arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
-                    if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() > 0)
+                    if (gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() > 0)
                         reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
-                if (getPipesInOrder().get(i).getStatus().equals("01")){
-                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
+                if (getPipesInOrder().get(i).getStatus().equals("01")) {
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
                     ArcTo arcTo = new ArcTo();
                     arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
                     arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
-                    if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
+                    if (gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
                         reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
 
-                if (getPipesInOrder().get(i).getStatus().equals("10")){
+                if (getPipesInOrder().get(i).getStatus().equals("10")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                     ArcTo arcTo = new ArcTo();
                     arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX());
                     arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
-                    if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() > 0)
+                    if (gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() > 0)
                         reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
 
-                if (getPipesInOrder().get(i).getStatus().equals("11")){
-                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140 , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                if (getPipesInOrder().get(i).getStatus().equals("11")) {
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     ArcTo arcTo = new ArcTo();
                     arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
                     arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
-                    if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
+                    if (gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
                         reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
@@ -637,53 +633,53 @@ public class Main extends Application implements Runnable  {
 
             if (getPipesInOrder().get(i) instanceof CurvedPipeStatic) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
-                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i-1));
+                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i - 1));
 
-                if (getPipesInOrder().get(i).getStatus().equals("00")){
-                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() , gameBoard.getImageViews()[indexOfImageView].getY() +70 );
+                if (getPipesInOrder().get(i).getStatus().equals("00")) {
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     ArcTo arcTo = new ArcTo();
                     arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
                     arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY());
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
-                    if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() > 0)
+                    if (gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() > 0)
                         reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
-                if (getPipesInOrder().get(i).getStatus().equals("01")){
-                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70 , gameBoard.getImageViews()[indexOfImageView].getY());
+                if (getPipesInOrder().get(i).getStatus().equals("01")) {
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
                     ArcTo arcTo = new ArcTo();
                     arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 140);
                     arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
-                    if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
+                    if (gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() < 0)
                         reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
-                if (getPipesInOrder().get(i).getStatus().equals("10")){
+                if (getPipesInOrder().get(i).getStatus().equals("10")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                     ArcTo arcTo = new ArcTo();
                     arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX());
                     arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
-                    if(gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() > 0)
+                    if (gameBoard.getImageViews()[indexOfImageView].getX() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getX() > 0)
                         reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
 
 
-                if (getPipesInOrder().get(i).getStatus().equals("11")){
-                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140 , gameBoard.getImageViews()[indexOfImageView].getY() + 70);
+                if (getPipesInOrder().get(i).getStatus().equals("11")) {
+                    MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 140, gameBoard.getImageViews()[indexOfImageView].getY() + 70);
                     ArcTo arcTo = new ArcTo();
                     arcTo.setX(gameBoard.getImageViews()[indexOfImageView].getX() + 70);
                     arcTo.setY(gameBoard.getImageViews()[indexOfImageView].getY() + 140);
                     arcTo.setRadiusX(70);
                     arcTo.setRadiusY(70);
-                    if(gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
+                    if (gameBoard.getImageViews()[indexOfImageView].getY() - gameBoard.getImageViews()[indexOfImageViewOfPreviousPipe].getY() < 0)
                         reverseDirection(moveTo, arcTo);
                     path.getElements().addAll(moveTo, arcTo);
                 }
@@ -696,7 +692,7 @@ public class Main extends Application implements Runnable  {
         setPath(path);
     }
 
-    private void reverseDirection(MoveTo moveTo, LineTo lineTo){
+    private void reverseDirection(MoveTo moveTo, LineTo lineTo) {
 
         double tempX = moveTo.getX();
         double tempY = moveTo.getY();
@@ -706,8 +702,9 @@ public class Main extends Application implements Runnable  {
         lineTo.setY(tempY);
 
     }
+
     // overloading reverseDirection method
-    private void reverseDirection(MoveTo moveTo, ArcTo arcTo){
+    private void reverseDirection(MoveTo moveTo, ArcTo arcTo) {
 
         double tempX = moveTo.getX();
         double tempY = moveTo.getY();
@@ -720,12 +717,12 @@ public class Main extends Application implements Runnable  {
 
     }
 
-    private int indexFinder(GameBoard gameBoard, Tile tile){
+    private int indexFinder(GameBoard gameBoard, Tile tile) {
 
         int indexOfRow = 0;
         int indexOfColumn = 0;
-        for (int k = 0; k < 4; k++){
-            for (int l = 0; l < 4; l++){
+        for (int k = 0; k < 4; k++) {
+            for (int l = 0; l < 4; l++) {
                 if (gameBoard.getTiles()[k][l].equals(tile)) {
                     indexOfRow = k;
                     indexOfColumn = l;
@@ -738,7 +735,7 @@ public class Main extends Application implements Runnable  {
                 imageViewIndex = m;
             }
         }
-        return  imageViewIndex;
+        return imageViewIndex;
     }
 
 
@@ -754,7 +751,7 @@ public class Main extends Application implements Runnable  {
         return levelCompleted;
     }
 
-    public void setLevelCompleted(boolean levelCompleted){
+    public void setLevelCompleted(boolean levelCompleted) {
         this.levelCompleted = levelCompleted;
     }
 
@@ -774,8 +771,4 @@ public class Main extends Application implements Runnable  {
         Main.levelNumber = levelNumber;
     }
 
-    @Override
-    public void run() {
-        drag(gameBoard);
-    }
 }
