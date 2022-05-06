@@ -56,9 +56,7 @@ public class GameBoard {
         Label label = new Label("Number of Moves " + getNumberOfMoves());
         label.setStyle("-fx-text-fill: white");
         label.setFont(Font.font("Arial", FontWeight.BOLD, 30));
-        EdgePane edgePane = new EdgePane(label);
-        edgePane.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+        StackPane edgePane = edgePane(label);
         getBorderPane().setTop(edgePane);
 
     }
@@ -74,10 +72,10 @@ public class GameBoard {
         Pane pane = new Pane();
         borderPane.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        borderPane.setRight(new EdgePane(new Label(" "))); // delete later
+        borderPane.setRight(edgePane(new Label(" "))); // delete later
         pane.getChildren().addAll(getImageViews());
-        borderPane.setBottom(new GameControlsPane(getCheckButton(), getNextButton()));
-        borderPane.setLeft(new EdgePane(new Label(" "))); // delete later
+        borderPane.setBottom(gameControlsPane(getCheckButton(), getNextButton()));
+        borderPane.setLeft(edgePane(new Label(" "))); // delete later
         borderPane.setCenter(pane);
 
         pane.getChildren().add(createBall());
@@ -298,26 +296,21 @@ public class GameBoard {
     public void setNextButton(Button nextButton) {
         this.nextButton = nextButton;
     }
-}
 
-
-class EdgePane extends StackPane {
-
-    public EdgePane(Label label) {
-        getChildren().add(label);
+    public StackPane edgePane(Label label){
+        StackPane edgePane = new StackPane();
+        edgePane.getChildren().add(label);
         label.setPadding(new Insets(30, 115.5, 50, 70.5));
-
+        return edgePane;
     }
 
-}
-
-class GameControlsPane extends HBox {
-
-    public GameControlsPane(Button button, Button button2){
-        getChildren().add(button);
-        getChildren().add(button2);
-        setPadding(new Insets(0, 0, 55, 175));
-
+    public HBox gameControlsPane(Button button, Button button2){
+        HBox gameControlsPane = new HBox();
+        gameControlsPane.getChildren().add(button);
+        gameControlsPane.getChildren().add(button2);
+        gameControlsPane.setPadding(new Insets(0, 0, 55, 175));
+        return gameControlsPane;
     }
-
 }
+
+
