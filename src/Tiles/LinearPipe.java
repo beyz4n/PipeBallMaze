@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 public class LinearPipe extends Tile implements Movable {
 
     public LinearPipe(String status){
+        // Set tiles' images
         if(status.equals("Vertical")) {
             setImage(new Image("Assets/VerticalPipe.png"));
             setStatus(status);

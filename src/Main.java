@@ -10,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.text.Font;
@@ -28,22 +27,6 @@ public class Main extends Application {
     private static int levelNumber;
     private GameBoard gameBoard;
     private boolean draggable;
-
-    public GameBoard getGameBoard() {
-        return gameBoard;
-    }
-
-    public void setGameBoard(GameBoard gameBoard) {
-        this.gameBoard = gameBoard;
-    }
-
-    public boolean isDraggable() {
-        return draggable;
-    }
-
-    public void setDraggable(boolean draggable) {
-        this.draggable = draggable;
-    }
 
     public static void main(String[] args) {
         launch(args);
@@ -70,11 +53,12 @@ public class Main extends Application {
         closeButton.setOnMouseClicked(event -> {
             primaryStage.close();
         });
-
     }
 
+    // Method to create start page
     private void startPage(Stage primaryStage, Button startButton) {
 
+        // Add music that will play throughout the game
         Media media = new Media(new File("src/Assets/The_Town_of_Luncheon.wav").toURI().toString());
         AudioClip mediaPlayer = new AudioClip(media.getSource());
         mediaPlayer.setVolume(20);
@@ -82,6 +66,7 @@ public class Main extends Application {
 
         primaryStage.setResizable(false);
 
+        // Create start button and label for game name then add them at the center of the startPage
         Label gameName = new Label("Pipe Ball Maze");
         gameName.setFont(Font.font("Arial", FontWeight.BOLD, 50));
         gameName.setStyle("-fx-text-fill: white");
@@ -90,14 +75,17 @@ public class Main extends Application {
         startPane.getChildren().add(gameName);
         startPane.getChildren().add(startButton);
         startPane.alignmentProperty().set(Pos.CENTER);
+
         startPane.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+
         Scene startScene = new Scene(startPane, 950, 780);
         primaryStage.setScene(startScene);
         primaryStage.setTitle("PipeBallMaze");
         primaryStage.show();
     }
 
+    // Method that enables the first level to be opened when the start button is pressed.
     private void clickedOnStart(Button startButton, Stage primaryStage, GameBoard gameBoard) {
 
         startButton.setOnMouseClicked(event -> {
@@ -107,9 +95,7 @@ public class Main extends Application {
             setDraggable(true);
             setLevelCompleted(checkForSolution(gameBoard));
             drag(gameBoard);
-
         });
-
     }
 
     private void clickedOnCheck(GameBoard gameBoard) {
@@ -117,7 +103,6 @@ public class Main extends Application {
         gameBoard.getCheckButton().setOnMouseClicked(event -> {
             animate(gameBoard);
         });
-
     }
 
     private void clickedOnNext(GameBoard gameBoard, Stage primaryStage, Button nextLevelButton, Button closeButton) {
@@ -145,10 +130,8 @@ public class Main extends Application {
                     primaryStage.setScene(scene);
                     primaryStage.show();
                 });
-
             }
         });
-
     }
 
     private void clickedOnNextLevel(GameBoard gameBoard, Stage primaryStage, Button nextLevelButton) {
@@ -163,10 +146,7 @@ public class Main extends Application {
             setDraggable(true);
             setLevelCompleted(checkForSolution(gameBoard));
             drag(gameBoard);
-
-
         });
-
     }
 
     private void animate(GameBoard gameBoard) {
@@ -184,7 +164,6 @@ public class Main extends Application {
         pathTransition.setOnFinished(event -> {
             gameBoard.getNextButton().setDisable(false);
         });
-
     }
 
     private Scene levelCompletedScene(Button button) {
@@ -271,9 +250,9 @@ public class Main extends Application {
                 }
             });
         }
-
     }
 
+    // Method to swap dragged tile's and empty free tile's image views
     private void swapImages(ImageView imageView1, ImageView imageView2) {
 
         ImageView temp = new ImageView(imageView1.getImage());
@@ -287,6 +266,7 @@ public class Main extends Application {
         GameBoard.numberOfMoves++;
     }
 
+   // Method to swap dragged tile and empty free tile
     private void swapTiles(GameBoard gameBoard, int index1x, int index1y, int index2x, int index2y) {
 
         Tile temp = gameBoard.getTiles()[index1x][index1y];
@@ -294,6 +274,7 @@ public class Main extends Application {
         gameBoard.getTiles()[index2x][index2y] = temp;
     }
 
+    // Method to drag movable tiles
     private void dragAnimation(ImageView imageView1, ImageView imageView2) {
 
         PathTransition pathTransition = new PathTransition();
@@ -310,12 +291,15 @@ public class Main extends Application {
         pathTransition.setOnFinished(event -> {
             imageView1.toBack();
         });
-
     }
+
+    // Method to check solution for ball's path
 
     private boolean checkForSolution(GameBoard gameBoard) {
 
+        // Create arraylist to hold pipes in path order
         pipesInOrder = new ArrayList<>();
+
         int rowIndexOfStart = 0;
         int columnIndexOfStart = 0;
         int curveCount = 0;
@@ -465,9 +449,9 @@ public class Main extends Application {
                 }
             }
         }
-
         return false;
     }
+
 
     private String directionFinder(String statusCurve, String statusPrevious) {
 
@@ -508,9 +492,7 @@ public class Main extends Application {
                     path.getElements().addAll(moveTo, lineTo);
                 }
                 path.setStroke(Color.WHITE);
-
             }
-
 
             if (getPipesInOrder().get(i) instanceof EndPipe) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
@@ -527,7 +509,6 @@ public class Main extends Application {
                 }
                 path.setStroke(Color.WHITE);
             }
-
 
             if (getPipesInOrder().get(i) instanceof LinearPipe) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
@@ -550,7 +531,6 @@ public class Main extends Application {
                 path.setStroke(Color.WHITE);
             }
 
-
             if (getPipesInOrder().get(i) instanceof NormalPipeStatic) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
                 int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i - 1));
@@ -571,7 +551,6 @@ public class Main extends Application {
                 }
                 path.setStroke(Color.WHITE);
             }
-
 
             if (getPipesInOrder().get(i) instanceof CurvedPipeMovable) {
                 int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
@@ -684,13 +663,12 @@ public class Main extends Application {
                 }
                 path.setStroke(Color.WHITE);
             }
-
-
         }
 
         setPath(path);
     }
 
+    // Method for reverse the direction of movement of the ball in the linear pipe.
     private void reverseDirection(MoveTo moveTo, LineTo lineTo) {
 
         double tempX = moveTo.getX();
@@ -699,10 +677,9 @@ public class Main extends Application {
         moveTo.setY(lineTo.getY());
         lineTo.setX(tempX);
         lineTo.setY(tempY);
-
     }
 
-    // overloading reverseDirection method
+    // overloading reverseDirection method for curved pipes
     private void reverseDirection(MoveTo moveTo, ArcTo arcTo) {
 
         double tempX = moveTo.getX();
@@ -716,6 +693,7 @@ public class Main extends Application {
 
     }
 
+    // Method to find index of given tile's image view
     private int indexFinder(GameBoard gameBoard, Tile tile) {
 
         int indexOfRow = 0;
@@ -768,6 +746,22 @@ public class Main extends Application {
 
     public static void setLevelNumber(int levelNumber) {
         Main.levelNumber = levelNumber;
+    }
+
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
+
+    public void setGameBoard(GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
+    }
+
+    public boolean isDraggable() {
+        return draggable;
+    }
+
+    public void setDraggable(boolean draggable) {
+        this.draggable = draggable;
     }
 
 }

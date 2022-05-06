@@ -8,6 +8,7 @@ public class CurvedPipeStatic extends Tile implements Fixed {
     String status;
 
     public CurvedPipeStatic(String status) {
+        // Set tiles' images
         switch (status) {
             case "00":
                 setImage(new Image("Assets/Curve3Static.png"));

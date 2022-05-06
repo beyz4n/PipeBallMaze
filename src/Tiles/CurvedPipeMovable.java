@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 public class CurvedPipeMovable extends Tile implements Movable {
     String status;
     public CurvedPipeMovable(String status) {
+        // Set tiles' images
         switch (status) {
             case "00":
                 setImage(new Image("Assets/Curve3.png"));

@@ -11,6 +11,7 @@ public class NormalPipeStatic extends Tile implements Fixed {
     }
 
     public NormalPipeStatic (String status){
+        // Set tiles' images
         if(status.equals("Vertical")) {
             setImage(new Image("Assets/VerticalPipeStatic.png"));
             setStatus(status);

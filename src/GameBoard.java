@@ -16,21 +16,22 @@ import java.util.Scanner;
 
 public class GameBoard {
 
-    public static int numberOfMoves;
-    private BorderPane borderPane;
-    private Tile[][] tiles;
-    private ImageView[] imageViews;
-    private ImageView ball;
+    public static int numberOfMoves; // numberOfMoves data field represent number of moves made by gamer at that level.
+    private BorderPane borderPane; // borderPane data field represent border pane for game board
+    private Tile[][] tiles; // tiles data field holds all tiles in that level
+    private ImageView[] imageViews; // imageView data field holds all tiles' images in that level
+    private ImageView ball; // ball data field holds ball that will move at that level
     private Pane pane;
-    private Scene boardScene;
-    private Button checkButton;
-    private Button nextButton;
-    private static int totalLevelNo;
-    private ArrayList<File> levels;
+    private Scene boardScene; // boardScene data field represent
+    private Button checkButton; // checkButton data field represent button for the player can control the path s/he creates
+    private Button nextButton; // nextButton data field represent button that provides to go to next level
+    private static int totalLevelNo; // totalLevelNo data field represents total level number in the game
+    private ArrayList<File> levels; // levels data field holds all level in levels package
 
     public GameBoard() {
 
         File folder = new File("src/Levels");
+        // Create ArrayList levels that holds all level in levels package
         ArrayList<File> levels = new ArrayList<>();
         for (int l = 0; l < folder.list().length; l++) {
             String levelNo = l + 1 + "";
@@ -38,12 +39,13 @@ public class GameBoard {
             levels.add(file);
         }
 
+        // Create buttons to check the path and go to next level
         Button checkButton = new Button("Check");
-        checkButton.setDisable(true);
+        checkButton.setDisable(true); // If the gamer couldn't create the path, the control button will not be active
         setCheckButton(checkButton);
 
         Button nextButton = new Button("Next");
-        nextButton.setDisable(true);
+        nextButton.setDisable(true); // If the ball don't reach end pipe tile, the next button will not be active
         setNextButton(nextButton);
 
         setLevels(levels);
@@ -51,31 +53,29 @@ public class GameBoard {
         setBoardScene(makeScene());
     }
 
+    // Method to display number of moves has made by gamer at that level
     protected void displayNumberOfMoves(){
-
         Label label = new Label("Number of Moves " + getNumberOfMoves());
         label.setStyle("-fx-text-fill: white");
         label.setFont(Font.font("Arial", FontWeight.BOLD, 30));
         StackPane edgePane = edgePane(label);
         getBorderPane().setTop(edgePane);
-
     }
 
-
+    // Method to create game scene
     protected Scene makeScene(){
 
         createTiles();
         createImageViews();
 
-        //Creating the pane
         BorderPane borderPane = new BorderPane();
         Pane pane = new Pane();
         borderPane.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        borderPane.setRight(edgePane(new Label(" "))); // delete later
+        borderPane.setRight(edgePane(new Label(" ")));
         pane.getChildren().addAll(getImageViews());
         borderPane.setBottom(gameControlsPane(getCheckButton(), getNextButton()));
-        borderPane.setLeft(edgePane(new Label(" "))); // delete later
+        borderPane.setLeft(edgePane(new Label(" ")));
         borderPane.setCenter(pane);
 
         pane.getChildren().add(createBall());
@@ -87,30 +87,37 @@ public class GameBoard {
         return getBoardScene();
     }
 
-
+    // Method to create image views at that level.
     private ImageView[] createImageViews(){
 
+        // Create array list to hold all image views.
         ArrayList<ImageView> imageViewsArrayList = new ArrayList<>();
         for (int i = 0; i < 16; i++) {
             final double sizeOfTile = 140;
 
+            // Create image views and set their coordinates.
             ImageView imageView = new ImageView(tiles[i / 4][i % 4].getImage());
             imageView.setX((i % 4) * 143);
             imageView.setY((i / 4) * 143);
+
+            // Set size of tile as 140 pixel.
             imageView.setFitHeight(sizeOfTile);
             imageView.setFitWidth(sizeOfTile);
             imageViewsArrayList.add(imageView);
         }
+
+        // Convert imageViewsArrayList to imageView array
         ImageView[] imageViews = new ImageView[16];
         imageViews = imageViewsArrayList.toArray(imageViews);
         setImageViews(imageViews);
 
-
         return imageViews;
     }
 
+    // Method to create tiles at that level.
     private Tile[][] createTiles(){
 
+        // Read input from the current level file
         Scanner input;
         try {
             input = new Scanner(getLevels().get(Main.getLevelNumber()));
@@ -129,6 +136,8 @@ public class GameBoard {
             String[] splitLine = line.split(",");
             Collections.addAll(words, splitLine);
         }
+
+        // Create tiles according to current level file
         Tile[][] tiles = new Tile[4][4];
         for (int k = 0; k < words.size(); k += 3) {
 
@@ -162,7 +171,6 @@ public class GameBoard {
                 } else if (words.get(k + 2).equals("00") || words.get(k + 2).equals("01") || words.get(k + 2).equals("10") || words.get(k + 2).equals("11")) {
                     tiles[queue / 4][queue % 4] = new CurvedPipeStatic(words.get(k + 2));
                 }
-
             }
 
             if (words.get(k + 1).equalsIgnoreCase("End")) {
@@ -174,6 +182,7 @@ public class GameBoard {
         return tiles;
     }
 
+    // Method to create ball that will move at that level
     private ImageView createBall(){
 
         ImageView ball = new ImageView(new Image("Assets/ball.png"));
@@ -196,17 +205,34 @@ public class GameBoard {
         if (tiles[indexOfStarterX][indexOfStarterY].getStatus().equalsIgnoreCase("Vertical")) {
             ball.setFitWidth(55);
             ball.setFitHeight(55);
-            ball.setX(getImageViews()[imageViewIndex].getX()+ 42.5);
+            ball.setX(getImageViews()[imageViewIndex].getX()+ 44.2);
             ball.setY(getImageViews()[imageViewIndex].getY()  + 30);
         }
         if (tiles[indexOfStarterX][indexOfStarterY].getStatus().equalsIgnoreCase("Horizontal")) {
             ball.setFitWidth(55);
             ball.setFitHeight(55);
             ball.setX(getImageViews()[imageViewIndex].getX()+ 52.5);
-            ball.setY(getImageViews()[imageViewIndex].getY()  + 42.3);
+            ball.setY(getImageViews()[imageViewIndex].getY()  + 44.2);
         }
         setBall(ball);
         return ball;
+    }
+
+    // Method that returns pane for border pane's left, right and top parts
+    public StackPane edgePane(Label label){
+        StackPane edgePane = new StackPane();
+        edgePane.getChildren().add(label);
+        label.setPadding(new Insets(30, 115.5, 50, 70.5));
+        return edgePane;
+    }
+
+    // Method that returns pane for border pane's bottom part
+    public HBox gameControlsPane(Button button, Button button2){
+        HBox gameControlsPane = new HBox();
+        gameControlsPane.getChildren().add(button);
+        gameControlsPane.getChildren().add(button2);
+        gameControlsPane.setPadding(new Insets(0, 0, 55, 175));
+        return gameControlsPane;
     }
 
     public static int getNumberOfMoves() {
@@ -297,20 +323,6 @@ public class GameBoard {
         this.nextButton = nextButton;
     }
 
-    public StackPane edgePane(Label label){
-        StackPane edgePane = new StackPane();
-        edgePane.getChildren().add(label);
-        label.setPadding(new Insets(30, 115.5, 50, 70.5));
-        return edgePane;
-    }
-
-    public HBox gameControlsPane(Button button, Button button2){
-        HBox gameControlsPane = new HBox();
-        gameControlsPane.getChildren().add(button);
-        gameControlsPane.getChildren().add(button2);
-        gameControlsPane.setPadding(new Insets(0, 0, 55, 175));
-        return gameControlsPane;
-    }
 }
 
 

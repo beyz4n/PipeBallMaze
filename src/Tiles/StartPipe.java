@@ -13,6 +13,7 @@ public class StartPipe extends Tile implements Fixed {
 
 
     public StartPipe(String status){
+        // Set tiles' images
         if(status.equals("Vertical")) {
             setImage(new Image("Assets/StarterVertical.png"));
             setStatus(status);

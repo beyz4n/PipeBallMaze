@@ -12,6 +12,7 @@ public class EndPipe extends Tile implements Fixed {
     }
 
     public EndPipe(String status){
+        // Set tiles' images
         if(status.equals("Vertical")) {
             setImage(new Image("Assets/EndVertical.png"));
             setStatus(status);
