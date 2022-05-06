@@ -1,7 +1,9 @@
 package Tiles;
-
 import javafx.scene.image.Image;
-
+/* The LinearPipe class is subclass of Tiles and represent linear pipe tile.
+ * Name Surname / Student ID: Beyza Nur Kaya / 150120077
+ * Name Surname / Student ID: Sena Ektiricioğlu / 150120047
+ */
 public class LinearPipe extends Tile implements Movable {
 
     public LinearPipe(String status){

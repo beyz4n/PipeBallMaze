@@ -319,5 +319,4 @@ class GameControlsPane extends HBox {
         setPadding(new Insets(0, 0, 55, 175));
 
     }
-
 }
