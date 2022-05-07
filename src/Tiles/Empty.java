@@ -15,6 +15,4 @@ public class Empty extends Tile implements Movable {
         setImage(new Image("Assets/Empty.png"));
         setStatus("Empty");
 }
-
-
 }
