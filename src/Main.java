@@ -374,10 +374,13 @@ public class Main extends Application {
         for (int a = 1; a <= curveCount; a++) {
             if (directionFinder(gameBoard.getTiles()[rowIndex][columnIndex].getStatus(), previousStatus).equals("down")) {
                 for (int i = rowIndex + 1; i <= 3; i++) {
-                    if ((gameBoard.getTiles()[i][columnIndex] instanceof LinearPipe) ||
-                            (gameBoard.getTiles()[i][columnIndex] instanceof NormalPipeStatic)) {
+                    if ((gameBoard.getTiles()[i][columnIndex] instanceof LinearPipe &&
+                            gameBoard.getTiles()[i][columnIndex].getStatus().equalsIgnoreCase("Vertical")) ||
+                            (gameBoard.getTiles()[i][columnIndex] instanceof NormalPipeStatic) &&
+                            gameBoard.getTiles()[i][columnIndex].getStatus().equalsIgnoreCase("Vertical")) {
                         pipesInOrder.add(gameBoard.getTiles()[i][columnIndex]);
-                    } else if ((gameBoard.getTiles()[i][columnIndex] instanceof CurvedPipeMovable) ||
+                    }
+                    else if ((gameBoard.getTiles()[i][columnIndex] instanceof CurvedPipeMovable) ||
                             (gameBoard.getTiles()[i][columnIndex] instanceof CurvedPipeStatic)) {
                         pipesInOrder.add(gameBoard.getTiles()[i][columnIndex]);
                         rowIndex = i;
@@ -395,10 +398,13 @@ public class Main extends Application {
             }
             if (directionFinder(gameBoard.getTiles()[rowIndex][columnIndex].getStatus(), previousStatus).equals("up")) {
                 for (int i = rowIndex - 1; i >= 0; i--) {
-                    if ((gameBoard.getTiles()[i][columnIndex] instanceof LinearPipe) ||
-                            (gameBoard.getTiles()[i][columnIndex] instanceof NormalPipeStatic)) {
+                    if ((gameBoard.getTiles()[i][columnIndex] instanceof LinearPipe &&
+                            gameBoard.getTiles()[i][columnIndex].getStatus().equalsIgnoreCase("Vertical")) ||
+                            (gameBoard.getTiles()[i][columnIndex] instanceof NormalPipeStatic &&
+                            gameBoard.getTiles()[i][columnIndex].getStatus().equalsIgnoreCase("Vertical"))) {
                         pipesInOrder.add(gameBoard.getTiles()[i][columnIndex]);
-                    } else if ((gameBoard.getTiles()[i][columnIndex] instanceof CurvedPipeMovable) ||
+                    }
+                    else if ((gameBoard.getTiles()[i][columnIndex] instanceof CurvedPipeMovable) ||
                             (gameBoard.getTiles()[i][columnIndex] instanceof CurvedPipeStatic)) {
                         pipesInOrder.add(gameBoard.getTiles()[i][columnIndex]);
                         rowIndex = i;
@@ -416,16 +422,20 @@ public class Main extends Application {
             }
             if (directionFinder(gameBoard.getTiles()[rowIndex][columnIndex].getStatus(), previousStatus).equals("right")) {
                 for (int i = columnIndex + 1; i <= 3; i++) {
-                    if ((gameBoard.getTiles()[rowIndex][i] instanceof LinearPipe) ||
-                            (gameBoard.getTiles()[rowIndex][i] instanceof NormalPipeStatic)) {
+                    if ((gameBoard.getTiles()[rowIndex][i] instanceof LinearPipe &&
+                            gameBoard.getTiles()[rowIndex][i].getStatus().equalsIgnoreCase("Horizontal")) ||
+                            (gameBoard.getTiles()[rowIndex][i] instanceof NormalPipeStatic &&
+                            gameBoard.getTiles()[rowIndex][i].getStatus().equalsIgnoreCase("Horizontal"))) {
                         pipesInOrder.add(gameBoard.getTiles()[rowIndex][i]);
-                    } else if ((gameBoard.getTiles()[rowIndex][i] instanceof CurvedPipeMovable) ||
+                    }
+                    else if ((gameBoard.getTiles()[rowIndex][i] instanceof CurvedPipeMovable) ||
                             (gameBoard.getTiles()[rowIndex][i] instanceof CurvedPipeStatic)) {
                         pipesInOrder.add(gameBoard.getTiles()[rowIndex][i]);
                         columnIndex = i;
                         previousStatus = "Horizontal";
                         break;
-                    } else if ((gameBoard.getTiles()[rowIndex][i] instanceof EndPipe)) {
+                    }
+                    else if ((gameBoard.getTiles()[rowIndex][i] instanceof EndPipe)) {
                         pipesInOrder.add(gameBoard.getTiles()[rowIndex][i]);
                         gameBoard.getCheckButton().setDisable(false);
                         levelNumber++;
@@ -437,16 +447,20 @@ public class Main extends Application {
             }
             if (directionFinder(gameBoard.getTiles()[rowIndex][columnIndex].getStatus(), previousStatus).equals("left")) {
                 for (int i = columnIndex - 1; i >= 0; i--) {
-                    if ((gameBoard.getTiles()[rowIndex][i] instanceof LinearPipe) ||
-                            (gameBoard.getTiles()[rowIndex][i] instanceof NormalPipeStatic)) {
+                    if ((gameBoard.getTiles()[rowIndex][i] instanceof LinearPipe &&
+                            gameBoard.getTiles()[rowIndex][i].getStatus().equalsIgnoreCase("Horizontal")) ||
+                            (gameBoard.getTiles()[rowIndex][i] instanceof NormalPipeStatic &&
+                            gameBoard.getTiles()[rowIndex][i].getStatus().equalsIgnoreCase("Horizontal"))) {
                         pipesInOrder.add(gameBoard.getTiles()[rowIndex][i]);
-                    } else if ((gameBoard.getTiles()[rowIndex][i] instanceof CurvedPipeMovable) ||
+                    }
+                    else if ((gameBoard.getTiles()[rowIndex][i] instanceof CurvedPipeMovable) ||
                             (gameBoard.getTiles()[rowIndex][i] instanceof CurvedPipeStatic)) {
                         pipesInOrder.add(gameBoard.getTiles()[rowIndex][i]);
                         columnIndex = i;
                         previousStatus = "Horizontal";
                         break;
-                    } else if ((gameBoard.getTiles()[rowIndex][i] instanceof EndPipe)) {
+                    }
+                    else if ((gameBoard.getTiles()[rowIndex][i] instanceof EndPipe)) {
                         pipesInOrder.add(gameBoard.getTiles()[rowIndex][i]);
                         gameBoard.getCheckButton().setDisable(false);
                         levelNumber++;
