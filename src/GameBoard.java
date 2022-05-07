@@ -40,15 +40,12 @@ public class GameBoard {
         }
 
         // Create buttons to check the path and go to next level
-        Button checkButton = new Button("Check");
+        checkButton = new Button("Check");
         checkButton.setDisable(true); // If the gamer couldn't create the path, the control button will not be active
-        setCheckButton(checkButton);
 
-        Button nextButton = new Button("Next");
+        nextButton = new Button("Next");
         nextButton.setDisable(true); // If the ball don't reach end pipe tile, the next button will not be active
-        setNextButton(nextButton);
 
-        setLevels(levels);
         setTotalLevelNumber(levels.size());
         setBoardScene(makeScene());
     }
@@ -59,22 +56,19 @@ public class GameBoard {
         createTiles();
         createImageViews();
 
-        BorderPane borderPane = new BorderPane();
-        Pane pane = new Pane();
+        borderPane = new BorderPane();
+        pane = new Pane();
         borderPane.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        borderPane.setRight(edgePane(new Label(" ")));
+        borderPane.setRight(edgePane(new Label("")));
         pane.getChildren().addAll(getImageViews());
         borderPane.setBottom(gameControlsPane(getCheckButton(), getNextButton()));
-        borderPane.setLeft(edgePane(new Label(" ")));
+        borderPane.setLeft(edgePane(new Label("")));
         borderPane.setCenter(pane);
 
         pane.getChildren().add(createBall());
-        setPane(pane);
-        setBorderPane(borderPane);
         displayNumberOfMoves();
-        Scene scene = new Scene(borderPane, 950, 780);
-        setBoardScene(scene);
+        boardScene = new Scene(borderPane, 950, 780);
         return getBoardScene();
     }
 
@@ -102,7 +96,7 @@ public class GameBoard {
         }
 
         // Create tiles according to current level file
-        Tile[][] tiles = new Tile[4][4];
+        tiles = new Tile[4][4];
         for (int k = 0; k < words.size(); k += 3) {
 
             int queue = Integer.parseInt(words.get(k)) - 1;
@@ -142,7 +136,6 @@ public class GameBoard {
             }
         }
 
-        setTiles(tiles);
         return tiles;
     }
 
@@ -166,9 +159,8 @@ public class GameBoard {
         }
 
         // Convert imageViewsArrayList to imageView array
-        ImageView[] imageViews = new ImageView[16];
+        imageViews = new ImageView[16];
         imageViews = imageViewsArrayList.toArray(imageViews);
-        setImageViews(imageViews);
 
         return imageViews;
     }
@@ -193,7 +185,7 @@ public class GameBoard {
     // Method to create ball that will move at that level
     private ImageView createBall(){
 
-        ImageView ball = new ImageView(new Image("Assets/ball.png"));
+        ball = new ImageView(new Image("Assets/ball.png"));
         int indexOfStarterX = 0;
         int indexOfStarterY = 0;
         for (int i = 0; i < 4; i++){
@@ -222,7 +214,7 @@ public class GameBoard {
             ball.setX(getImageViews()[imageViewIndex].getX()+ 52.5);
             ball.setY(getImageViews()[imageViewIndex].getY()  + 44.2);
         }
-        setBall(ball);
+
         return ball;
     }
 
