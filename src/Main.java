@@ -480,7 +480,7 @@ public class Main extends Application {
 
     private void setWholePath() {
 
-        Path path = new Path();
+        path = new Path();
         for (int i = 0; i < getPipesInOrder().size(); i++) {
 
             if (getPipesInOrder().get(i) instanceof StartPipe) {
@@ -669,8 +669,6 @@ public class Main extends Application {
                 path.setStroke(Color.WHITE);
             }
         }
-
-        setPath(path);
     }
 
     // Method for reverse the direction of movement of the ball in the linear pipe.
@@ -723,7 +721,6 @@ public class Main extends Application {
     private void animate() {
 
         setWholePath();
-        setPath(getPath());
         getPath().setOpacity(0);
         gameBoard.getPane().getChildren().add(getPath());
         gameBoard.getBall().toFront();
