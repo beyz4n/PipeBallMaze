@@ -32,7 +32,7 @@ public class GameBoard {
 
         File folder = new File("src/Levels");
         // Create ArrayList levels that holds all level in levels package
-        ArrayList<File> levels = new ArrayList<>();
+        levels = new ArrayList<>();
         for (int l = 0; l < folder.list().length; l++) {
             String levelNo = l + 1 + "";
             File file = new File("src/Levels/level" + levelNo + ".txt");
