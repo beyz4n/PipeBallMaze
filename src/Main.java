@@ -39,8 +39,9 @@ public class Main extends Application {
         Button nextLevelButton = new Button("Next Level ->");
         Button closeButton = new Button("Exit!");
 
-        startPage(primaryStage, startButton);
         gameBoard = new GameBoard();
+
+        startPage(primaryStage, startButton);
         clickedOnStart(startButton, primaryStage);
         clickedOnCheck();
         clickedOnNext(primaryStage, nextLevelButton, closeButton);
@@ -54,9 +55,9 @@ public class Main extends Application {
 
         // Add music that will play throughout the game
         Media media = new Media(new File("src/Assets/The_Town_of_Luncheon.wav").toURI().toString());
-        AudioClip mediaPlayer = new AudioClip(media.getSource());
-        mediaPlayer.setVolume(20);
-        mediaPlayer.play();
+        AudioClip audioClip = new AudioClip(media.getSource());
+        audioClip.setVolume(20);
+        audioClip.play();
 
         primaryStage.setResizable(false);
 
@@ -75,7 +76,7 @@ public class Main extends Application {
 
         Scene startScene = new Scene(startPane, 950, 780);
         primaryStage.setScene(startScene);
-        primaryStage.setTitle("PipeBallMaze");
+        primaryStage.setTitle("Pipe Ball Maze");
         primaryStage.show();
     }
 
@@ -110,40 +111,40 @@ public class Main extends Application {
                 primaryStage.setScene(levelCompletedScene(nextLevelButton));
                 primaryStage.show();
                 nextLevelButton.setOnMouseClicked(event1 -> {
-                    VBox vBox = new VBox(50);
-                    vBox.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
+                    VBox endPane = new VBox(50);
+                    endPane.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                             BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
                     Label label = new Label("The game is completed.");
                     label.setFont(Font.font("Arial", FontWeight.BOLD, 30));
                     label.setStyle("-fx-text-fill: white");
-                    vBox.getChildren().add(label);
-                    vBox.getChildren().add(closeButton);
+                    endPane.getChildren().add(label);
+                    endPane.getChildren().add(closeButton);
                     closeButton.setPrefSize(120, 50);
-                    vBox.alignmentProperty().set(Pos.CENTER);
-                    Scene scene = new Scene(vBox, 950, 780);
-                    primaryStage.setScene(scene);
+                    endPane.alignmentProperty().set(Pos.CENTER);
+                    Scene endScene = new Scene(endPane, 950, 780);
+                    primaryStage.setScene(endScene);
                     primaryStage.show();
                 });
             }
         });
     }
 
-    private Scene levelCompletedScene(Button button) {
+    private Scene levelCompletedScene(Button nextLevelButton) {
 
-        VBox vBox = new VBox(20);
+        VBox levelCompletedPane = new VBox(50);
 
-        vBox.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
+        levelCompletedPane.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
 
         Label levelCompletedText = new Label("Level " + getLevelNumber() + " is completed in " + GameBoard.numberOfMoves + " moves!");
         levelCompletedText.setFont(Font.font("Arial", FontWeight.BOLD, 30));
         levelCompletedText.setStyle("-fx-text-fill: white");
-        vBox.getChildren().add(levelCompletedText);
-        button.setPrefSize(100, 50);
-        vBox.getChildren().add(button);
-        vBox.alignmentProperty().set(Pos.CENTER);
+        levelCompletedPane.getChildren().add(levelCompletedText);
+        nextLevelButton.setPrefSize(100, 50);
+        levelCompletedPane.getChildren().add(nextLevelButton);
+        levelCompletedPane.alignmentProperty().set(Pos.CENTER);
 
-        Scene levelCompletedScene = new Scene(vBox, 950, 780);
+        Scene levelCompletedScene = new Scene(levelCompletedPane, 950, 780);
 
         return levelCompletedScene;
     }
@@ -154,8 +155,7 @@ public class Main extends Application {
             gameBoard.getCheckButton().setDisable(true);
             gameBoard.getNextButton().setDisable(true);
             GameBoard.numberOfMoves = 0;
-            Scene scene = gameBoard.makeScene();
-            primaryStage.setScene(scene);
+            primaryStage.setScene(gameBoard.makeScene());
             primaryStage.show();
             setDraggable(true);
             setLevelCompleted(checkForSolution());
@@ -177,7 +177,7 @@ public class Main extends Application {
         for (ImageView imageView : imageViews) {
 
             imageView.setOnMouseReleased(e -> {
-                ImageView imageView1 = (ImageView) e.getTarget(); // gets the first node
+                ImageView imageView1 = imageView; //(ImageView) e.getTarget(); // gets the first node
                 ImageView imageView2 = null;
 
                 if (e.getPickResult().getIntersectedNode() instanceof ImageView) {
@@ -268,9 +268,9 @@ public class Main extends Application {
         pathTransition.setDuration(Duration.seconds(0.50));
         pathTransition.play();
         Media media = new Media(new File("src/Assets/swap_tiles.mp3").toURI().toString());
-        AudioClip mediaPlayer = new AudioClip(media.getSource());
-        mediaPlayer.setVolume(45);
-        mediaPlayer.play();
+        AudioClip audioClip = new AudioClip(media.getSource());
+        audioClip.setVolume(45);
+        audioClip.play();
         pathTransition.setOnFinished(event -> {
             imageView1.toBack();
         });
