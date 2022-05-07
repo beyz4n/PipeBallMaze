@@ -21,11 +21,11 @@ import java.util.ArrayList;
 
 public class Main extends Application {
 
-    private Path path;
-    private boolean levelCompleted;
-    private ArrayList<Tile> pipesInOrder;
-    private static int levelNumber;
     private GameBoard gameBoard;
+    private boolean levelCompleted;
+    private static int levelNumber;
+    private ArrayList<Tile> pipesInOrder;
+    private Path path;
     private boolean draggable;
 
     public static void main(String[] args) {
@@ -41,18 +41,12 @@ public class Main extends Application {
 
         startPage(primaryStage, startButton);
         gameBoard = new GameBoard();
-        clickedOnStart(startButton, primaryStage, gameBoard);
-        clickedOnCheck(gameBoard);
-        clickedOnNext(gameBoard, primaryStage, nextLevelButton, closeButton);
-        clickedOnNextLevel(gameBoard, primaryStage, nextLevelButton);
+        clickedOnStart(startButton, primaryStage);
+        clickedOnCheck();
+        clickedOnNext(primaryStage, nextLevelButton, closeButton);
+        clickedOnNextLevel(primaryStage, nextLevelButton);
         clickedOnClose(closeButton, primaryStage);
 
-    }
-
-    private void clickedOnClose(Button closeButton, Stage primaryStage) {
-        closeButton.setOnMouseClicked(event -> {
-            primaryStage.close();
-        });
     }
 
     // Method to create start page
@@ -86,32 +80,32 @@ public class Main extends Application {
     }
 
     // Method that enables the first level to be opened when the start button is pressed.
-    private void clickedOnStart(Button startButton, Stage primaryStage, GameBoard gameBoard) {
+    private void clickedOnStart(Button startButton, Stage primaryStage) {
 
         startButton.setOnMouseClicked(event -> {
             GameBoard.numberOfMoves = 0;
             primaryStage.setScene(gameBoard.makeScene());
             primaryStage.show();
             setDraggable(true);
-            setLevelCompleted(checkForSolution(gameBoard));
-            drag(gameBoard);
+            setLevelCompleted(checkForSolution());
+            drag();
         });
     }
 
-    private void clickedOnCheck(GameBoard gameBoard) {
+    private void clickedOnCheck() {
 
         gameBoard.getCheckButton().setOnMouseClicked(event -> {
-            animate(gameBoard);
+            animate();
         });
     }
 
-    private void clickedOnNext(GameBoard gameBoard, Stage primaryStage, Button nextLevelButton, Button closeButton) {
+    private void clickedOnNext(Stage primaryStage, Button nextLevelButton, Button closeButton) {
 
         gameBoard.getNextButton().setOnMouseClicked(event -> {
-            if (getLevelNumber() < (GameBoard.getTotalLevelNo())) {
+            if (getLevelNumber() < (GameBoard.getTotalLevelNumber())) {
                 primaryStage.setScene(levelCompletedScene(nextLevelButton));
                 primaryStage.show();
-            } else if (getLevelNumber() == (GameBoard.getTotalLevelNo())) {
+            } else if (getLevelNumber() == (GameBoard.getTotalLevelNumber())) {
                 nextLevelButton.setText("Finish");
                 primaryStage.setScene(levelCompletedScene(nextLevelButton));
                 primaryStage.show();
@@ -131,38 +125,6 @@ public class Main extends Application {
                     primaryStage.show();
                 });
             }
-        });
-    }
-
-    private void clickedOnNextLevel(GameBoard gameBoard, Stage primaryStage, Button nextLevelButton) {
-
-        nextLevelButton.setOnMouseClicked(event -> {
-            gameBoard.getCheckButton().setDisable(true);
-            gameBoard.getNextButton().setDisable(true);
-            GameBoard.numberOfMoves = 0;
-            Scene scene = gameBoard.makeScene();
-            primaryStage.setScene(scene);
-            primaryStage.show();
-            setDraggable(true);
-            setLevelCompleted(checkForSolution(gameBoard));
-            drag(gameBoard);
-        });
-    }
-
-    private void animate(GameBoard gameBoard) {
-
-        setWholePath(gameBoard);
-        setPath(getPath());
-        getPath().setOpacity(0);
-        gameBoard.getPane().getChildren().add(getPath());
-        gameBoard.getBall().toFront();
-        PathTransition pathTransition = new PathTransition();
-        pathTransition.setPath(getPath());
-        pathTransition.setNode(gameBoard.getBall());
-        pathTransition.setDuration(Duration.seconds(2));
-        pathTransition.play();
-        pathTransition.setOnFinished(event -> {
-            gameBoard.getNextButton().setDisable(false);
         });
     }
 
@@ -186,7 +148,28 @@ public class Main extends Application {
         return levelCompletedScene;
     }
 
-    private void drag(GameBoard gameBoard) {
+    private void clickedOnNextLevel(Stage primaryStage, Button nextLevelButton) {
+
+        nextLevelButton.setOnMouseClicked(event -> {
+            gameBoard.getCheckButton().setDisable(true);
+            gameBoard.getNextButton().setDisable(true);
+            GameBoard.numberOfMoves = 0;
+            Scene scene = gameBoard.makeScene();
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            setDraggable(true);
+            setLevelCompleted(checkForSolution());
+            drag();
+        });
+    }
+
+    private void clickedOnClose(Button closeButton, Stage primaryStage) {
+        closeButton.setOnMouseClicked(event -> {
+            primaryStage.close();
+        });
+    }
+
+    private void drag() {
 
         ImageView[] imageViews = gameBoard.getImageViews();
         Tile[][] tiles = gameBoard.getTiles();
@@ -229,9 +212,9 @@ public class Main extends Application {
                                         dragAnimation(imageView1, imageView2);
                                         swapImages(imageView1, imageView2);
                                         gameBoard.displayNumberOfMoves();
-                                        swapTiles(gameBoard, index1x, index1y, index2x, index2y);
+                                        swapTiles(index1x, index1y, index2x, index2y);
 
-                                        setLevelCompleted(checkForSolution(gameBoard));
+                                        setLevelCompleted(checkForSolution());
                                     }
                                     if (Math.abs(imageView2.getY() - imageView1.getY()) <= 180 &&
                                             imageView2.getX() == imageView1.getX()) {
@@ -239,9 +222,9 @@ public class Main extends Application {
                                         dragAnimation(imageView1, imageView2);
                                         swapImages(imageView1, imageView2);
                                         gameBoard.displayNumberOfMoves();
-                                        swapTiles(gameBoard, index1x, index1y, index2x, index2y);
+                                        swapTiles(index1x, index1y, index2x, index2y);
 
-                                        setLevelCompleted(checkForSolution(gameBoard));
+                                        setLevelCompleted(checkForSolution());
                                     }
                                 }
                             }
@@ -267,7 +250,7 @@ public class Main extends Application {
     }
 
    // Method to swap dragged tile and empty free tile
-    private void swapTiles(GameBoard gameBoard, int index1x, int index1y, int index2x, int index2y) {
+    private void swapTiles(int index1x, int index1y, int index2x, int index2y) {
 
         Tile temp = gameBoard.getTiles()[index1x][index1y];
         gameBoard.getTiles()[index1x][index1y] = gameBoard.getTiles()[index2x][index2y];
@@ -295,7 +278,7 @@ public class Main extends Application {
 
     // Method to check solution for ball's path
 
-    private boolean checkForSolution(GameBoard gameBoard) {
+    private boolean checkForSolution() {
 
         // Create arraylist to hold pipes in path order
         pipesInOrder = new ArrayList<>();
@@ -495,13 +478,13 @@ public class Main extends Application {
             return "right";
     }
 
-    private void setWholePath(GameBoard gameBoard) {
+    private void setWholePath() {
 
         Path path = new Path();
         for (int i = 0; i < getPipesInOrder().size(); i++) {
 
             if (getPipesInOrder().get(i) instanceof StartPipe) {
-                int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
+                int indexOfImageView = indexFinder(getPipesInOrder().get(i));
 
                 if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Vertical")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 50.5);
@@ -517,7 +500,7 @@ public class Main extends Application {
             }
 
             if (getPipesInOrder().get(i) instanceof EndPipe) {
-                int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
+                int indexOfImageView = indexFinder(getPipesInOrder().get(i));
 
                 if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Vertical")) {
                     LineTo lineTo = new LineTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY() + 50.5);
@@ -533,8 +516,8 @@ public class Main extends Application {
             }
 
             if (getPipesInOrder().get(i) instanceof LinearPipe) {
-                int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
-                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i - 1));
+                int indexOfImageView = indexFinder(getPipesInOrder().get(i));
+                int indexOfImageViewOfPreviousPipe = indexFinder( getPipesInOrder().get(i - 1));
 
                 if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Vertical")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
@@ -554,8 +537,8 @@ public class Main extends Application {
             }
 
             if (getPipesInOrder().get(i) instanceof NormalPipeStatic) {
-                int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
-                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i - 1));
+                int indexOfImageView = indexFinder( getPipesInOrder().get(i));
+                int indexOfImageViewOfPreviousPipe = indexFinder(getPipesInOrder().get(i - 1));
 
                 if (getPipesInOrder().get(i).getStatus().equalsIgnoreCase("Vertical")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX() + 70, gameBoard.getImageViews()[indexOfImageView].getY());
@@ -575,8 +558,8 @@ public class Main extends Application {
             }
 
             if (getPipesInOrder().get(i) instanceof CurvedPipeMovable) {
-                int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
-                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i - 1));
+                int indexOfImageView = indexFinder(getPipesInOrder().get(i));
+                int indexOfImageViewOfPreviousPipe = indexFinder(getPipesInOrder().get(i - 1));
 
                 if (getPipesInOrder().get(i).getStatus().equals("00")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
@@ -632,8 +615,8 @@ public class Main extends Application {
 
 
             if (getPipesInOrder().get(i) instanceof CurvedPipeStatic) {
-                int indexOfImageView = indexFinder(gameBoard, getPipesInOrder().get(i));
-                int indexOfImageViewOfPreviousPipe = indexFinder(gameBoard, getPipesInOrder().get(i - 1));
+                int indexOfImageView = indexFinder(getPipesInOrder().get(i));
+                int indexOfImageViewOfPreviousPipe = indexFinder(getPipesInOrder().get(i - 1));
 
                 if (getPipesInOrder().get(i).getStatus().equals("00")) {
                     MoveTo moveTo = new MoveTo(gameBoard.getImageViews()[indexOfImageView].getX(), gameBoard.getImageViews()[indexOfImageView].getY() + 70);
@@ -716,7 +699,7 @@ public class Main extends Application {
     }
 
     // Method to find index of given tile's image view
-    private int indexFinder(GameBoard gameBoard, Tile tile) {
+    private int indexFinder(Tile tile) {
 
         int indexOfRow = 0;
         int indexOfColumn = 0;
@@ -735,6 +718,23 @@ public class Main extends Application {
             }
         }
         return imageViewIndex;
+    }
+
+    private void animate() {
+
+        setWholePath();
+        setPath(getPath());
+        getPath().setOpacity(0);
+        gameBoard.getPane().getChildren().add(getPath());
+        gameBoard.getBall().toFront();
+        PathTransition pathTransition = new PathTransition();
+        pathTransition.setPath(getPath());
+        pathTransition.setNode(gameBoard.getBall());
+        pathTransition.setDuration(Duration.seconds(2));
+        pathTransition.play();
+        pathTransition.setOnFinished(event -> {
+            gameBoard.getNextButton().setDisable(false);
+        });
     }
 
 

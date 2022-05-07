@@ -18,14 +18,14 @@ public class GameBoard {
 
     public static int numberOfMoves; // numberOfMoves data field represent number of moves made by gamer at that level.
     private BorderPane borderPane; // borderPane data field represent border pane for game board
+    private Pane pane;
+    private Scene boardScene; // boardScene data field represent
     private Tile[][] tiles; // tiles data field holds all tiles in that level
     private ImageView[] imageViews; // imageView data field holds all tiles' images in that level
     private ImageView ball; // ball data field holds ball that will move at that level
-    private Pane pane;
-    private Scene boardScene; // boardScene data field represent
     private Button checkButton; // checkButton data field represent button for the player can control the path s/he creates
     private Button nextButton; // nextButton data field represent button that provides to go to next level
-    private static int totalLevelNo; // totalLevelNo data field represents total level number in the game
+    private static int totalLevelNumber; // totalLevelNumber data field represents total level number in the game
     private ArrayList<File> levels; // levels data field holds all level in levels package
 
     public GameBoard() {
@@ -49,17 +49,8 @@ public class GameBoard {
         setNextButton(nextButton);
 
         setLevels(levels);
-        setTotalLevelNo(levels.size());
+        setTotalLevelNumber(levels.size());
         setBoardScene(makeScene());
-    }
-
-    // Method to display number of moves has made by gamer at that level
-    protected void displayNumberOfMoves(){
-        Label label = new Label("Number of Moves " + getNumberOfMoves());
-        label.setStyle("-fx-text-fill: white");
-        label.setFont(Font.font("Arial", FontWeight.BOLD, 30));
-        StackPane edgePane = edgePane(label);
-        getBorderPane().setTop(edgePane);
     }
 
     // Method to create game scene
@@ -85,33 +76,6 @@ public class GameBoard {
         Scene scene = new Scene(borderPane, 950, 780);
         setBoardScene(scene);
         return getBoardScene();
-    }
-
-    // Method to create image views at that level.
-    private ImageView[] createImageViews(){
-
-        // Create array list to hold all image views.
-        ArrayList<ImageView> imageViewsArrayList = new ArrayList<>();
-        for (int i = 0; i < 16; i++) {
-            final double sizeOfTile = 140;
-
-            // Create image views and set their coordinates.
-            ImageView imageView = new ImageView(tiles[i / 4][i % 4].getImage());
-            imageView.setX((i % 4) * 143);
-            imageView.setY((i / 4) * 143);
-
-            // Set size of tile as 140 pixel.
-            imageView.setFitHeight(sizeOfTile);
-            imageView.setFitWidth(sizeOfTile);
-            imageViewsArrayList.add(imageView);
-        }
-
-        // Convert imageViewsArrayList to imageView array
-        ImageView[] imageViews = new ImageView[16];
-        imageViews = imageViewsArrayList.toArray(imageViews);
-        setImageViews(imageViews);
-
-        return imageViews;
     }
 
     // Method to create tiles at that level.
@@ -182,6 +146,50 @@ public class GameBoard {
         return tiles;
     }
 
+    // Method to create image views at that level.
+    private ImageView[] createImageViews(){
+
+        // Create array list to hold all image views.
+        ArrayList<ImageView> imageViewsArrayList = new ArrayList<>();
+        for (int i = 0; i < 16; i++) {
+            final double sizeOfTile = 140;
+
+            // Create image views and set their coordinates.
+            ImageView imageView = new ImageView(tiles[i / 4][i % 4].getImage());
+            imageView.setX((i % 4) * 143);
+            imageView.setY((i / 4) * 143);
+
+            // Set size of tile as 140 pixel.
+            imageView.setFitHeight(sizeOfTile);
+            imageView.setFitWidth(sizeOfTile);
+            imageViewsArrayList.add(imageView);
+        }
+
+        // Convert imageViewsArrayList to imageView array
+        ImageView[] imageViews = new ImageView[16];
+        imageViews = imageViewsArrayList.toArray(imageViews);
+        setImageViews(imageViews);
+
+        return imageViews;
+    }
+
+    // Method that returns pane for border pane's left, right and top parts
+    public StackPane edgePane(Label label){
+        StackPane edgePane = new StackPane();
+        edgePane.getChildren().add(label);
+        label.setPadding(new Insets(30, 115.5, 50, 70.5));
+        return edgePane;
+    }
+
+    // Method that returns pane for border pane's bottom part
+    public HBox gameControlsPane(Button button, Button button2){
+        HBox gameControlsPane = new HBox();
+        gameControlsPane.getChildren().add(button);
+        gameControlsPane.getChildren().add(button2);
+        gameControlsPane.setPadding(new Insets(0, 0, 55, 175));
+        return gameControlsPane;
+    }
+
     // Method to create ball that will move at that level
     private ImageView createBall(){
 
@@ -218,22 +226,15 @@ public class GameBoard {
         return ball;
     }
 
-    // Method that returns pane for border pane's left, right and top parts
-    public StackPane edgePane(Label label){
-        StackPane edgePane = new StackPane();
-        edgePane.getChildren().add(label);
-        label.setPadding(new Insets(30, 115.5, 50, 70.5));
-        return edgePane;
+    // Method to display number of moves has made by gamer at that level
+    protected void displayNumberOfMoves(){
+        Label label = new Label("Number of Moves " + getNumberOfMoves());
+        label.setStyle("-fx-text-fill: white");
+        label.setFont(Font.font("Arial", FontWeight.BOLD, 30));
+        StackPane edgePane = edgePane(label);
+        getBorderPane().setTop(edgePane);
     }
 
-    // Method that returns pane for border pane's bottom part
-    public HBox gameControlsPane(Button button, Button button2){
-        HBox gameControlsPane = new HBox();
-        gameControlsPane.getChildren().add(button);
-        gameControlsPane.getChildren().add(button2);
-        gameControlsPane.setPadding(new Insets(0, 0, 55, 175));
-        return gameControlsPane;
-    }
 
     public static int getNumberOfMoves() {
         return numberOfMoves;
@@ -299,12 +300,12 @@ public class GameBoard {
         this.checkButton = checkButton;
     }
 
-    public static int getTotalLevelNo() {
-        return totalLevelNo;
+    public static int getTotalLevelNumber() {
+        return totalLevelNumber;
     }
 
-    public static void setTotalLevelNo(int totalLevelNo) {
-        GameBoard.totalLevelNo = totalLevelNo;
+    public static void setTotalLevelNumber(int totalLevelNumber) {
+        GameBoard.totalLevelNumber = totalLevelNumber;
     }
 
     public ArrayList<File> getLevels() {
