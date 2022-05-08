@@ -22,11 +22,12 @@ import java.util.ArrayList;
 public class Main extends Application {
 
     private GameBoard gameBoard;
-    private boolean levelCompleted;
-    private static int levelNumber;
-    private ArrayList<Tile> pipesInOrder;
-    private Path path;
-    private boolean draggable;
+    private boolean levelCompleted;  // levelCompleted data field gets true value, level is completed
+    private static int levelNumber; // levelNumber data field holds level number
+    private ArrayList<Tile> pipesInOrder;  // pipesInOrder holds pipes in path order
+    private Path path; // path data field represents ball's path
+    private boolean draggable; // draggable data field gets true if that tile is draggable
+
 
     public static void main(String[] args) {
         launch(args);
@@ -93,6 +94,7 @@ public class Main extends Application {
         });
     }
 
+    //  Method to start animation for the ball to roll when check button is clicked
     private void clickedOnCheck() {
 
         gameBoard.getCheckButton().setOnMouseClicked(event -> {
@@ -100,13 +102,17 @@ public class Main extends Application {
         });
     }
 
+    // Method to move to next scene, when next button is clicked
     private void clickedOnNext(Stage primaryStage, Button nextLevelButton, Button closeButton) {
 
         gameBoard.getNextButton().setOnMouseClicked(event -> {
+            // if game has new level, level completed scene will appear.
             if (getLevelNumber() < (GameBoard.getTotalLevelNumber())) {
                 primaryStage.setScene(levelCompletedScene(nextLevelButton));
                 primaryStage.show();
-            } else if (getLevelNumber() == (GameBoard.getTotalLevelNumber())) {
+            }
+            // if there is no more level, end screen will show up
+            else if (getLevelNumber() == (GameBoard.getTotalLevelNumber())) {
                 nextLevelButton.setText("Finish");
                 primaryStage.setScene(levelCompletedScene(nextLevelButton));
                 primaryStage.show();
@@ -129,6 +135,7 @@ public class Main extends Application {
         });
     }
 
+    // Method to create level completed scene.
     private Scene levelCompletedScene(Button nextLevelButton) {
 
         VBox levelCompletedPane = new VBox(50);
@@ -136,6 +143,7 @@ public class Main extends Application {
         levelCompletedPane.setBackground(new Background(new BackgroundImage(new Image("Assets/Background.jpg"), BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
 
+        // Show in how many moves the level is completed.
         Label levelCompletedText = new Label("Level " + getLevelNumber() + " is completed in " + GameBoard.numberOfMoves + " moves!");
         levelCompletedText.setFont(Font.font("Arial", FontWeight.BOLD, 30));
         levelCompletedText.setStyle("-fx-text-fill: white");
@@ -149,6 +157,7 @@ public class Main extends Application {
         return levelCompletedScene;
     }
 
+    // Method to move to next level when next level button is clicked.
     private void clickedOnNextLevel(Stage primaryStage, Button nextLevelButton) {
 
         nextLevelButton.setOnMouseClicked(event -> {
@@ -163,12 +172,14 @@ public class Main extends Application {
         });
     }
 
+    // Method to close the game
     private void clickedOnClose(Button closeButton, Stage primaryStage) {
         closeButton.setOnMouseClicked(event -> {
             primaryStage.close();
         });
     }
 
+    // Method to drag tiles according to cursor's position
     private void drag() {
 
         ImageView[] imageViews = gameBoard.getImageViews();
@@ -180,11 +191,13 @@ public class Main extends Application {
                 ImageView imageView1 = imageView; //(ImageView) e.getTarget(); // gets the first node
                 ImageView imageView2 = null;
 
+                // if clicked area is in the tile, assign that tile's image view to imageView2
                 if (e.getPickResult().getIntersectedNode() instanceof ImageView) {
                     imageView2 = (ImageView) e.getPickResult().getIntersectedNode(); // gets the last node
                 }
-                if (imageView2 != null) {
 
+                // find indexes of imageview1 and imageView2
+                if (imageView2 != null) {
                     int index1x = 0;
                     int index1y = 0;
                     int index2x = 0;
@@ -202,6 +215,8 @@ public class Main extends Application {
                         }
                     }
 
+                    /* if imageView2 is EmptyFree also imageView1 is not, imageView1 is movable, the path is not yet created
+                    and only one unit has been dragged, than swap tiles with animation. */
                     if ((tiles[index2x][index2y] instanceof EmptyFree) && !(tiles[index1x][index1y] instanceof EmptyFree)) {
                         if (!((index1x == index2x) && (index1y == index2y))) {
                             if ((tiles[index1x][index1y] instanceof Movable)) {
@@ -257,7 +272,7 @@ public class Main extends Application {
         gameBoard.getTiles()[index2x][index2y] = temp;
     }
 
-    // Method to drag movable tiles
+    // Method to drag movable tiles with animation
     private void dragAnimation(ImageView imageView1, ImageView imageView2) {
 
         PathTransition pathTransition = new PathTransition();
@@ -267,6 +282,7 @@ public class Main extends Application {
         pathTransition.setNode(imageView1);
         pathTransition.setDuration(Duration.seconds(0.50));
         pathTransition.play();
+        // Add sound effect when tiles drag
         Media media = new Media(new File("src/Assets/swap_tiles.mp3").toURI().toString());
         AudioClip audioClip = new AudioClip(media.getSource());
         audioClip.setVolume(45);
@@ -277,7 +293,6 @@ public class Main extends Application {
     }
 
     // Method to check solution for ball's path
-
     private boolean checkForSolution() {
 
         // Create arraylist to hold pipes in path order
@@ -286,12 +301,14 @@ public class Main extends Application {
         int rowIndexOfStart = 0;
         int columnIndexOfStart = 0;
         int curveCount = 0;
+        // Find indexes of start pipe.
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (gameBoard.getTiles()[i][j] instanceof StartPipe) {
                     columnIndexOfStart = j;
                     rowIndexOfStart = i;
                 }
+                // Find curved pipe count includes static and movable ones.
                 if ((gameBoard.getTiles()[i][j] instanceof CurvedPipeStatic) || (gameBoard.getTiles()[i][j] instanceof CurvedPipeMovable)) {
                     curveCount++;
                 }
@@ -302,6 +319,7 @@ public class Main extends Application {
         String previousStatus = "";
         pipesInOrder.add(gameBoard.getTiles()[rowIndexOfStart][columnIndexOfStart]);
 
+        // Start to check the solution.(it checks the next tile has the consistent status with the previous tile)
         if (gameBoard.getTiles()[rowIndexOfStart][columnIndexOfStart].getStatus().equalsIgnoreCase("Vertical")) {
             for (int i = rowIndexOfStart + 1; i <= 3; i++) {
                 if (((gameBoard.getTiles()[i][columnIndexOfStart] instanceof LinearPipe) &&
@@ -319,9 +337,9 @@ public class Main extends Application {
                     break;
                 } else if ((gameBoard.getTiles()[i][columnIndexOfStart] instanceof EndPipe)) {
                     pipesInOrder.add(gameBoard.getTiles()[i][columnIndexOfStart]);
-                    gameBoard.getCheckButton().setDisable(false);
+                    gameBoard.getCheckButton().setDisable(false); // active check button
                     levelNumber++;
-                    setDraggable(false);
+                    setDraggable(false);  // lock tiles to their positions if the pipes are lined up correctly
                     return true;
                 } else
                     break;
@@ -457,7 +475,7 @@ public class Main extends Application {
         return false;
     }
 
-
+    // Method to find the direction in which the ball will leave the pipe
     private String directionFinder(String statusCurve, String statusPrevious) {
 
         if (statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("00"))
@@ -478,6 +496,7 @@ public class Main extends Application {
             return "right";
     }
 
+    // Method forms the path of the ball relative to the pipes, respectively, taking into account the rolling direction of the ball
     private void setWholePath() {
 
         path = new Path();
@@ -718,10 +737,10 @@ public class Main extends Application {
         return imageViewIndex;
     }
 
+    // Method for the ball to roll
     private void animate() {
-
         setWholePath();
-        getPath().setOpacity(0);
+        getPath().setOpacity(0); // the path of the ball is set to invisible
         gameBoard.getPane().getChildren().add(getPath());
         gameBoard.getBall().toFront();
         PathTransition pathTransition = new PathTransition();
@@ -730,7 +749,7 @@ public class Main extends Application {
         pathTransition.setDuration(Duration.seconds(2));
         pathTransition.play();
         pathTransition.setOnFinished(event -> {
-            gameBoard.getNextButton().setDisable(false);
+            gameBoard.getNextButton().setDisable(false); // After the ball rolls, the next button is activated
         });
     }
 
