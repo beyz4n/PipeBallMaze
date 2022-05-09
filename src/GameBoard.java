@@ -14,6 +14,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+/** The class GameBoard
+ * This class creates the gameboard of the game using the input.
+ * Name Surname / Student ID: Beyza Nur Kaya / 150120077
+ * Name Surname / Student ID: Sena Ektiricioğlu / 150120047
+ */
+
 public class GameBoard {
 
     public static int numberOfMoves; // numberOfMoves data field represent number of moves made by gamer at that level.
@@ -50,7 +56,7 @@ public class GameBoard {
         setBoardScene(makeScene());
     }
 
-    // Method to create game scene
+    /** Method to create game scene */
     protected Scene makeScene(){
 
         createTiles();
@@ -72,7 +78,7 @@ public class GameBoard {
         return getBoardScene();
     }
 
-    // Method to create tiles at that level.
+    /** Method to create tiles at that level. */
     private Tile[][] createTiles(){
 
         // Read input from the current level file
@@ -139,7 +145,7 @@ public class GameBoard {
         return tiles;
     }
 
-    // Method to create image views at that level.
+    /** Method to create image views at that level. */
     private ImageView[] createImageViews(){
 
         // Create array list to hold all image views.
@@ -165,16 +171,16 @@ public class GameBoard {
         return imageViews;
     }
 
-    // Method that returns pane for border pane's left, right and top parts
-    public StackPane edgePane(Label label){
+    /** Method that returns pane for border pane's left, right and top parts */
+    private StackPane edgePane(Label label){
         StackPane edgePane = new StackPane();
         edgePane.getChildren().add(label);
         label.setPadding(new Insets(30, 115.5, 50, 70.5));
         return edgePane;
     }
 
-    // Method that returns pane for border pane's bottom part
-    public HBox gameControlsPane(Button button, Button button2){
+    /** Method that returns pane for border pane's bottom part */
+    private HBox gameControlsPane(Button button, Button button2){
         HBox gameControlsPane = new HBox();
         gameControlsPane.getChildren().add(button);
         gameControlsPane.getChildren().add(button2);
@@ -182,7 +188,7 @@ public class GameBoard {
         return gameControlsPane;
     }
 
-    // Method to create ball that will move at that level
+    /** Method to create ball that will move at that level*/
     private ImageView createBall(){
 
         ball = new ImageView(new Image("Assets/ball.png"));
@@ -218,7 +224,7 @@ public class GameBoard {
         return ball;
     }
 
-    // Method to display number of moves has made by gamer at that level
+    /** Method to display number of moves has made by gamer at that level */
     protected void displayNumberOfMoves(){
         Label label = new Label("Number of Moves " + getNumberOfMoves());
         label.setStyle("-fx-text-fill: white");

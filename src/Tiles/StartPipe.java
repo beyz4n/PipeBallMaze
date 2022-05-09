@@ -6,12 +6,6 @@ import javafx.scene.image.Image;
  */
 public class StartPipe extends Tile implements Fixed {
 
-    @Override
-    public boolean isFixed() {
-        return true;
-    }
-
-
     public StartPipe(String status){
         // Set tiles' images
         if(status.equals("Vertical")) {
@@ -22,6 +16,11 @@ public class StartPipe extends Tile implements Fixed {
             setImage(new Image("Assets/StarterHorizontal.png"));
             setStatus(status);
         }
+    }
+
+    @Override
+    public boolean isFixed() {
+        return true;
     }
 
 }

@@ -6,13 +6,14 @@ import javafx.scene.image.Image;
  */
 public class Empty extends Tile implements Movable {
 
-    @Override
-    public boolean isMovable() {
-        return true;
-    }
     public Empty(){
         // Set tiles' images
         setImage(new Image("Assets/Empty.png"));
         setStatus("Empty");
-}
+    }
+
+    @Override
+    public boolean isMovable() {
+        return true;
+    }
 }

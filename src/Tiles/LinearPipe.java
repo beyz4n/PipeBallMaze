@@ -24,5 +24,4 @@ public class LinearPipe extends Tile implements Movable {
         return true;
     }
 
-
 }

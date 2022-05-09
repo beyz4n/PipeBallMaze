@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
  * Name Surname / Student ID: Sena Ektiricioğlu / 150120047
  */
 public class CurvedPipeMovable extends Tile implements Movable {
-    String status;
+
     public CurvedPipeMovable(String status) {
         // Set tiles' images
         switch (status) {
@@ -29,21 +29,9 @@ public class CurvedPipeMovable extends Tile implements Movable {
     }
 
     @Override
-    public String getStatus() {
-        return status;
-    }
-
-    @Override
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-
-    @Override
     public boolean isMovable() {
         return true;
     }
-
 
 }
 

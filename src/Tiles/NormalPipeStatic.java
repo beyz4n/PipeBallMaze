@@ -5,10 +5,6 @@ import javafx.scene.image.Image;
  * Name Surname / Student ID: Sena Ektiricioğlu / 150120047
  */
 public class NormalPipeStatic extends Tile implements Fixed {
-    @Override
-    public boolean isFixed() {
-        return true;
-    }
 
     public NormalPipeStatic (String status){
         // Set tiles' images
@@ -20,5 +16,10 @@ public class NormalPipeStatic extends Tile implements Fixed {
             setImage(new Image("Assets/HorizontalPipeStatic.png"));
             setStatus(status);
         }
+    }
+
+    @Override
+    public boolean isFixed() {
+        return true;
     }
 }

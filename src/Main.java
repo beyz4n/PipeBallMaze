@@ -19,6 +19,12 @@ import javafx.util.Duration;
 import java.io.File;
 import java.util.ArrayList;
 
+/** The class Main
+ * This class creates the game controls of the game, and has the methods for that.
+ * Name Surname / Student ID: Beyza Nur Kaya / 150120077
+ * Name Surname / Student ID: Sena Ektiricioğlu / 150120047
+ */
+
 public class Main extends Application {
 
     private GameBoard gameBoard;
@@ -34,6 +40,7 @@ public class Main extends Application {
     }
 
     @Override
+    /** This method creates the buttons and calls the method for game controls */
     public void start(Stage primaryStage) {
 
         Button startButton = new Button("Play the Game!");
@@ -51,7 +58,7 @@ public class Main extends Application {
 
     }
 
-    // Method to create start page
+    /** Method to create start page */
     private void startPage(Stage primaryStage, Button startButton) {
 
         // Add music that will play throughout the game
@@ -81,7 +88,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    // Method that enables the first level to be opened when the start button is pressed.
+    /** Method that enables the first level to be opened when the start button is pressed. */
     private void clickedOnStart(Button startButton, Stage primaryStage) {
 
         startButton.setOnMouseClicked(event -> {
@@ -94,7 +101,7 @@ public class Main extends Application {
         });
     }
 
-    //  Method to start animation for the ball to roll when check button is clicked
+    /**  Method to start animation for the ball to roll when check button is clicked */
     private void clickedOnCheck() {
 
         gameBoard.getCheckButton().setOnMouseClicked(event -> {
@@ -102,7 +109,7 @@ public class Main extends Application {
         });
     }
 
-    // Method to move to next scene, when next button is clicked
+    /** Method to move to next scene, when next button is clicked */
     private void clickedOnNext(Stage primaryStage, Button nextLevelButton, Button closeButton) {
 
         gameBoard.getNextButton().setOnMouseClicked(event -> {
@@ -135,7 +142,7 @@ public class Main extends Application {
         });
     }
 
-    // Method to create level completed scene.
+    /** Method to create level completed scene. */
     private Scene levelCompletedScene(Button nextLevelButton) {
 
         VBox levelCompletedPane = new VBox(50);
@@ -157,7 +164,7 @@ public class Main extends Application {
         return levelCompletedScene;
     }
 
-    // Method to move to next level when next level button is clicked.
+    /** Method to move to next level when next level button is clicked. */
     private void clickedOnNextLevel(Stage primaryStage, Button nextLevelButton) {
 
         nextLevelButton.setOnMouseClicked(event -> {
@@ -172,14 +179,14 @@ public class Main extends Application {
         });
     }
 
-    // Method to close the game
+    /** Method to close the game */
     private void clickedOnClose(Button closeButton, Stage primaryStage) {
         closeButton.setOnMouseClicked(event -> {
             primaryStage.close();
         });
     }
 
-    // Method to drag tiles according to cursor's position
+    /** Method to drag tiles according to cursor's position */
     private void drag() {
 
         ImageView[] imageViews = gameBoard.getImageViews();
@@ -250,7 +257,7 @@ public class Main extends Application {
         }
     }
 
-    // Method to swap dragged tile's and empty free tile's image views
+    /** Method to swap dragged tile's and empty free tile's image views */
     private void swapImages(ImageView imageView1, ImageView imageView2) {
 
         ImageView temp = new ImageView(imageView1.getImage());
@@ -264,7 +271,7 @@ public class Main extends Application {
         GameBoard.numberOfMoves++;
     }
 
-   // Method to swap dragged tile and empty free tile
+   /** Method to swap dragged tile and empty free tile */
     private void swapTiles(int index1x, int index1y, int index2x, int index2y) {
 
         Tile temp = gameBoard.getTiles()[index1x][index1y];
@@ -272,7 +279,7 @@ public class Main extends Application {
         gameBoard.getTiles()[index2x][index2y] = temp;
     }
 
-    // Method to drag movable tiles with animation
+    /** Method to drag movable tiles with animation */
     private void dragAnimation(ImageView imageView1, ImageView imageView2) {
 
         PathTransition pathTransition = new PathTransition();
@@ -292,7 +299,7 @@ public class Main extends Application {
         });
     }
 
-    // Method to check solution for ball's path
+    /** Method to check solution for ball's path */
     private boolean checkForSolution() {
 
         // Create arraylist to hold pipes in path order
@@ -475,7 +482,7 @@ public class Main extends Application {
         return false;
     }
 
-    // Method to find the direction in which the ball will leave the pipe
+    /** Method to find the direction in which the ball will leave the pipe */
     private String directionFinder(String statusCurve, String statusPrevious) {
 
         if (statusPrevious.equalsIgnoreCase("Horizontal") && statusCurve.equals("00"))
@@ -690,7 +697,7 @@ public class Main extends Application {
         }
     }
 
-    // Method for reverse the direction of movement of the ball in the linear pipe.
+    /** Method for reverse the direction of movement of the ball in the linear pipe. */
     private void reverseDirection(MoveTo moveTo, LineTo lineTo) {
 
         double tempX = moveTo.getX();
@@ -701,7 +708,7 @@ public class Main extends Application {
         lineTo.setY(tempY);
     }
 
-    // overloading reverseDirection method for curved pipes
+    /** overloading reverseDirection method for curved pipes */
     private void reverseDirection(MoveTo moveTo, ArcTo arcTo) {
 
         double tempX = moveTo.getX();
@@ -715,7 +722,7 @@ public class Main extends Application {
 
     }
 
-    // Method to find index of given tile's image view
+    /** Method to find index of given tile's image view */
     private int indexFinder(Tile tile) {
 
         int indexOfRow = 0;
@@ -737,7 +744,7 @@ public class Main extends Application {
         return imageViewIndex;
     }
 
-    // Method for the ball to roll
+    /** Method for the ball to roll */
     private void animate() {
         setWholePath();
         getPath().setOpacity(0); // the path of the ball is set to invisible

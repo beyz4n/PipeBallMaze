@@ -15,8 +15,8 @@ public abstract class Tile {
       return status;
    }
 
-   public void setStatus(String attribute) {
-      this.status = attribute;
+   public void setStatus(String status) {
+      this.status = status;
    }
 
    public void setImage(Image image) {

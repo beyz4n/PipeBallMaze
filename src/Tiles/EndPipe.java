@@ -6,11 +6,6 @@ import javafx.scene.image.Image;
  */
 public class EndPipe extends Tile implements Fixed {
 
-    @Override
-    public boolean isFixed() {
-        return true;
-    }
-
     public EndPipe(String status){
         // Set tiles' images
         if(status.equals("Vertical")) {
@@ -22,4 +17,11 @@ public class EndPipe extends Tile implements Fixed {
             setStatus(status);
         }
     }
+
+
+    @Override
+    public boolean isFixed() {
+        return true;
+    }
+
 }

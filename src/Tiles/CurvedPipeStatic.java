@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
  * Name Surname / Student ID: Sena Ektiricioğlu / 150120047
  */
 public class CurvedPipeStatic extends Tile implements Fixed {
-    String status;
 
     public CurvedPipeStatic(String status) {
         // Set tiles' images
@@ -27,16 +26,6 @@ public class CurvedPipeStatic extends Tile implements Fixed {
                 setStatus(status);
                 break;
         }
-    }
-
-    @Override
-    public String getStatus() {
-        return status;
-    }
-
-    @Override
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     @Override
