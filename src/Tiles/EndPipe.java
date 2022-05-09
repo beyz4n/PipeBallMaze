@@ -1,6 +1,6 @@
 package Tiles;
 import javafx.scene.image.Image;
-/* The EndPipe class is subclass of Tiles and represent end pipe tile.
+/** The EndPipe class is subclass of Tiles and represent end pipe tile.
  * Name Surname / Student ID: Beyza Nur Kaya / 150120077
  * Name Surname / Student ID: Sena Ektiricioğlu / 150120047
  */
